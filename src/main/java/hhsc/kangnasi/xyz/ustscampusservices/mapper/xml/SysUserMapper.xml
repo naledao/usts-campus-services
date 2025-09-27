@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hhsc.kangnasi.xyz.ustscampusservices.mapper.SysUserMapper">
+
+    <resultMap id="SysUserMap" type="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity">
+        <id property="email" column="email"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isDel" column="is_del"/>
+    </resultMap>
+
+    <!-- 根据 email 查询 -->
+    <select id="selectByEmail" parameterType="string" resultMap="SysUserMap">
+        SELECT * FROM sys_user WHERE email = #{email}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="selectAll" resultMap="SysUserMap">
+        SELECT * FROM sys_user
+    </select>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="com.example.demo.entity.SysUser">
+        INSERT INTO sys_user (email, nick_name, create_time, update_time, is_del)
+        VALUES (#{email}, #{nickName}, #{createTime}, #{updateTime}, #{isDel})
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="com.example.demo.entity.SysUser">
+        UPDATE sys_user
+        SET nick_name=#{nickName},
+            update_time=#{updateTime},
+            is_del=#{isDel}
+        WHERE email=#{email}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteByEmail" parameterType="string">
+        DELETE FROM sys_user WHERE email=#{email}
+    </delete>
+
+</mapper>
