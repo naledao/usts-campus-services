@@ -9,4 +9,6 @@ public interface SysUserService {
     ResponseEntity<?> login(String email, String code);
 
     ResponseEntity<?> validateToken(String token);
+
+    ResponseEntity<?> updateNickname(String token, String nickname);
 }

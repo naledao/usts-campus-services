@@ -29,5 +29,10 @@ public class SysUserController {
     public ResponseEntity<?> validateToken(@RequestParam("token") String token) {
         return sysUserService.validateToken(token);
     }
-}
 
+    @PostMapping("/update-nickname")
+    public ResponseEntity<?> updateNickname(@RequestParam("token") String token,
+                                            @RequestParam("nickname") String nickname) {
+        return sysUserService.updateNickname(token, nickname);
+    }
+}

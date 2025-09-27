@@ -111,6 +111,40 @@ public class SysUserServiceImpl implements SysUserService {
         return ResponseEntity.status(401).body("token无效");
     }
 
+    @Override
+    public ResponseEntity<?> updateNickname(String token, String nickname) {
+        if (token == null || token.isBlank()) {
+            return ResponseEntity.badRequest().body("token不能为空");
+        }
+        if (nickname == null || nickname.isBlank()) {
+            return ResponseEntity.badRequest().body("昵称不能为空");
+        }
+
+        String tokenKey = "auth:token:" + token;
+        RBucket<String> bucket = redissonClient.getBucket(tokenKey);
+        String email = bucket.get();
+        if (email == null || email.isBlank()) {
+            return ResponseEntity.status(401).body("token无效");
+        }
+
+        SysUserEntity user = sysUserMapper.selectByEmail(email);
+        if (user == null) {
+            return ResponseEntity.status(404).body("用户不存在");
+        }
+
+        user.setNickName(nickname);
+        user.setUpdateTime(new Date());
+        // 保持现有 isDel 值
+        if (user.getIsDel() == null) {
+            user.setIsDel(0);
+        }
+        int rows = sysUserMapper.update(user);
+        if (rows > 0) {
+            return ResponseEntity.ok(Map.of("nickname", nickname));
+        }
+        return ResponseEntity.internalServerError().body("更新失败");
+    }
+
     private static String generateNumericCode(int length) {
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);
