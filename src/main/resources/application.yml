@@ -1,4 +1,4 @@
-Zq!spring:
+spring:
   application:
     name: usts-campus-services
 
@@ -31,6 +31,10 @@ Zq!spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       pool-name: HikariCP
+
+
+mybatis:
+  mapper-locations: classpath*:hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/*.xml
 
 
 server:

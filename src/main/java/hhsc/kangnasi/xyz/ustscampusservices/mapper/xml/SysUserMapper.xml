@@ -24,13 +24,13 @@
     </select>
 
     <!-- 插入 -->
-    <insert id="insert" parameterType="com.example.demo.entity.SysUser">
+    <insert id="insert" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity">
         INSERT INTO sys_user (email, nick_name, create_time, update_time, is_del)
         VALUES (#{email}, #{nickName}, #{createTime}, #{updateTime}, #{isDel})
     </insert>
 
     <!-- 更新 -->
-    <update id="update" parameterType="com.example.demo.entity.SysUser">
+    <update id="update" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity">
         UPDATE sys_user
         SET nick_name=#{nickName},
             update_time=#{updateTime},

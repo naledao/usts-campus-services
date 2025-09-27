@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -77,6 +78,11 @@ public class SysUserServiceImpl implements SysUserService {
             // 如果数据库中没有该用户，创建一个新用户
             SysUserEntity newUser = new SysUserEntity();
             newUser.setEmail(email);
+            newUser.setNickName("用户");
+            Date date = new Date();
+            newUser.setCreateTime(date);
+            newUser.setUpdateTime(date);
+            newUser.setIsDel(0);
             sysUserMapper.insert(newUser);
         }
         return ResponseEntity.ok(Map.of("token", token));
