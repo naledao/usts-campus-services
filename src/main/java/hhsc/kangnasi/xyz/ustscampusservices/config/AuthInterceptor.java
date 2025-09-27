@@ -1,5 +1,7 @@
 package hhsc.kangnasi.xyz.ustscampusservices.config;
 
+import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity;
+import hhsc.kangnasi.xyz.ustscampusservices.mapper.SysUserMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.redisson.api.RBucket;
@@ -15,10 +17,15 @@ import java.nio.charset.StandardCharsets;
 public class AuthInterceptor implements HandlerInterceptor {
 
     private final RedissonClient redissonClient;
+    private final SysUserMapper sysUserMapper;
 
-    public AuthInterceptor(RedissonClient redissonClient) {
+    public static final ThreadLocal<String> CURRENT_USER_EMAIL = new ThreadLocal<>();
+
+    public AuthInterceptor(RedissonClient redissonClient, SysUserMapper sysUserMapper) {
         this.redissonClient = redissonClient;
+        this.sysUserMapper = sysUserMapper;
     }
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -44,9 +51,24 @@ public class AuthInterceptor implements HandlerInterceptor {
             return unauthorized(response, "未登录或Token无效");
         }
 
+        // 查询用户的isDel
+        SysUserEntity user = sysUserMapper.selectByEmail(email);
+        if (user == null || user.getIsDel() == 1) {
+            return unauthorized(response, "用户已被禁用");
+        }
+
         // Attach resolved principal for downstream use
-        request.setAttribute("X-User-Email", email);
+        CURRENT_USER_EMAIL.set(email);
         return true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request,
+                                HttpServletResponse response,
+                                Object handler,
+                                Exception ex) throws Exception {
+        // 请求完成后清理 ThreadLocal，避免内存泄漏
+        CURRENT_USER_EMAIL.remove();
     }
 
     private static String extractToken(String authHeader) {

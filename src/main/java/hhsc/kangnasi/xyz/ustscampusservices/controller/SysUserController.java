@@ -4,6 +4,8 @@ import hhsc.kangnasi.xyz.ustscampusservices.service.SysUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RequestMapping("/user")
 @RestController
 public class SysUserController {
@@ -31,8 +33,11 @@ public class SysUserController {
     }
 
     @PostMapping("/update-nickname")
-    public ResponseEntity<?> updateNickname(@RequestParam("token") String token,
-                                            @RequestParam("nickname") String nickname) {
-        return sysUserService.updateNickname(token, nickname);
+    public ResponseEntity<?> updateNickname(@RequestBody Map<String, String> body) {
+        String nickname = body.get("nickname");
+        if (nickname == null || nickname.isBlank()) {
+            return ResponseEntity.badRequest().body("昵称不能为空");
+        }
+        return sysUserService.updateNickname(nickname);
     }
 }

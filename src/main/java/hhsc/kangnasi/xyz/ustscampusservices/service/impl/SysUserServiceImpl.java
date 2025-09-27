@@ -1,6 +1,7 @@
 package hhsc.kangnasi.xyz.ustscampusservices.service.impl;
 
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity;
+import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.SysUserMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.service.SysUserService;
 import hhsc.kangnasi.xyz.ustscampusservices.util.EmailUtil;
@@ -12,8 +13,11 @@ import org.springframework.stereotype.Service;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import static hhsc.kangnasi.xyz.ustscampusservices.config.AuthInterceptor.CURRENT_USER_EMAIL;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -112,26 +116,15 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public ResponseEntity<?> updateNickname(String token, String nickname) {
-        if (token == null || token.isBlank()) {
-            return ResponseEntity.badRequest().body("token不能为空");
-        }
+    public ResponseEntity<?> updateNickname(String nickname) {
         if (nickname == null || nickname.isBlank()) {
             return ResponseEntity.badRequest().body("昵称不能为空");
         }
 
-        String tokenKey = "auth:token:" + token;
-        RBucket<String> bucket = redissonClient.getBucket(tokenKey);
-        String email = bucket.get();
-        if (email == null || email.isBlank()) {
-            return ResponseEntity.status(401).body("token无效");
-        }
-
-        SysUserEntity user = sysUserMapper.selectByEmail(email);
+        SysUserEntity user = sysUserMapper.selectByEmail(CURRENT_USER_EMAIL.get());
         if (user == null) {
             return ResponseEntity.status(404).body("用户不存在");
         }
-
         user.setNickName(nickname);
         user.setUpdateTime(new Date());
         // 保持现有 isDel 值

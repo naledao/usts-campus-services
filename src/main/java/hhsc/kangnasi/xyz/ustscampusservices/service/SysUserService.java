@@ -1,6 +1,9 @@
 package hhsc.kangnasi.xyz.ustscampusservices.service;
 
+import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface SysUserService {
 
@@ -10,5 +13,6 @@ public interface SysUserService {
 
     ResponseEntity<?> validateToken(String token);
 
-    ResponseEntity<?> updateNickname(String token, String nickname);
+    ResponseEntity<?> updateNickname(String nickname);
+
 }
