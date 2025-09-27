@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface ServiceCampusNetLoginMapper {
 
-    @Select("SELECT * FROM service_campus_net_login WHERE email = #{email}")
+    @Select("SELECT * FROM service_campus_net_login WHERE email = #{email} and is_del = 0")
     ServiceCampusNetLoginEntity selectById(String email);
 
     @Select("SELECT * FROM service_campus_net_login WHERE is_del = 0")
@@ -28,6 +28,6 @@ public interface ServiceCampusNetLoginMapper {
     @Delete("DELETE FROM service_campus_net_login WHERE email = #{email}")
     int deleteById(String email);
 
-    @Select("select count(*) from service_campus_net_login where email = #{email}")
+    @Select("select count(*) from service_campus_net_login where email = #{email} and is_del = 0")
     int selectByNetByEmail(@Param("email") String email);
 }
