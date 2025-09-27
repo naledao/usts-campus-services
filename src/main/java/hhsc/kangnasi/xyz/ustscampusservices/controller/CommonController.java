@@ -11,6 +11,6 @@ public class CommonController {
 
     @GetMapping
     public String allService() {
-
+        String email=CURRENT_USER_EMAIL.get();
     }
 }
