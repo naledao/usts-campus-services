@@ -11,5 +11,7 @@ public interface ServiceCampusNetLoginService {
     ResponseEntity<?> create(ServiceCampusNetLoginEntity body);
 
     List<CommonServiceVo> allService(String email);
+
+    int edit(ServiceCampusNetLoginEntity body);
 }
 

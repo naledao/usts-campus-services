@@ -1,0 +1,9 @@
+singleServerConfig:
+  # Redis server address: use redis:// for non-SSL, rediss:// for SSL
+  address: "redis://127.0.0.1:26739"
+  password: "Mw4xPZAEKYAjBycB"   # uncomment and set if your Redis requires auth
+  database: 0
+  connectionMinimumIdleSize: 8
+  connectionPoolSize: 32
+threads: 8
+nettyThreads: 16

@@ -8,10 +8,12 @@ import java.util.List;
 @Mapper
 public interface ServiceCampusNetLoginMapper {
 
-    @Select("SELECT * FROM service_campus_net_login WHERE email = #{email} and is_del = 0")
+    @Select("SELECT * FROM service_campus_net_login WHERE email = #{email} and is_del = 0 for update")
+    @ResultMap("hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper.BaseResultMap")
     ServiceCampusNetLoginEntity selectById(String email);
 
     @Select("SELECT * FROM service_campus_net_login WHERE is_del = 0")
+    @ResultMap("hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper.BaseResultMap")
     List<ServiceCampusNetLoginEntity> selectAll();
 
     @Insert("INSERT INTO service_campus_net_login " +
@@ -21,13 +23,14 @@ public interface ServiceCampusNetLoginMapper {
 
     @Update("UPDATE service_campus_net_login SET " +
             "net_account=#{netAccount}, carrier=#{carrier}, net_password=#{netPassword}, wlan_user_ip=#{wlanUserIp}, " +
-            "wlan_user_mac=#{wlanUserMac}, wlan_ac_ip=#{wlanAcIp}, wlan_ac_name=#{wlanAcName}, update_time=#{updateTime}, is_del=#{isDel} " +
+            "wlan_user_mac=#{wlanUserMac}, wlan_ac_ip=#{wlanAcIp}, wlan_ac_name=#{wlanAcName}, update_time=#{updateTime}, is_del=#{isDel}, run_status=#{runStatus} " +
             "WHERE email=#{email}")
     int update(ServiceCampusNetLoginEntity record);
 
     @Delete("DELETE FROM service_campus_net_login WHERE email = #{email}")
     int deleteById(String email);
 
-    @Select("select count(*) from service_campus_net_login where email = #{email} and is_del = 0")
-    int selectByNetByEmail(@Param("email") String email);
+    @Select("select * from service_campus_net_login where email = #{email} and is_del = #{isDel}")
+    @ResultMap("hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper.BaseResultMap")
+    ServiceCampusNetLoginEntity selectByNetByEmail(@Param("email") String email,@Param("isDel") int isDel);
 }
