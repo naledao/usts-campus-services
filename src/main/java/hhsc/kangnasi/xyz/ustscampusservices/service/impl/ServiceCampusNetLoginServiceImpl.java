@@ -158,7 +158,7 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
             serviceLog.setCreateTime(new Date());
             serviceLog.setOperationName("登录");
             serviceLog.setOperationStatus(0);
-            serviceLog.setRemarks("连接失败，请联系管理员QQ\n+2419646091");
+            serviceLog.setRemarks("登录失败，请联系管理员QQ\n+2419646091");
             serviceLogMapper.insert(serviceLog);
         }
     }
@@ -167,6 +167,26 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
     public List<ServiceLogEntity> logs(String email) {
         List<ServiceLogEntity> serviceLogEntities = serviceLogMapper.selectByEmail(email);
         return serviceLogEntities==null?List.of():serviceLogEntities;
+    }
+
+    @Override
+    public void logout(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException {
+        serviceCampusNetLoginEntity.setNetAccount(serviceCampusNetLoginEntity.getNetAccount()+"@"+serviceCampusNetLoginEntity.getCarrier());
+        JsonNode node = objectMapper.valueToTree(serviceCampusNetLoginEntity);
+        ObjectNode objectNode = (ObjectNode) node;
+        objectNode.put("type", "logout");
+        String json=objectMapper.writeValueAsString(objectNode);
+        boolean send = wsSessionHub.send(campusNetworkAutoLoginKey, json);
+        if (!send) {
+            ServiceLogEntity serviceLog=new ServiceLogEntity();
+            serviceLog.setRelationTable("service_campus_net_login");
+            serviceLog.setEmail(serviceCampusNetLoginEntity.getEmail());
+            serviceLog.setCreateTime(new Date());
+            serviceLog.setOperationName("下线");
+            serviceLog.setOperationStatus(0);
+            serviceLog.setRemarks("下线失败，请联系管理员QQ\n+2419646091");
+            serviceLogMapper.insert(serviceLog);
+        }
     }
 }
 

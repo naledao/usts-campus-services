@@ -59,6 +59,17 @@ public class ServiceCampusNetLoginController {
         return ResponseEntity.ok("连接操作已执行，请查看日志结果。");
     }
 
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout() throws JsonProcessingException {
+        String email= CURRENT_USER_EMAIL.get();
+        ServiceCampusNetLoginEntity serviceCampusNetLoginEntity = serviceCampusNetLoginMapper.selectById(email);
+        if(serviceCampusNetLoginEntity==null){
+            throw new RuntimeException("请先创建服务");
+        }
+        serviceCampusNetLoginService.logout(serviceCampusNetLoginEntity);
+        return ResponseEntity.ok("下线操作已执行，请查看日志结果。");
+    }
+
     @GetMapping("/logs")
     public ResponseEntity<?> logs()  {
         String email= CURRENT_USER_EMAIL.get();

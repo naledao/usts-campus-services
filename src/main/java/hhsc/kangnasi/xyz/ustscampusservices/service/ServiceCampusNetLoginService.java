@@ -18,6 +18,8 @@ public interface ServiceCampusNetLoginService {
 
     void connect(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException;
 
-     List<ServiceLogEntity> logs(String email);
+    List<ServiceLogEntity> logs(String email);
+
+    void logout(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException;
 }
 

@@ -40,22 +40,22 @@
         delete from service_log where id = #{id}
     </delete>
 
-    <select id="selectById" parameterType="int">
+    <select id="selectById" parameterType="int" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>
         from service_log
         where id = #{id}
     </select>
 
-    <select id="selectAll">
+    <select id="selectAll" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/> from service_log
     </select>
 
-    <select id="selectByEmail" parameterType="string">
+    <select id="selectByEmail" parameterType="string" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/> from service_log
-        where email = #{email}
+        where email = #{email} order by create_time desc
     </select>
 
-    <select id="selectByRelationTable" parameterType="string">
+    <select id="selectByRelationTable" parameterType="string" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/> from service_log
         where relation_table = #{relationTable}
     </select>
