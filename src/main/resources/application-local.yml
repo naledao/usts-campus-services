@@ -39,6 +39,7 @@ spring:
     password: GGSBJ235DfphP8fZ
 
 
+
 mybatis:
   mapper-locations: classpath*:hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/*.xml
 
@@ -51,4 +52,4 @@ server:
 # MQ delay feature gate (off by default)
 mq:
   delay:
-    enabled: false
+    enabled: true

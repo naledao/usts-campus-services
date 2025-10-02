@@ -22,4 +22,25 @@ public class TimeUtil {
             return (seconds / 31104000) + "年";
         }
     }
+
+    /**
+     * 计算目标时间与当前时间的间隔（毫秒），范围限定在一天内
+     * @param hourStr   小时 (0-23)
+     * @param minuteStr 分钟 (0-59)
+     * @return 间隔毫秒
+     */
+    public static long getIntervalMillis(String hourStr, String minuteStr) {
+        int hour = Integer.parseInt(hourStr);
+        int minute = Integer.parseInt(minuteStr);
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime target = now.withHour(hour).withMinute(minute).withSecond(0).withNano(0);
+
+        // 如果目标时间已经过去，则加一天
+        if (target.isBefore(now)) {
+            target = target.plusDays(1);
+        }
+
+        return Duration.between(now, target).toMillis();
+    }
 }

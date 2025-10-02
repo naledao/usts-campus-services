@@ -21,5 +21,7 @@ public interface ServiceCampusNetLoginService {
     List<ServiceLogEntity> logs(String email);
 
     void logout(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException;
+
+    void setRunningTime(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity, String hour, String minute) throws JsonProcessingException;
 }
 

@@ -33,7 +33,7 @@ spring:
       pool-name: HikariCP
 
   rabbitmq:
-    host: 14.103.202.40
+    host: 127.0.0.1
     port: 5672
     username: rabbitmq
     password: GGSBJ235DfphP8fZ
@@ -51,4 +51,4 @@ server:
 # MQ delay feature gate (off by default)
 mq:
   delay:
-    enabled: false
+    enabled: true

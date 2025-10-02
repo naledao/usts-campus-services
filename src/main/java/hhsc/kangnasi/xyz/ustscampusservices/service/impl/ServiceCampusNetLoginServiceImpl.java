@@ -9,6 +9,7 @@ import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceLogMapper;
+import hhsc.kangnasi.xyz.ustscampusservices.mq.DelayedMessageSender;
 import hhsc.kangnasi.xyz.ustscampusservices.service.ServiceCampusNetLoginService;
 import hhsc.kangnasi.xyz.ustscampusservices.util.TimeUtil;
 import hhsc.kangnasi.xyz.ustscampusservices.websocket.WsSessionHub;
@@ -32,13 +33,15 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
     private final WsSessionHub wsSessionHub;
     private final ObjectMapper objectMapper;
     private final ServiceLogMapper serviceLogMapper;
+    private final DelayedMessageSender delayedMessageSender;
 
 
-    public ServiceCampusNetLoginServiceImpl(ServiceCampusNetLoginMapper mapper, WsSessionHub wsSessionHub, ObjectMapper objectMapper, ServiceLogMapper serviceLogMapper) {
+    public ServiceCampusNetLoginServiceImpl(ServiceCampusNetLoginMapper mapper, WsSessionHub wsSessionHub, ObjectMapper objectMapper, ServiceLogMapper serviceLogMapper, DelayedMessageSender delayedMessageSender) {
         this.mapper = mapper;
         this.wsSessionHub = wsSessionHub;
         this.objectMapper = objectMapper;
         this.serviceLogMapper = serviceLogMapper;
+        this.delayedMessageSender = delayedMessageSender;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -187,6 +190,18 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
             serviceLog.setRemarks("下线失败，请联系管理员QQ\n+2419646091");
             serviceLogMapper.insert(serviceLog);
         }
+    }
+
+    @Override
+    public void setRunningTime(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity, String hour, String minute) throws JsonProcessingException {
+        long intervalMillis = TimeUtil.getIntervalMillis(hour, minute);
+        serviceCampusNetLoginEntity.setNetAccount(serviceCampusNetLoginEntity.getNetAccount()+"@"+serviceCampusNetLoginEntity.getCarrier());
+        JsonNode node = objectMapper.valueToTree(serviceCampusNetLoginEntity);
+        ObjectNode objectNode = (ObjectNode) node;
+        objectNode.put("serviceName", "service_campus_net_login");
+        objectNode.put("type", "all");
+        String json=objectMapper.writeValueAsString(objectNode);
+        delayedMessageSender.send(json, intervalMillis);
     }
 }
 

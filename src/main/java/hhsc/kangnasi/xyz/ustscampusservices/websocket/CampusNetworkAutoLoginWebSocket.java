@@ -44,9 +44,13 @@ public class CampusNetworkAutoLoginWebSocket {
 
     @OnMessage
     public void onMessage(String msg, Session session) {
-        if(msg.contains("======")){
+        if(msg.contains(":")){
             try {
-                String[] split = msg.split("======");
+                String[] split=new String[2];
+                split[0]=msg;
+                if(msg.contains("======")){
+                    split=msg.split("======");
+                }
                 String[] splitMsg = split[0].split(":");
                 // 0-【login或者logout】，1-【0-操作失败，1-操作成功】，2-【邮箱】,3-【校园网账号======可能的错误信息】
                 ServiceLogEntity serviceLog=new ServiceLogEntity();
@@ -55,6 +59,7 @@ public class CampusNetworkAutoLoginWebSocket {
                 serviceLog.setCreateTime(new Date());
                 serviceLog.setOperationName(splitMsg[0].equals("login")?"登录":"下线");
                 serviceLog.setOperationStatus(Integer.parseInt(splitMsg[1]));
+                split[1]= split[1]==null?"操作成功":split[1];
                 serviceLog.setRemarks(split[1]);
                 serviceLogMapper.insert(serviceLog);
             }catch (Exception e){
