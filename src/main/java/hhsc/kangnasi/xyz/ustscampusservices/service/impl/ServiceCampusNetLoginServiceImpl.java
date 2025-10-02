@@ -1,12 +1,17 @@
 package hhsc.kangnasi.xyz.ustscampusservices.service.impl;
 
-import hhsc.kangnasi.xyz.ustscampusservices.config.AuthInterceptor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceCampusNetLoginEntity;
+import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper;
+import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceLogMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.service.ServiceCampusNetLoginService;
 import hhsc.kangnasi.xyz.ustscampusservices.util.TimeUtil;
-import org.springframework.beans.BeanUtils;
+import hhsc.kangnasi.xyz.ustscampusservices.websocket.WsSessionHub;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +23,22 @@ import java.util.List;
 import java.util.Map;
 
 import static hhsc.kangnasi.xyz.ustscampusservices.config.AuthInterceptor.CURRENT_USER_EMAIL;
+import static hhsc.kangnasi.xyz.ustscampusservices.websocket.CampusNetworkAutoLoginWebSocket.campusNetworkAutoLoginKey;
 
 @Service
 public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginService {
 
     private final ServiceCampusNetLoginMapper mapper;
+    private final WsSessionHub wsSessionHub;
+    private final ObjectMapper objectMapper;
+    private final ServiceLogMapper serviceLogMapper;
 
-    public ServiceCampusNetLoginServiceImpl(ServiceCampusNetLoginMapper mapper) {
+
+    public ServiceCampusNetLoginServiceImpl(ServiceCampusNetLoginMapper mapper, WsSessionHub wsSessionHub, ObjectMapper objectMapper, ServiceLogMapper serviceLogMapper) {
         this.mapper = mapper;
+        this.wsSessionHub = wsSessionHub;
+        this.objectMapper = objectMapper;
+        this.serviceLogMapper = serviceLogMapper;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -120,9 +133,40 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
         String email = CURRENT_USER_EMAIL.get();
         ServiceCampusNetLoginEntity serviceCampusNetLoginEntity = mapper.selectById(email);
         if(serviceCampusNetLoginEntity==null){
-
+            throw new RuntimeException("当前邮箱下不存在校园网账号，无法编辑!");
         }
+        serviceCampusNetLoginEntity.setNetAccount(body.getNetAccount());
+        serviceCampusNetLoginEntity.setCarrier(body.getCarrier());
+        serviceCampusNetLoginEntity.setNetPassword(body.getNetPassword());
+        serviceCampusNetLoginEntity.setWlanUserIp(body.getWlanUserIp());
+        serviceCampusNetLoginEntity.setUpdateTime(new Date());
+        return mapper.update(serviceCampusNetLoginEntity);
+    }
 
+    @Override
+    public void connect(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException {
+        serviceCampusNetLoginEntity.setNetAccount(serviceCampusNetLoginEntity.getNetAccount()+"@"+serviceCampusNetLoginEntity.getCarrier());
+        JsonNode node = objectMapper.valueToTree(serviceCampusNetLoginEntity);
+        ObjectNode objectNode = (ObjectNode) node;
+        objectNode.put("type", "login");
+        String json=objectMapper.writeValueAsString(objectNode);
+        boolean send = wsSessionHub.send(campusNetworkAutoLoginKey, json);
+        if (!send) {
+            ServiceLogEntity serviceLog=new ServiceLogEntity();
+            serviceLog.setRelationTable("service_campus_net_login");
+            serviceLog.setEmail(serviceCampusNetLoginEntity.getEmail());
+            serviceLog.setCreateTime(new Date());
+            serviceLog.setOperationName("登录");
+            serviceLog.setOperationStatus(0);
+            serviceLog.setRemarks("连接失败，请联系管理员QQ\n+2419646091");
+            serviceLogMapper.insert(serviceLog);
+        }
+    }
+
+    @Override
+    public List<ServiceLogEntity> logs(String email) {
+        List<ServiceLogEntity> serviceLogEntities = serviceLogMapper.selectByEmail(email);
+        return serviceLogEntities==null?List.of():serviceLogEntities;
     }
 }
 

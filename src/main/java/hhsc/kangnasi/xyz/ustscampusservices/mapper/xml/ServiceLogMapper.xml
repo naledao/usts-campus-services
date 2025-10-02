@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceLogMapper">
+
+    <resultMap id="BaseResultMap" type="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity">
+        <id property="id" column="id"/>
+        <result property="relationTable" column="relation_table"/>
+        <result property="email" column="email"/>
+        <result property="createTime" column="create_time"/>
+        <result property="operationName" column="operation_name"/>
+        <result property="operationStatus" column="operation_status"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, relation_table, email, create_time, operation_name, operation_status, remarks
+    </sql>
+
+
+    <insert id="insert" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into service_log (relation_table, email, create_time, operation_name, operation_status, remarks)
+        values (#{relationTable}, #{email}, #{createTime}, #{operationName}, #{operationStatus}, #{remarks})
+    </insert>
+
+    <update id="update" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity">
+        update service_log
+        set relation_table   = #{relationTable},
+            email            = #{email},
+            create_time      = #{createTime},
+            operation_name   = #{operationName},
+            operation_status = #{operationStatus},
+            remarks          = #{remarks}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        delete from service_log where id = #{id}
+    </delete>
+
+    <select id="selectById" parameterType="int">
+        select <include refid="Base_Column_List"/>
+        from service_log
+        where id = #{id}
+    </select>
+
+    <select id="selectAll">
+        select <include refid="Base_Column_List"/> from service_log
+    </select>
+
+    <select id="selectByEmail" parameterType="string">
+        select <include refid="Base_Column_List"/> from service_log
+        where email = #{email}
+    </select>
+
+    <select id="selectByRelationTable" parameterType="string">
+        select <include refid="Base_Column_List"/> from service_log
+        where relation_table = #{relationTable}
+    </select>
+
+</mapper>
