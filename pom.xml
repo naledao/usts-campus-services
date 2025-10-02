@@ -36,6 +36,12 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
+        <!-- RabbitMQ AMQP -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
         <!-- Redisson Spring Boot Starter for Redis integration -->
         <dependency>
             <groupId>org.redisson</groupId>

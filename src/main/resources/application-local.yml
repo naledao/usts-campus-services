@@ -32,6 +32,13 @@ spring:
       connection-timeout: 30000
       pool-name: HikariCP
 
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    virtual-host: ${RABBITMQ_VHOST:/}
+
 
 mybatis:
   mapper-locations: classpath*:hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/*.xml
@@ -41,3 +48,8 @@ server:
   port: 9880
   servlet:
     context-path: /usts-campus-services
+
+# MQ delay feature gate (off by default)
+mq:
+  delay:
+    enabled: false
