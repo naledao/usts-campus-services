@@ -1,6 +1,6 @@
 package hhsc.kangnasi.xyz.ustscampusservices.controller;
 
-import hhsc.kangnasi.xyz.ustscampusservices.service.DelayedMessageSender;
+import hhsc.kangnasi.xyz.ustscampusservices.mq.DelayedMessageSender;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

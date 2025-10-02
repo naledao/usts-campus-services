@@ -1,5 +1,6 @@
 package hhsc.kangnasi.xyz.ustscampusservices.config;
 
+import hhsc.kangnasi.xyz.ustscampusservices.contant.MqConstant;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -27,36 +28,36 @@ public class RabbitDelayConfig {
     // Delay exchange/queue (TTL + DLX, per-message TTL)
     @Bean
     public DirectExchange delayExchange() {
-        return new DirectExchange(MqConstants.DELAY_EXCHANGE, true, false);
+        return new DirectExchange(MqConstant.DELAY_EXCHANGE, true, false);
     }
 
     @Bean
     public Queue delayQueue() {
         Map<String, Object> args = new HashMap<>();
-        args.put("x-dead-letter-exchange", MqConstants.BIZ_EXCHANGE);
-        args.put("x-dead-letter-routing-key", MqConstants.BIZ_ROUTING_KEY);
-        return new Queue(MqConstants.DELAY_QUEUE, true, false, false, args);
+        args.put("x-dead-letter-exchange", MqConstant.BIZ_EXCHANGE);
+        args.put("x-dead-letter-routing-key", MqConstant.BIZ_ROUTING_KEY);
+        return new Queue(MqConstant.DELAY_QUEUE, true, false, false, args);
     }
 
     @Bean
     public Binding delayBinding(Queue delayQueue, DirectExchange delayExchange) {
-        return BindingBuilder.bind(delayQueue).to(delayExchange).with(MqConstants.DELAY_ROUTING_KEY);
+        return BindingBuilder.bind(delayQueue).to(delayExchange).with(MqConstant.DELAY_ROUTING_KEY);
     }
 
     // Business exchange/queue (receives expired messages from delay queue)
     @Bean
     public DirectExchange bizExchange() {
-        return new DirectExchange(MqConstants.BIZ_EXCHANGE, true, false);
+        return new DirectExchange(MqConstant.BIZ_EXCHANGE, true, false);
     }
 
     @Bean
     public Queue bizQueue() {
-        return new Queue(MqConstants.BIZ_QUEUE, true);
+        return new Queue(MqConstant.BIZ_QUEUE, true);
     }
 
     @Bean
     public Binding bizBinding(Queue bizQueue, DirectExchange bizExchange) {
-        return BindingBuilder.bind(bizQueue).to(bizExchange).with(MqConstants.BIZ_ROUTING_KEY);
+        return BindingBuilder.bind(bizQueue).to(bizExchange).with(MqConstant.BIZ_ROUTING_KEY);
     }
 }
 

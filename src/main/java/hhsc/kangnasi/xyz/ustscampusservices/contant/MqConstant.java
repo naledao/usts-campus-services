@@ -1,7 +1,7 @@
-package hhsc.kangnasi.xyz.ustscampusservices.config;
+package hhsc.kangnasi.xyz.ustscampusservices.contant;
 
-public final class MqConstants {
-    private MqConstants() {}
+public final class MqConstant {
+    private MqConstant() {}
 
     public static final String DELAY_EXCHANGE = "demo.delay.exchange";
     public static final String DELAY_QUEUE = "demo.delay.queue";

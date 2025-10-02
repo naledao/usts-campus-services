@@ -1,6 +1,6 @@
-package hhsc.kangnasi.xyz.ustscampusservices.service;
+package hhsc.kangnasi.xyz.ustscampusservices.mq;
 
-import hhsc.kangnasi.xyz.ustscampusservices.config.MqConstants;
+import hhsc.kangnasi.xyz.ustscampusservices.contant.MqConstant;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -30,8 +30,8 @@ public class DelayedMessageSender {
         };
 
         rabbitTemplate.convertAndSend(
-                MqConstants.DELAY_EXCHANGE,
-                MqConstants.DELAY_ROUTING_KEY,
+                MqConstant.DELAY_EXCHANGE,
+                MqConstant.DELAY_ROUTING_KEY,
                 payload,
                 mpp
         );
