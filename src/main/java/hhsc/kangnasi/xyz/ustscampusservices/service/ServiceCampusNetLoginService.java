@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface ServiceCampusNetLoginService {
 
-    ResponseEntity<?> create(ServiceCampusNetLoginEntity body);
+    ResponseEntity<?> create(ServiceCampusNetLoginEntity body) throws JsonProcessingException;
 
     List<CommonServiceVo> allService(String email);
 
-    int edit(ServiceCampusNetLoginEntity body);
+    int edit(ServiceCampusNetLoginEntity body) throws JsonProcessingException;
 
     void connect(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException;
 
@@ -23,5 +23,7 @@ public interface ServiceCampusNetLoginService {
     void logout(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException;
 
     void setRunningTime(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity, String hour, String minute) throws JsonProcessingException;
+
+    String toJson(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException;
 }
 

@@ -4,7 +4,7 @@
 
 ## 总览
 
-- 当前实现：基于 RabbitMQ 的消息 TTL（per-message）+ 死信交换机（DLX）实现按消息延迟。
+- 当前实现：基于官方插件 x-delayed-message（rabbitmq_delayed_message_exchange），通过设置消息头 x-delay（毫秒）实现按消息延迟。
 - 开关控制：`mq.delay.enabled=true` 时启用相关 Bean、发送器与示例监听；默认关闭，避免本地未装 RabbitMQ 时报错。
 - JSON 序列化：通过 `Jackson2JsonMessageConverter` 在发送与消费端进行对象与 JSON 的转换。
 - 组件命名（可在 `MqConstants` 中调整）：
@@ -122,4 +122,3 @@ Delay Queue --DLX--> [Biz Exchange] --RK--> [Biz Queue] --(consume)--> Consumer
 ## 小结
 
 TTL + DLX 方案无需安装插件，易于落地，能满足多数“按消息指定延迟”的需求，但需了解其队首阻塞、非硬实时等特性。若你的业务对延迟精度有更强要求或规模较大，推荐采用 “延迟交换机插件” 实现，其投递机制能从根源上避免队首阻塞问题。
-

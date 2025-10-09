@@ -1,7 +1,10 @@
 package hhsc.kangnasi.xyz.ustscampusservices.util;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class TimeUtil {
     public static String formatDiff(LocalDateTime start, LocalDateTime end) {
@@ -42,5 +45,27 @@ public class TimeUtil {
         }
 
         return Duration.between(now, target).toMillis();
+    }
+
+    /**
+     * 获取当前时间的小时和分钟组成的字符串数组
+     * @return 包含小时和分钟的字符串数组，格式为[小时, 分钟]，例如["21", "45"]
+     */
+    public static String[] getCurrentHourMinuteArray() {
+        // 获取当前的本地时间
+        LocalTime now = LocalTime.now();
+        // 创建时间格式化器，指定格式为24小时制的小时和分钟（HH:mm）
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        // 将当前时间按照指定格式转换为字符串，例如 "21:45"
+        String timeStr = now.format(formatter);
+        // 以冒号为分隔符，将时间字符串拆分为小时和分钟的数组
+        return timeStr.split(":"); // 拆成 ["21", "45"]
+    }
+
+
+    public static String getToday() {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return today.format(formatter);
     }
 }

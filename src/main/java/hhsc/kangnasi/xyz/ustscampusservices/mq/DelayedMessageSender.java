@@ -18,14 +18,14 @@ public class DelayedMessageSender {
 
     /**
      * Send a message with a per-message delay (ms).
-     * Uses TTL + Dead Letter Exchange to deliver after the delay.
+     * Uses rabbitmq_delayed_message_exchange (x-delayed-message) with x-delay header.
      */
     public void send(Object payload, long delayMillis) {
-        if (delayMillis < 0) delayMillis = 0;
-        long finalDelay = Math.min(delayMillis, Integer.MAX_VALUE); // expiration is a String of integer milliseconds
+        final long finalDelay = delayMillis < 0 ? 0 : delayMillis;
 
         MessagePostProcessor mpp = message -> {
-            message.getMessageProperties().setExpiration(String.valueOf(finalDelay));
+            // x-delay expects milliseconds as a number; plugin will hold the message
+            message.getMessageProperties().setHeader("x-delay", finalDelay);
             return message;
         };
 
@@ -37,4 +37,3 @@ public class DelayedMessageSender {
         );
     }
 }
-

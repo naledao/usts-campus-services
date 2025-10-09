@@ -1,5 +1,6 @@
 package hhsc.kangnasi.xyz.ustscampusservices.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import hhsc.kangnasi.xyz.ustscampusservices.service.CommonService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class CommonServiceController {
     }
 
     @PostMapping("/start")
-    public ResponseEntity<?> startService(@RequestParam("serviceTag")String serviceTag) {
+    public ResponseEntity<?> startService(@RequestParam("serviceTag")String serviceTag) throws JsonProcessingException {
         String email = CURRENT_USER_EMAIL.get();
         if(serviceTag==null || serviceTag.isBlank()) {
             return ResponseEntity.badRequest().body("服务不能为空");

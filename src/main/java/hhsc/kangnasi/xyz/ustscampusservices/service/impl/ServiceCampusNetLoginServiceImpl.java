@@ -46,7 +46,7 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public ResponseEntity<?> create(ServiceCampusNetLoginEntity body) {
+    public ResponseEntity<?> create(ServiceCampusNetLoginEntity body) throws JsonProcessingException {
         String email = CURRENT_USER_EMAIL.get();
         if (email == null || email.isBlank()) {
             return ResponseEntity.status(401).body("未登录");
@@ -105,8 +105,11 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
         body.setWlanUserMac("000000000000");
         body.setWlanAcIp("221.178.235.146");
         body.setWlanAcName("JSSUZ-MC-CMNET-BRAS-KEDA_ME60X8");
+        // 添加到延迟队列
         int rows = mapper.insert(body);
         if (rows > 0) {
+            ServiceCampusNetLoginEntity serviceCampusNetLoginEntity = mapper.selectById(email);
+            setRunningTime(serviceCampusNetLoginEntity,"03","00");
             return ResponseEntity.ok(Map.of(
                     "email", email,
                     "netAccount", body.getNetAccount(),
@@ -132,7 +135,7 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
     }
 
     @Override
-    public int edit(ServiceCampusNetLoginEntity body) {
+    public int edit(ServiceCampusNetLoginEntity body) throws JsonProcessingException {
         String email = CURRENT_USER_EMAIL.get();
         ServiceCampusNetLoginEntity serviceCampusNetLoginEntity = mapper.selectById(email);
         if(serviceCampusNetLoginEntity==null){
@@ -143,7 +146,14 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
         serviceCampusNetLoginEntity.setNetPassword(body.getNetPassword());
         serviceCampusNetLoginEntity.setWlanUserIp(body.getWlanUserIp());
         serviceCampusNetLoginEntity.setUpdateTime(new Date());
-        return mapper.update(serviceCampusNetLoginEntity);
+        int update = mapper.update(serviceCampusNetLoginEntity);
+        if(update<=0){
+            throw new RuntimeException("编辑失败");
+        }else{
+            String[] refreshTime = serviceCampusNetLoginEntity.getRefreshTime().split("-");
+            setRunningTime(serviceCampusNetLoginEntity,refreshTime[0],refreshTime[1]);
+            return 1;
+        }
     }
 
     @Override
@@ -195,13 +205,21 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
     @Override
     public void setRunningTime(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity, String hour, String minute) throws JsonProcessingException {
         long intervalMillis = TimeUtil.getIntervalMillis(hour, minute);
+        serviceCampusNetLoginEntity.setRefreshTime(hour+"-"+minute);
+        serviceCampusNetLoginEntity.setUpdateTime(new Date());
+        mapper.update(serviceCampusNetLoginEntity);
         serviceCampusNetLoginEntity.setNetAccount(serviceCampusNetLoginEntity.getNetAccount()+"@"+serviceCampusNetLoginEntity.getCarrier());
+        String json = toJson(serviceCampusNetLoginEntity);
+        delayedMessageSender.send(json, intervalMillis);
+    }
+
+    @Override
+    public String toJson(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException {
         JsonNode node = objectMapper.valueToTree(serviceCampusNetLoginEntity);
         ObjectNode objectNode = (ObjectNode) node;
         objectNode.put("serviceName", "service_campus_net_login");
         objectNode.put("type", "all");
-        String json=objectMapper.writeValueAsString(objectNode);
-        delayedMessageSender.send(json, intervalMillis);
+        return objectMapper.writeValueAsString(objectNode);
     }
 }
 

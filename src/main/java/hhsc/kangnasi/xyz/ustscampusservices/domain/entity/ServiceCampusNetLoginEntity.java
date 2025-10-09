@@ -15,6 +15,15 @@ public class ServiceCampusNetLoginEntity {
     private Date updateTime;     // 更新时间
     private Short isDel;         // 是否删除
     private Short runStatus;     // 运行状态
+    private String refreshTime;    // 刷新时间
+
+    public String getRefreshTime() {
+        return refreshTime;
+    }
+
+    public void setRefreshTime(String refreshTime) {
+        this.refreshTime = refreshTime;
+    }
 
     public String getEmail() {
         return email;

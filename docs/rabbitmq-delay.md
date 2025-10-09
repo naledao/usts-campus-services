@@ -1,5 +1,7 @@
 # RabbitMQ 延迟队列使用说明（按消息动态延迟）
 
+更新：项目已切换为使用官方插件 rabbitmq_delayed_message_exchange（x-delayed-message）实现延迟投递；发送端通过设置消息头 x-delay（毫秒）控制延迟。下文保留 TTL+DLX 的说明以供对比与参考。
+
 本文档说明如何在本项目中使用“每条消息可动态指定延迟”的消息投递能力。默认实现基于 RabbitMQ 的 TTL + DLX（无需安装插件），并提供切换到官方延迟交换机插件的参考。
 
 ## 功能概览

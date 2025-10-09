@@ -14,6 +14,7 @@ public interface ServiceLogMapper {
 
     int deleteById(Integer id);
 
+
     ServiceLogEntity selectById(Integer id);
 
     List<ServiceLogEntity> selectAll();
