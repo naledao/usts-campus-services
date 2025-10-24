@@ -5,6 +5,8 @@ import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceCampusNetLoginE
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.service.ServiceCampusNetLoginService;
 import org.redisson.api.RRateLimiter;
+import org.redisson.api.RateIntervalUnit;
+import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ public class ServiceCampusNetLoginController {
     private final ServiceCampusNetLoginService serviceCampusNetLoginService;
     private final ServiceCampusNetLoginMapper serviceCampusNetLoginMapper;
     private final RedissonClient redissonClient;
+    private static final String RATE_LIMIT_KEY_PREFIX = "service-campus-net-login:rate-limit";
 
     public ServiceCampusNetLoginController(ServiceCampusNetLoginService serviceCampusNetLoginService, ServiceCampusNetLoginMapper serviceCampusNetLoginMapper, RedissonClient redissonClient) {
         this.serviceCampusNetLoginService = serviceCampusNetLoginService;
@@ -59,6 +62,7 @@ public class ServiceCampusNetLoginController {
         if(serviceCampusNetLoginEntity==null){
             throw new RuntimeException("请先创建服务");
         }
+        enforceRateLimit(email, "connect");
         serviceCampusNetLoginService.connect(serviceCampusNetLoginEntity);
         return ResponseEntity.ok("连接操作已执行，请查看日志结果。");
     }
@@ -70,6 +74,7 @@ public class ServiceCampusNetLoginController {
         if(serviceCampusNetLoginEntity==null){
             throw new RuntimeException("请先创建服务");
         }
+        enforceRateLimit(email, "logout");
         serviceCampusNetLoginService.logout(serviceCampusNetLoginEntity);
         return ResponseEntity.ok("下线操作已执行，请查看日志结果。");
     }
@@ -104,5 +109,14 @@ public class ServiceCampusNetLoginController {
         }
         serviceCampusNetLoginService.setRunningTime(serviceCampusNetLoginEntity,hour,minute);
         return ResponseEntity.ok("设置成功");
+    }
+
+    private void enforceRateLimit(String email, String action) {
+        String limiterKey = String.format("%s:%s:%s", RATE_LIMIT_KEY_PREFIX, action, email);
+        RRateLimiter rateLimiter = redissonClient.getRateLimiter(limiterKey);
+        rateLimiter.trySetRate(RateType.OVERALL, 12, 1, RateIntervalUnit.DAYS);
+        if (!rateLimiter.tryAcquire()) {
+            throw new RuntimeException("24小时内该操作已达上限，请稍后再试");
+        }
     }
 }

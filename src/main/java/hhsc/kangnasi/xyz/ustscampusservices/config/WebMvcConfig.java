@@ -24,7 +24,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/user/validate-token",
                         // health/error/static
                         "/error",
-                        "/favicon.ico"
+                        "/favicon.ico",
+                        "/service-dorm-electricity-alert-room/init-rooms",
+                        "/swagger-ui/**",
+                        "/v3/**"
                 );
     }
 }

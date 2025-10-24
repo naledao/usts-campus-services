@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertRoomMapper">
+
+    <!-- 表名 -->
+    <sql id="table_name">service_dorm_electricity_alert_room</sql>
+
+    <!-- 字段列表（与列顺序一致） -->
+    <sql id="Base_Column_List">
+        id, feeitemid, type, level, campus, building, room, room_name
+    </sql>
+
+    <!-- 下划线 -> 驼峰 的显式映射 -->
+    <resultMap id="BaseResultMap" type="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertRoomEntity">
+        <id     column="id"        property="id"/>
+        <result column="feeitemid" property="feeitemid"/>
+        <result column="type"      property="type"/>
+        <result column="level"     property="level"/>
+        <result column="campus"    property="campus"/>
+        <result column="building"  property="building"/>
+        <result column="room"      property="room"/>
+        <result column="room_name" property="roomName"/>
+    </resultMap>
+
+    <!-- 单条插入：使用自增主键回写 -->
+    <insert id="insert" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertRoomEntity"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        <include refid="table_name"/>
+        (feeitemid, type, level, campus, building, room, room_name)
+        VALUES
+        (#{feeitemid}, #{type}, #{level}, #{campus}, #{building}, #{room}, #{roomName})
+    </insert>
+
+    <!-- 批量插入（MySQL 单条 VALUES 多组） -->
+    <insert id="insertBatch">
+        INSERT INTO
+        <include refid="table_name"/>
+        (feeitemid, type, level, campus, building, room, room_name)
+        VALUES
+        <foreach collection="list" item="e" separator=",">
+            (#{e.feeitemid}, #{e.type}, #{e.level}, #{e.campus}, #{e.building}, #{e.room}, #{e.roomName})
+        </foreach>
+    </insert>
+
+    <!-- 根据主键删除 -->
+    <delete id="deleteById">
+        DELETE FROM <include refid="table_name"/> WHERE id = #{id}
+    </delete>
+
+    <!-- 按主键更新（动态 set，空值不更新） -->
+    <update id="updateById" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertRoomEntity">
+        UPDATE <include refid="table_name"/>
+        <set>
+            <if test="feeitemid != null">feeitemid = #{feeitemid},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="campus != null and campus != ''">campus = #{campus},</if>
+            <if test="building != null">building = #{building},</if>
+            <if test="room != null">room = #{room},</if>
+            <if test="roomName != null and roomName != ''">room_name = #{roomName},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 主键查询 -->
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM <include refid="table_name"/>
+        WHERE id = #{id}
+    </select>
+
+    <!-- 条件列表查询（全部条件可选） -->
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM <include refid="table_name"/>
+        <where>
+            <if test="feeitemid != null">AND feeitemid = #{feeitemid}</if>
+            <if test="type != null and type != ''">AND type = #{type}</if>
+            <if test="level != null">AND level = #{level}</if>
+            <if test="campus != null and campus != ''">AND campus = #{campus}</if>
+            <if test="building != null">AND building = #{building}</if>
+            <if test="room != null">AND room = #{room}</if>
+            <!-- roomName 支持模糊 -->
+            <if test="roomName != null and roomName != ''">AND room_name LIKE CONCAT('%', #{roomName}, '%')</if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectByCampusAndBuilding" resultMap="BaseResultMap">
+        SELECT *
+        FROM <include refid="table_name"/>
+        where campus = #{campusId} AND building = #{buildingId}
+    </select>
+
+    <select id="selectByCampusAndBuildingAndRoom" resultMap="BaseResultMap">
+        SELECT *
+        FROM <include refid="table_name"/>
+        where campus = #{campusId} AND building = #{buildingId} and room=#{roomId}
+    </select>
+
+</mapper>

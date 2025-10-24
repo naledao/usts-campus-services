@@ -208,13 +208,13 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
         serviceCampusNetLoginEntity.setRefreshTime(hour+"-"+minute);
         serviceCampusNetLoginEntity.setUpdateTime(new Date());
         mapper.update(serviceCampusNetLoginEntity);
-        serviceCampusNetLoginEntity.setNetAccount(serviceCampusNetLoginEntity.getNetAccount()+"@"+serviceCampusNetLoginEntity.getCarrier());
         String json = toJson(serviceCampusNetLoginEntity);
         delayedMessageSender.send(json, intervalMillis);
     }
 
     @Override
     public String toJson(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException {
+        serviceCampusNetLoginEntity.setNetAccount(serviceCampusNetLoginEntity.getNetAccount()+"@"+serviceCampusNetLoginEntity.getCarrier());
         JsonNode node = objectMapper.valueToTree(serviceCampusNetLoginEntity);
         ObjectNode objectNode = (ObjectNode) node;
         objectNode.put("serviceName", "service_campus_net_login");
