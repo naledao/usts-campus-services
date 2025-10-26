@@ -1,7 +1,5 @@
 package hhsc.kangnasi.xyz.ustscampusservices.service.impl;
 
-import com.alibaba.fastjson2.JSONObject;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -39,6 +37,7 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
 
     @DubboReference(
             interfaceClass = DianFeiService.class,
+            protocol = "tri",
             url = "${dubbo.reference.dianfei-service.url}", // 与你原来的 URL 一致
             timeout = 5000
     )
@@ -179,8 +178,8 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
     }
 
     @Override
-    public Double getCharge(String email) throws JsonProcessingException {
-        ServiceDormElectricityAlertEntity serviceDormElectricityAlertEntity = serviceDormElectricityAlertMapper.selectByEmail("2419646091@qq.com",0);
+    public Double queryCurrentElectricity(String email)  {
+        ServiceDormElectricityAlertEntity serviceDormElectricityAlertEntity = serviceDormElectricityAlertMapper.selectByEmail(email,0);
         if(serviceDormElectricityAlertEntity==null){
             return -1d;
         }
@@ -192,7 +191,8 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
         roomChargeDTO.setBuilding(serviceDormElectricityAlertEntity.getBuilding());
         roomChargeDTO.setRoom(serviceDormElectricityAlertEntity.getRoom());
         Gson gson=new Gson();
-        String responseJson = dianFeiService.query_current_electricity(gson.toJson(roomChargeDTO));
+        String payload = gson.toJson(roomChargeDTO);
+        String responseJson = dianFeiService.query_current_electricity(payload);
         System.out.println(responseJson);
         return 1.0;
     }

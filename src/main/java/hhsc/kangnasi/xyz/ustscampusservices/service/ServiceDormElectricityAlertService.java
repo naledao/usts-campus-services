@@ -26,5 +26,5 @@ public interface ServiceDormElectricityAlertService {
 
     ServiceDormElectricityAlertEntity viewRoom(String email);
 
-    Double getCharge(String email) throws JsonProcessingException;
+    Double queryCurrentElectricity(String email) throws JsonProcessingException;
 }

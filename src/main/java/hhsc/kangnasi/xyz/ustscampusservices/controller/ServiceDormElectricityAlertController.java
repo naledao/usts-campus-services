@@ -83,10 +83,11 @@ public class ServiceDormElectricityAlertController {
         return ResponseEntity.ok(serviceDormElectricityAlertRoomService.viewRoom(email));
     }
 
-    @GetMapping("/charge")
-    public ResponseEntity<Double> charge() throws JsonProcessingException {
+    @GetMapping("/current-electricity")
+    public ResponseEntity<Double> queryCurrentElectricity() throws JsonProcessingException {
         String email=CURRENT_USER_EMAIL.get();
-        serviceDormElectricityAlertRoomService.getCharge(email);
+        email="2419646091@qq.com";
+        serviceDormElectricityAlertRoomService.queryCurrentElectricity(email);
         return ResponseEntity.ok(1.0);
     }
 }

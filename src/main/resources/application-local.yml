@@ -58,10 +58,10 @@ mq:
 dubbo:
   application:
     name: usts-campus-services
-  consumer:
-    check: false
-    timeout: 5000
   reference:
     dianfei-service:
       url: tri://127.0.0.1:50051/DianFeiService
+
+
+
 
