@@ -89,7 +89,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnhandled(Exception ex, HttpServletRequest request) {
         log.error("Unhandled exception on {} {}", request.getMethod(), request.getRequestURI(), ex);
-        return build(HttpStatus.INTERNAL_SERVER_ERROR, "服务器内部错误");
+        return build(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 }
 

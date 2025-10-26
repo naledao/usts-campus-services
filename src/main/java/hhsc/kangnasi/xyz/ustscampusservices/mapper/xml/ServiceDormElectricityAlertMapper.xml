@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertMapper">
+
+    <!-- 字段映射：下划线→驼峰 -->
+    <resultMap id="BaseResultMap" type="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertEntity">
+        <id     property="id"         column="id"           jdbcType="INTEGER"/>
+        <result property="email"      column="email"        jdbcType="VARCHAR"/>
+        <result property="feeItemId"  column="feeitemid"    jdbcType="VARCHAR"/>
+        <result property="type"       column="type"         jdbcType="VARCHAR"/>
+        <result property="level"      column="level"        jdbcType="VARCHAR"/>
+        <result property="campus"     column="campus"       jdbcType="VARCHAR"/>
+        <result property="campusName"     column="campus_name"       jdbcType="VARCHAR"/>
+        <result property="building"   column="building"     jdbcType="VARCHAR"/>
+        <result property="buildingName"   column="building_name"     jdbcType="VARCHAR"/>
+        <result property="room"       column="room"         jdbcType="VARCHAR"/>
+        <result property="roomName"   column="room_name"    jdbcType="VARCHAR"/>
+        <result property="runStatus"  column="run_status"   jdbcType="SMALLINT"/>
+        <result property="threshold"  column="threshold"    jdbcType="DOUBLE"/>
+        <result property="isDel"      column="is_del"       jdbcType="SMALLINT"/>
+        <result property="createTime" column="create_time"  jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time"  jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 通用列 -->
+    <sql id="Base_Column_List">
+        id, email, feeitemid, `type`, `level`, campus, campus_name, building, building_name, room, room_name,
+        run_status, threshold, is_del, create_time, update_time
+    </sql>
+
+    <!-- 插入：全字段 -->
+    <insert id="insert" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertEntity"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO service_dorm_electricity_alert
+        (email, feeitemid, `type`, `level`, campus, campus_name, building, building_name, room, room_name,
+         run_status, threshold, is_del, create_time, update_time)
+        VALUES
+            (#{email}, #{feeItemId}, #{type}, #{level}, #{campus},#{campusName}, #{building},#{buildingName}, #{room}, #{roomName},
+             #{runStatus}, #{threshold}, #{isDel},
+             #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+
+
+    <!-- 按主键更新：仅非空字段 -->
+    <update id="updateById" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertEntity">
+        UPDATE service_dorm_electricity_alert
+        <set>
+            <if test="email != null">email = #{email},</if>
+            <if test="feeItemId != null">feeitemid = #{feeItemId},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="level != null">`level` = #{level},</if>
+            <if test="campus != null">campus = #{campus},</if>
+            <if test="campusName != null">campus_name = #{campusName},</if>
+            <if test="building != null">building = #{building},</if>
+            <if test="buildingName != null">building_name = #{buildingName},</if>
+            <if test="room != null">room = #{room},</if>
+            <if test="roomName != null">room_name = #{roomName},</if>
+            <if test="runStatus != null">run_status = #{runStatus},</if>
+            <if test="threshold != null">threshold = #{threshold},</if>
+            <if test="isDel != null">is_del = #{isDel},</if>
+            <if test="updateTime != null">update_time = #{updateTime,jdbcType=TIMESTAMP},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 物理删除 -->
+    <delete id="deleteById">
+        DELETE FROM service_dorm_electricity_alert WHERE id = #{id}
+    </delete>
+
+    <!-- 逻辑删除 -->
+    <update id="markDeleteById">
+        UPDATE service_dorm_electricity_alert
+        SET is_del = 1, update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 主键查询 -->
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_dorm_electricity_alert
+        WHERE id = #{id}
+    </select>
+
+    <!-- 邮箱唯一查询 -->
+    <select id="selectByEmail" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_dorm_electricity_alert
+        WHERE email = #{email}
+        <if test="isDel != null">
+          and is_del=#{isDel}
+        </if>
+        LIMIT 1
+    </select>
+
+    <!-- 全量查询（可按需改为分页） -->
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM service_dorm_electricity_alert
+        ORDER BY id DESC
+    </select>
+
+</mapper>
