@@ -52,7 +52,7 @@
 
     <select id="selectByEmail" parameterType="string" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/> from service_log
-        where email = #{email} order by create_time desc
+        where email = #{email} and relation_table = #{relationTable} order by create_time desc
     </select>
 
     <select id="selectByRelationTable" parameterType="string" resultMap="BaseResultMap">

@@ -45,7 +45,7 @@ mybatis:
 
 
 server:
-  port: 9880
+  port: 9550
   servlet:
     context-path: /usts-campus-services
 
@@ -60,7 +60,7 @@ dubbo:
     name: usts-campus-services
   reference:
     dianfei-service:
-      url: tri://127.0.0.1:50051/DianFeiService
+      url: tri://127.0.0.1:50051/dianfei.DianFeiService?mapping=grpc
 
 
 

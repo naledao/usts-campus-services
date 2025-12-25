@@ -103,4 +103,9 @@
         ORDER BY id DESC
     </select>
 
+    <select id="selectByRunStatus" resultMap="BaseResultMap">
+        select * from service_dorm_electricity_alert
+        where run_status=#{runStatus} and is_del=0
+    </select>
+
 </mapper>

@@ -71,7 +71,7 @@ public class CommonServiceController {
         switch (serviceTag.toLowerCase()) {
             case "校园网自动登录":
                 return "service_campus_net_login";
-            case "宿舍电费预警":
+            case "宿舍电量预警":
                 return "service_dorm_electricity_alert";
             default:
                 return "";

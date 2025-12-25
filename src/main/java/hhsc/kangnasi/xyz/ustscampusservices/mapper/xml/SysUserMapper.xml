@@ -8,6 +8,7 @@
     <resultMap id="SysUserMap" type="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity">
         <id property="email" column="email"/>
         <result property="nickName" column="nick_name"/>
+        <result property="phoneNumber" column="phone_number"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="isDel" column="is_del"/>
@@ -25,14 +26,15 @@
 
     <!-- 插入 -->
     <insert id="insert" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity">
-        INSERT INTO sys_user (email, nick_name, create_time, update_time, is_del)
-        VALUES (#{email}, #{nickName}, #{createTime}, #{updateTime}, #{isDel})
+        INSERT INTO sys_user (email, phone_number, nick_name, create_time, update_time, is_del)
+        VALUES (#{email}, #{phoneNumber}, #{nickName}, #{createTime}, #{updateTime}, #{isDel})
     </insert>
 
     <!-- 更新 -->
     <update id="update" parameterType="hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity">
         UPDATE sys_user
         SET nick_name=#{nickName},
+            phone_number=#{phoneNumber},
             update_time=#{updateTime},
             is_del=#{isDel}
         WHERE email=#{email}

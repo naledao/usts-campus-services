@@ -1,5 +1,6 @@
 package hhsc.kangnasi.xyz.ustscampusservices.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.SysUserMapper;
@@ -33,7 +34,7 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public ResponseEntity<String> sendLoginCode(String email) {
+    public ResponseEntity<String> sendLoginCode(String email) throws JsonProcessingException {
         if (email == null || email.isBlank() || !email.contains("@")) {
             return ResponseEntity.badRequest().body("邮箱格式不正确");
         }
@@ -136,6 +137,19 @@ public class SysUserServiceImpl implements SysUserService {
             return ResponseEntity.ok(Map.of("nickname", nickname));
         }
         return ResponseEntity.internalServerError().body("更新失败");
+    }
+
+    @Override
+    public String getCurrentUserEmail() {
+        String email = CURRENT_USER_EMAIL.get();
+        if (email == null || email.isBlank()) {
+            throw new RuntimeException("当前用户不存在");
+        }
+        SysUserEntity sysUserEntity = sysUserMapper.selectByEmail(email);
+        if (sysUserEntity == null || sysUserEntity.getIsDel() == 1) {
+            throw new RuntimeException("当前用户不存在");
+        }
+        return email;
     }
 
     private static String generateNumericCode(int length) {

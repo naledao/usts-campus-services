@@ -1,5 +1,12 @@
 package hhsc.kangnasi.xyz.ustscampusservices.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity;
+import hhsc.kangnasi.xyz.ustscampusservices.domain.request.SmsRequest;
+import hhsc.kangnasi.xyz.ustscampusservices.mapper.SysUserMapper;
+import hhsc.kangnasi.xyz.ustscampusservices.websocket.WsSessionHub;
+import org.apache.commons.text.StringSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +22,12 @@ import jakarta.mail.internet.MimeMessage;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+
+import static hhsc.kangnasi.xyz.ustscampusservices.websocket.SMSWebSocket.SMSKEY;
 
 /**
  * Utility component for sending emails via Spring's JavaMailSender.
@@ -28,20 +40,40 @@ public class EmailUtil {
 
     private final JavaMailSender mailSender;
 
+    private final WsSessionHub wsSessionHub;
+
+    private final SysUserMapper sysUserMapper;
+
+    private final ObjectMapper objectMapper=new ObjectMapper();
+
+    private final String smsTemplate = "\\n\\n\\n\\n【${msg}】\\n\\n\\n\\n";
+
     /**
      * Default sender address. Falls back to spring.mail.username when app.mail.from is not set.
      */
     @Value("${app.mail.from:${spring.mail.username:}}")
     private String defaultFrom;
 
-    public EmailUtil(JavaMailSender mailSender) {
+    public EmailUtil(JavaMailSender mailSender, WsSessionHub wsSessionHub, SysUserMapper sysUserMapper) {
         this.mailSender = mailSender;
+        this.wsSessionHub = wsSessionHub;
+        this.sysUserMapper = sysUserMapper;
     }
 
     // ---------------- Simple Text ----------------
 
-    public void sendText(String to, String subject, String text) {
+    public void sendText(String to, String subject, String text) throws JsonProcessingException {
         sendText(null, to, subject, text);
+        SysUserEntity sysUserEntity = sysUserMapper.selectByEmail(to);
+        if(sysUserEntity!=null && sysUserEntity.getPhoneNumber()!=null && !sysUserEntity.getPhoneNumber().isEmpty()){
+            Map<String, String> values = new HashMap<>();
+            values.put("msg", text);
+            StringSubstitutor sub = new StringSubstitutor(values);
+            String result = sub.replace(smsTemplate);
+            SmsRequest smsRequest=new SmsRequest(sysUserEntity.getPhoneNumber(), result);
+            String jsonString = objectMapper.writeValueAsString(smsRequest);
+            wsSessionHub.send(SMSKEY, jsonString);
+        }
     }
 
     public void sendText(@Nullable String from, String to, String subject, String text) {

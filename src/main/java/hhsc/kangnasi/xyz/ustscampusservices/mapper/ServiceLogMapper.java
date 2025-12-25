@@ -19,7 +19,7 @@ public interface ServiceLogMapper {
 
     List<ServiceLogEntity> selectAll();
 
-    List<ServiceLogEntity> selectByEmail(@Param("email") String email);
+    List<ServiceLogEntity> selectByEmail(@Param("email") String email, @Param("relationTable") String relationTable);
 
     List<ServiceLogEntity> selectByRelationTable(String relationTable);
 }

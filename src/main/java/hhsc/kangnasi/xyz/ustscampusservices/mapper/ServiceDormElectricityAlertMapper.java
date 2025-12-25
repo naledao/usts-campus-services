@@ -23,4 +23,6 @@ public interface ServiceDormElectricityAlertMapper {
     ServiceDormElectricityAlertEntity selectByEmail(@Param("email") String email,@Param("isDel") Integer isDel);
 
     List<ServiceDormElectricityAlertEntity> selectAll();           // 简单全量查询
+
+    List<ServiceDormElectricityAlertEntity> selectByRunStatus(@Param("runStatus") int status);
 }

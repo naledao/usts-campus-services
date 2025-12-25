@@ -1,5 +1,6 @@
 package hhsc.kangnasi.xyz.ustscampusservices.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import hhsc.kangnasi.xyz.ustscampusservices.service.SysUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class SysUserController {
     }
 
     @GetMapping("/send-login-code")
-    public ResponseEntity<String> sendLoginCode(@RequestParam("email") String email) {
+    public ResponseEntity<String> sendLoginCode(@RequestParam("email") String email) throws JsonProcessingException {
         return sysUserService.sendLoginCode(email);
     }
 

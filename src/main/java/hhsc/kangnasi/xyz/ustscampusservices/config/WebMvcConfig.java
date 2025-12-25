@@ -27,8 +27,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/favicon.ico",
                         "/service-dorm-electricity-alert-room/init-rooms",
                         "/swagger-ui/**",
-                        "/v3/**",
-                        "/service-dorm-electricity-alert/**"
+                        "/v3/**"
                 );
     }
 }

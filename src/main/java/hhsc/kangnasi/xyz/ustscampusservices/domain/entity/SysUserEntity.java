@@ -4,10 +4,11 @@ import java.util.Date;
 
 public class SysUserEntity {
     private String email;       // 登录账号
+    private String phoneNumber;
     private String nickName;    // 昵称
     private Date createTime;    // 创建时间
     private Date updateTime;    // 更新时间
-    private Integer isDel;      // 是否删除
+    private Integer isDel;      // 是否删除;
 
     // Getter & Setter
     public String getEmail() { return email; }
@@ -24,4 +25,11 @@ public class SysUserEntity {
 
     public Integer getIsDel() { return isDel; }
     public void setIsDel(Integer isDel) { this.isDel = isDel; }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

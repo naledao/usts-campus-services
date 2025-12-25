@@ -2,6 +2,7 @@ package hhsc.kangnasi.xyz.ustscampusservices.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertEntity;
+import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import org.springframework.http.ResponseEntity;
 
@@ -27,4 +28,6 @@ public interface ServiceDormElectricityAlertService {
     ServiceDormElectricityAlertEntity viewRoom(String email);
 
     Double queryCurrentElectricity(String email) throws JsonProcessingException;
+
+    List<ServiceLogEntity> logs(String email);
 }

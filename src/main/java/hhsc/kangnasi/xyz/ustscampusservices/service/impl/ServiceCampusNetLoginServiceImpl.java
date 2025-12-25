@@ -178,7 +178,7 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
 
     @Override
     public List<ServiceLogEntity> logs(String email) {
-        List<ServiceLogEntity> serviceLogEntities = serviceLogMapper.selectByEmail(email);
+        List<ServiceLogEntity> serviceLogEntities = serviceLogMapper.selectByEmail(email,"service_campus_net_login");
         return serviceLogEntities==null?List.of():serviceLogEntities;
     }
 

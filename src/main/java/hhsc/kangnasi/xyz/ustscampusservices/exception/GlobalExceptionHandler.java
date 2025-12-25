@@ -15,6 +15,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.validation.BindException;
 
+import java.time.Instant;
+import java.util.Map;
+
 /**
  * Global exception handler to standardize error responses.
  */
@@ -90,6 +93,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleUnhandled(Exception ex, HttpServletRequest request) {
         log.error("Unhandled exception on {} {}", request.getMethod(), request.getRequestURI(), ex);
         return build(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+    }
+
+    @ExceptionHandler(TooManyRequestsException.class)
+    public ResponseEntity<?> handle429(TooManyRequestsException e) {
+        return ResponseEntity.status(429).body(Map.of(
+                "timestamp", Instant.now().toString(),
+                "status", 429,
+                "error", "Too Many Requests",
+                "message", e.getMessage()
+        ));
     }
 }
 

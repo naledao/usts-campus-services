@@ -2,14 +2,15 @@ package hhsc.kangnasi.xyz.ustscampusservices.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import hhsc.kangnasi.xyz.ustscampusservices.domain.dto.RoomChargeDTO;
+import dianfei.Dianfei;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertRoomEntity;
+import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import hhsc.kangnasi.xyz.ustscampusservices.dubbo.api.DianFeiService;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertRoomMapper;
+import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceLogMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.service.ServiceDormElectricityAlertService;
 import hhsc.kangnasi.xyz.ustscampusservices.util.TimeUtil;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -21,10 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static hhsc.kangnasi.xyz.ustscampusservices.config.AuthInterceptor.CURRENT_USER_EMAIL;
 
@@ -34,20 +32,23 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
     private final ResourceLoader resourceLoader;
     private final ObjectMapper objectMapper;
     private final ServiceDormElectricityAlertMapper serviceDormElectricityAlertMapper;
+    private final ServiceLogMapper serviceLogMapper;
 
     @DubboReference(
             interfaceClass = DianFeiService.class,
             protocol = "tri",
+            check = false,
             url = "${dubbo.reference.dianfei-service.url}", // 与你原来的 URL 一致
             timeout = 5000
     )
     private DianFeiService dianFeiService;
 
-    public ServiceDormElectricityAlertServiceImpl(ServiceDormElectricityAlertRoomMapper serviceDormElectricityAlertRoomMapper, ResourceLoader resourceLoader, ObjectMapper objectMapper, ServiceDormElectricityAlertMapper serviceDormElectricityAlertMapper) {
+    public ServiceDormElectricityAlertServiceImpl(ServiceDormElectricityAlertRoomMapper serviceDormElectricityAlertRoomMapper, ResourceLoader resourceLoader, ObjectMapper objectMapper, ServiceDormElectricityAlertMapper serviceDormElectricityAlertMapper, ServiceLogMapper serviceLogMapper) {
         this.serviceDormElectricityAlertRoomMapper = serviceDormElectricityAlertRoomMapper;
         this.resourceLoader = resourceLoader;
         this.objectMapper = objectMapper;
         this.serviceDormElectricityAlertMapper = serviceDormElectricityAlertMapper;
+        this.serviceLogMapper = serviceLogMapper;
     }
 
     @Override
@@ -149,10 +150,15 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
             return List.of();
         }
         CommonServiceVo commonServiceVo = new CommonServiceVo();
-        commonServiceVo.setTag("宿舍电费预警");
+        commonServiceVo.setTag("宿舍电量预警");
         commonServiceVo.setName(serviceDormElectricityAlertEntity.getRoomName());
         commonServiceVo.setRunStatus(serviceDormElectricityAlertEntity.getRunStatus() == 1 ? "运行中" : "已停止");
         commonServiceVo.setRunningTime(TimeUtil.formatDiff(serviceDormElectricityAlertEntity.getUpdateTime().atZone(ZoneId.systemDefault()).toLocalDateTime(), LocalDateTime.now()));
+        Double electricity = queryCurrentElectricity(email);
+        if(electricity==null){
+            electricity=-1d;
+        }
+        commonServiceVo.setName(commonServiceVo.getName()+"（"+electricity+"度）");
         return List.of(commonServiceVo);
     }
 
@@ -179,21 +185,39 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
 
     @Override
     public Double queryCurrentElectricity(String email)  {
-        ServiceDormElectricityAlertEntity serviceDormElectricityAlertEntity = serviceDormElectricityAlertMapper.selectByEmail(email,0);
-        if(serviceDormElectricityAlertEntity==null){
+        ServiceLogEntity serviceLog=new ServiceLogEntity();
+        serviceLog.setRelationTable("service_dorm_electricity_alert");
+        serviceLog.setEmail(email);
+        serviceLog.setCreateTime(new Date());
+        serviceLog.setOperationName("查询宿舍当前电量");
+        try {
+            ServiceDormElectricityAlertEntity serviceDormElectricityAlertEntity = serviceDormElectricityAlertMapper.selectByEmail(email,0);
+            if(serviceDormElectricityAlertEntity==null){
+                return -1d;
+            }
+            Dianfei.QueryRequest req = Dianfei.QueryRequest.newBuilder()
+                    .setCampus(serviceDormElectricityAlertEntity.getCampus())
+                    .setBuilding(serviceDormElectricityAlertEntity.getBuilding())
+                    .setRoom(serviceDormElectricityAlertEntity.getRoom())
+                    .setFeeitemid(serviceDormElectricityAlertEntity.getFeeItemId())
+                    .setType(serviceDormElectricityAlertEntity.getType())
+                    .setLevel(serviceDormElectricityAlertEntity.getLevel())
+                    .build();
+            Dianfei.QueryReply reply = dianFeiService.QueryCurrentElectricity(req);
+            serviceLog.setOperationStatus(1);
+            serviceLog.setRemarks("操作成功，当前电量为"+reply.getValue()+"度");
+            serviceLogMapper.insert(serviceLog);
+            return reply.getValue();
+        }catch (Exception e){
+            serviceLog.setOperationStatus(0);
+            serviceLog.setRemarks("获取电量失败\n"+e.getMessage());
+            serviceLogMapper.insert(serviceLog);
             return -1d;
         }
-        RoomChargeDTO roomChargeDTO=new RoomChargeDTO();
-        roomChargeDTO.setLevel(serviceDormElectricityAlertEntity.getLevel());
-        roomChargeDTO.setCampus(serviceDormElectricityAlertEntity.getCampus());
-        roomChargeDTO.setFeeitemid(serviceDormElectricityAlertEntity.getFeeItemId());
-        roomChargeDTO.setType(serviceDormElectricityAlertEntity.getType());
-        roomChargeDTO.setBuilding(serviceDormElectricityAlertEntity.getBuilding());
-        roomChargeDTO.setRoom(serviceDormElectricityAlertEntity.getRoom());
-        Gson gson=new Gson();
-        String payload = gson.toJson(roomChargeDTO);
-        String responseJson = dianFeiService.query_current_electricity(payload);
-        System.out.println(responseJson);
-        return 1.0;
+    }
+
+    @Override
+    public List<ServiceLogEntity> logs(String email) {
+        return serviceLogMapper.selectByEmail(email, "service_dorm_electricity_alert");
     }
 }
