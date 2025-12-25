@@ -7,10 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.config.ApplicationContextProvider;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceLogMapper;
+import hhsc.kangnasi.xyz.ustscampusservices.util.EmailUtil;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -20,14 +20,19 @@ import java.util.Date;
 @Component
 public class SMSWebSocket {
 
-    @Setter
-    private static WsSessionHub hub;
+    private WsSessionHub hub = ApplicationContextProvider.getBean(WsSessionHub.class);
 
     public static final String  SMSKEY="bgcjhdsgcfjsdgkuiweyqwcdgksjabvuydfvgbfiahhdc87236rfhdw7";
 
     private ServiceLogMapper serviceLogMapper= ApplicationContextProvider.getBean(ServiceLogMapper.class);
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    private final EmailUtil emailUtil;
+
+    public SMSWebSocket(EmailUtil emailUtil) {
+        this.emailUtil = emailUtil;
+    }
 
     @OnOpen
     public void onOpen(Session session, @PathParam("secretKey") String secretKey) throws IOException {
@@ -57,6 +62,9 @@ public class SMSWebSocket {
         serviceLog.setOperationStatus(result.equals("success")?1:0);
         serviceLog.setRemarks("发送短信失败");
         serviceLogMapper.insert(serviceLog);
+        if(serviceLog.getOperationStatus()==0){
+            emailUtil.sendText("2419646091@qq.com","短信服务异常","短信服务异常");
+        }
     }
 
     @OnClose

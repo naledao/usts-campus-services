@@ -10,8 +10,8 @@ import hhsc.kangnasi.xyz.ustscampusservices.util.EmailUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
+import org.springframework.scheduling.config.IntervalTask;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -37,8 +37,16 @@ public class QueryPowerTask implements SchedulingConfigurer {
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+        // 6小时的毫秒数
+        long interval = 6 * 60 * 60 * 1000;
+        // 0 表示初始延迟（Initial Delay）为 0，即立即执行
+        long initialDelay = 0;
         taskRegistrar.setScheduler(queryPowerTaskScheduler);
-        taskRegistrar.addCronTask(this::runTask, "0 0 0/6 * * ?");
+        taskRegistrar.addFixedRateTask(new IntervalTask(
+                this::runTask,
+                interval,
+                initialDelay
+        ));
     }
 
 //    @PostConstruct
