@@ -66,7 +66,7 @@ public class QueryPowerTask implements SchedulingConfigurer {
             try {
                 Double electricity = serviceDormElectricityAlertService.queryCurrentElectricity(email);
                 if(electricity<=threshold){
-                    emailUtil.sendText(email, "电量预警", "您的宿舍电量已低于阈值"+threshold+"，当前电量为"+electricity+",请及时充值");
+                    emailUtil.sendText(email, "电量预警", "您的宿舍电量已低于阈值"+threshold+"，当前电量为"+electricity+",请及时充值",true);
                     serviceLogEntity.setOperationName("发送电量预警邮件");
                     serviceLogEntity.setOperationStatus(1);
                     serviceLogEntity.setRemarks("发送电量预警成功，您当前电量为"+electricity+",已经低于阈值"+threshold);

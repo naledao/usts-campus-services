@@ -28,11 +28,7 @@ public class SMSWebSocket {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    private final EmailUtil emailUtil;
-
-    public SMSWebSocket(EmailUtil emailUtil) {
-        this.emailUtil = emailUtil;
-    }
+    private final EmailUtil emailUtil=ApplicationContextProvider.getBean(EmailUtil.class);
 
     @OnOpen
     public void onOpen(Session session, @PathParam("secretKey") String secretKey) throws IOException {
@@ -63,7 +59,7 @@ public class SMSWebSocket {
         serviceLog.setRemarks("发送短信失败");
         serviceLogMapper.insert(serviceLog);
         if(serviceLog.getOperationStatus()==0){
-            emailUtil.sendText("2419646091@qq.com","短信服务异常","短信服务异常");
+            emailUtil.sendText("2419646091@qq.com","短信服务异常","短信服务异常",false);
         }
     }
 
@@ -74,6 +70,8 @@ public class SMSWebSocket {
 
     @OnError
     public void onError(Session session, Throwable thr) {
+        // 处理异常
+        thr.printStackTrace();
         // 记录日志即可
     }
 

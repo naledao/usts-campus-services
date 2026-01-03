@@ -23,7 +23,6 @@ import jakarta.mail.internet.MimeMessage;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -46,7 +45,7 @@ public class EmailUtil {
 
     private final ObjectMapper objectMapper=new ObjectMapper();
 
-    private final String smsTemplate = "\\n\\n\\n\\n【${msg}】\\n\\n\\n\\n";
+    public static final String SMSTEMPLATE = "\n\n\n\n【这边是和您有关的消息：${msg}】\n\n\n\n";
 
     /**
      * Default sender address. Falls back to spring.mail.username when app.mail.from is not set.
@@ -62,17 +61,19 @@ public class EmailUtil {
 
     // ---------------- Simple Text ----------------
 
-    public void sendText(String to, String subject, String text) throws JsonProcessingException {
+    public void sendText(String to, String subject, String text,Boolean sendSms) throws JsonProcessingException {
         sendText(null, to, subject, text);
-        SysUserEntity sysUserEntity = sysUserMapper.selectByEmail(to);
-        if(sysUserEntity!=null && sysUserEntity.getPhoneNumber()!=null && !sysUserEntity.getPhoneNumber().isEmpty()){
-            Map<String, String> values = new HashMap<>();
-            values.put("msg", text);
-            StringSubstitutor sub = new StringSubstitutor(values);
-            String result = sub.replace(smsTemplate);
-            SmsRequest smsRequest=new SmsRequest(sysUserEntity.getPhoneNumber(), result);
-            String jsonString = objectMapper.writeValueAsString(smsRequest);
-            wsSessionHub.send(SMSKEY, jsonString);
+        if(sendSms){
+            SysUserEntity sysUserEntity = sysUserMapper.selectByEmail(to);
+            if(sysUserEntity!=null && sysUserEntity.getPhoneNumber()!=null && !sysUserEntity.getPhoneNumber().isEmpty()){
+                Map<String, String> values = new HashMap<>();
+                values.put("msg", text);
+                StringSubstitutor sub = new StringSubstitutor(values);
+                String result = sub.replace(SMSTEMPLATE);
+                SmsRequest smsRequest=new SmsRequest(sysUserEntity.getPhoneNumber(), result);
+                String jsonString = objectMapper.writeValueAsString(smsRequest);
+                wsSessionHub.send(SMSKEY, jsonString);
+            }
         }
     }
 

@@ -6,7 +6,6 @@ import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceLogMapper;
 import jakarta.websocket.OnOpen;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 import jakarta.websocket.*;
 
@@ -18,8 +17,7 @@ import java.util.Date;
 @Component
 public class CampusNetworkAutoLoginWebSocket {
 
-    @Setter
-    private static WsSessionHub hub;
+    private WsSessionHub hub = ApplicationContextProvider.getBean(WsSessionHub.class);;
 
     public static final String  campusNetworkAutoLoginKey="d1e56wf48sfv15489rt4es2dc57svd84f5c1289sfdv4c1s56489rs6f48r6egr489s65rd4f98r64s5vdf845esrd";
 

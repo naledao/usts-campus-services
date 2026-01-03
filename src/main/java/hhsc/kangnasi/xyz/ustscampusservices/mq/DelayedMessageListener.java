@@ -92,7 +92,7 @@ public class DelayedMessageListener {
                         if(!send){
                             // 没有发送成功，添加到消息队列中（延迟12分钟），并发送邮件告知我
                             // 发送邮件告知我
-                            emailUtil.sendText("2419646091@qq.com","发送校园网操作失败","websocket已断开连接");
+                            emailUtil.sendText("2419646091@qq.com","发送校园网操作失败","websocket已断开连接",true);
                             delayedMessageSender.send(serviceCampusNetLoginService.toJson(serviceCampusNetLoginEntity),7200000);
                             log.info("没有发送websocket成功，添加到消息队列中（延迟12分钟），并发送邮件告知我");
                         }else{

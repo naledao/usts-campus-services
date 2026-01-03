@@ -5,6 +5,7 @@ import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SysUserService {
 
@@ -18,4 +19,9 @@ public interface SysUserService {
 
     String getCurrentUserEmail();
 
+    Integer bindPhoneNumber(String phoneNumber, String code);
+
+    String sendPhoneCode(String phoneNumber) throws JsonProcessingException;
+
+    Map<String, String> getCurrentUserMsg(String token);
 }

@@ -11,6 +11,5 @@ public class WsBootstrap {
 
     @PostConstruct
     public void wire() {
-        CampusNetworkAutoLoginWebSocket.setHub(hub);
     }
 }
