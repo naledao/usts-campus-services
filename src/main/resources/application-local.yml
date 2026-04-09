@@ -45,7 +45,7 @@ mybatis:
 
 
 server:
-  port: 9550
+  port: 9880
   servlet:
     context-path: /usts-campus-services
 

@@ -1,10 +1,12 @@
 package hhsc.kangnasi.xyz.ustscampusservices.websocket;
 
 import jakarta.websocket.Session;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Slf4j
 @Component
 public class WsSessionHub {
     private final Map<String, Session> sessions = new ConcurrentHashMap<>();
@@ -14,8 +16,16 @@ public class WsSessionHub {
 
     public boolean send(String key, String text) {
         Session s = sessions.get(key);
-        if (s == null || !s.isOpen()) return false;
-        s.getAsyncRemote().sendText(text); // 异步更保险
+        if (s == null) {
+            log.warn("WsSessionHub.send: session not found, key={}", key);
+            return false;
+        }
+        if(!s.isOpen()){
+            log.warn("WsSessionHub.send: session is closed, key={}", key);
+            return false;
+        }
+        s.getAsyncRemote().sendText(text);
+        log.info("WsSessionHub.send: sent message to session, key={}", key);
         return true;
     }
 

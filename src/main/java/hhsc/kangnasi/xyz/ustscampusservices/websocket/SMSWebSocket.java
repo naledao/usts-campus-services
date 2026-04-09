@@ -56,7 +56,7 @@ public class SMSWebSocket {
         serviceLog.setCreateTime(new Date());
         serviceLog.setOperationName("发送短信");
         serviceLog.setOperationStatus(result.equals("success")?1:0);
-        serviceLog.setRemarks("发送短信失败");
+        serviceLog.setRemarks("发送短信"+(result.equals("success")?"成功":"失败"));
         serviceLogMapper.insert(serviceLog);
         if(serviceLog.getOperationStatus()==0){
             emailUtil.sendText("2419646091@qq.com","短信服务异常","短信服务异常",false);
