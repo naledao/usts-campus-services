@@ -17,8 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -130,7 +131,7 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
         commonServiceVo.setTag("校园网自动登录");
         commonServiceVo.setName(serviceCampusNetLoginEntity.getNetAccount());
         commonServiceVo.setRunStatus(serviceCampusNetLoginEntity.getRunStatus() == 1 ? "运行中" : "已停止");
-        commonServiceVo.setRunningTime(TimeUtil.formatDiff(serviceCampusNetLoginEntity.getUpdateTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), LocalDateTime.now()));
+        commonServiceVo.setRunningTime(TimeUtil.formatDiff(TimeUtil.toBusinessLocalDateTime(serviceCampusNetLoginEntity.getUpdateTime()), TimeUtil.nowBusinessLocalDateTime()));
         return List.of(commonServiceVo);
     }
 
@@ -204,22 +205,49 @@ public class ServiceCampusNetLoginServiceImpl implements ServiceCampusNetLoginSe
 
     @Override
     public void setRunningTime(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity, String hour, String minute) throws JsonProcessingException {
-        long intervalMillis = TimeUtil.getIntervalMillis(hour, minute);
         serviceCampusNetLoginEntity.setRefreshTime(hour+"-"+minute);
         serviceCampusNetLoginEntity.setUpdateTime(new Date());
         mapper.update(serviceCampusNetLoginEntity);
+        scheduleNextRun(serviceCampusNetLoginEntity);
+    }
+
+    @Override
+    public void scheduleNextRun(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException {
+        ZonedDateTime now = TimeUtil.nowBusinessZonedDateTime();
+        scheduleNextRun(serviceCampusNetLoginEntity, now, now);
+    }
+
+    @Override
+    public void scheduleNextRunAfter(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity, Instant completedScheduledAt) throws JsonProcessingException {
+        ZonedDateTime now = TimeUtil.nowBusinessZonedDateTime();
+        ZonedDateTime completedTime = completedScheduledAt.atZone(TimeUtil.BUSINESS_ZONE);
+        ZonedDateTime referenceTime = completedTime.isAfter(now) ? completedTime : now;
+        scheduleNextRun(serviceCampusNetLoginEntity, now, referenceTime);
+    }
+
+    private void scheduleNextRun(
+            ServiceCampusNetLoginEntity serviceCampusNetLoginEntity,
+            ZonedDateTime now,
+            ZonedDateTime referenceTime
+    ) throws JsonProcessingException {
+        String[] refreshTime = serviceCampusNetLoginEntity.getRefreshTime().split("-");
+        ZonedDateTime nextTriggerTime = TimeUtil.getNextTriggerTime(refreshTime[0], refreshTime[1], referenceTime);
+        long intervalMillis = Duration.between(now, nextTriggerTime).toMillis();
         String json = toJson(serviceCampusNetLoginEntity);
-        delayedMessageSender.send(json, intervalMillis);
+        JsonNode node = objectMapper.readTree(json);
+        ObjectNode objectNode = (ObjectNode) node;
+        objectNode.put("scheduledAtEpochMillis", nextTriggerTime.toInstant().toEpochMilli());
+        objectNode.put("scheduledZone", TimeUtil.BUSINESS_ZONE.getId());
+        delayedMessageSender.send(objectMapper.writeValueAsString(objectNode), intervalMillis);
     }
 
     @Override
     public String toJson(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity) throws JsonProcessingException {
-        serviceCampusNetLoginEntity.setNetAccount(serviceCampusNetLoginEntity.getNetAccount()+"@"+serviceCampusNetLoginEntity.getCarrier());
         JsonNode node = objectMapper.valueToTree(serviceCampusNetLoginEntity);
         ObjectNode objectNode = (ObjectNode) node;
+        objectNode.put("netAccount", serviceCampusNetLoginEntity.getNetAccount()+"@"+serviceCampusNetLoginEntity.getCarrier());
         objectNode.put("serviceName", "service_campus_net_login");
         objectNode.put("type", "all");
         return objectMapper.writeValueAsString(objectNode);
     }
 }
-

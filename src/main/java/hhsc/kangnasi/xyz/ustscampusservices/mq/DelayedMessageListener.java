@@ -3,6 +3,7 @@ package hhsc.kangnasi.xyz.ustscampusservices.mq;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import hhsc.kangnasi.xyz.ustscampusservices.contant.MqConstant;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceCampusNetLoginEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper;
@@ -18,10 +19,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
+import java.time.Instant;
 
 import static hhsc.kangnasi.xyz.ustscampusservices.websocket.CampusNetworkAutoLoginWebSocket.campusNetworkAutoLoginKey;
 
@@ -37,6 +35,7 @@ public class DelayedMessageListener {
     private final ServiceCampusNetLoginService serviceCampusNetLoginService;
     private final EmailUtil emailUtil;
     private final RedissonClient redissonClient;
+    private static final long WEBSOCKET_RETRY_DELAY_MILLIS = 7200000L;
 
 
     public DelayedMessageListener(ObjectMapper objectMapper, WsSessionHub wsSessionHub, ServiceCampusNetLoginMapper serviceCampusNetLoginMapper, DelayedMessageSender delayedMessageSender, ServiceCampusNetLoginService serviceCampusNetLoginService, EmailUtil emailUtil, RedissonClient redissonClient) {
@@ -61,10 +60,24 @@ public class DelayedMessageListener {
             case "service_campus_net_login":
                 log.info("执行自动登录校园网服务");
                 try {
-                    String[] currentHourMinuteArray = TimeUtil.getCurrentHourMinuteArray();
                     String email=serviceNode.get("email").asText();
                     log.info("当前执行的的账号为：{}",email);
+                    JsonNode scheduledAtNode = serviceNode.get("scheduledAtEpochMillis");
+                    if (scheduledAtNode == null || !scheduledAtNode.canConvertToLong()) {
+                        log.warn("跳过旧格式校园网自动登录延迟消息，email={}", email);
+                        return;
+                    }
+                    long scheduledAtEpochMillis = scheduledAtNode.asLong();
+                    long nowEpochMillis = Instant.now().toEpochMilli();
+                    if (scheduledAtEpochMillis - nowEpochMillis > Duration.ofMinutes(1).toMillis()) {
+                        log.warn("校园网自动登录消息提前投递，继续消费，email={}, scheduledAtEpochMillis={}, earlyMillis={}",
+                                email, scheduledAtEpochMillis, scheduledAtEpochMillis - nowEpochMillis);
+                    }
                     ServiceCampusNetLoginEntity serviceCampusNetLoginEntity = serviceCampusNetLoginMapper.selectById(email);
+                    if (serviceCampusNetLoginEntity == null) {
+                        log.info("数据库中不存在该校园网自动登录服务，email={}", email);
+                        return;
+                    }
                     String[] refreshTime = serviceNode.get("refreshTime").asText().split("-");
                     String hour=refreshTime[0];
                     String minute=refreshTime[1];
@@ -90,25 +103,20 @@ public class DelayedMessageListener {
                         boolean send = wsSessionHub.send(campusNetworkAutoLoginKey, json);
                         log.info("开始判断发送websocket是否成功");
                         if(!send){
-                            // 没有发送成功，添加到消息队列中（延迟12分钟），并发送邮件告知我
+                            // 没有发送成功，添加到消息队列中（延迟2小时），并发送邮件告知我
                             // 发送邮件告知我
                             emailUtil.sendText("2419646091@qq.com","发送校园网操作失败","websocket已断开连接",true);
-                            delayedMessageSender.send(serviceCampusNetLoginService.toJson(serviceCampusNetLoginEntity),7200000);
-                            log.info("没有发送websocket成功，添加到消息队列中（延迟12分钟），并发送邮件告知我");
+                            delayedMessageSender.send(toScheduledJson(serviceCampusNetLoginEntity, WEBSOCKET_RETRY_DELAY_MILLIS), WEBSOCKET_RETRY_DELAY_MILLIS);
+                            log.info("没有发送websocket成功，添加到消息队列中（延迟2小时），并发送邮件告知我");
                         }else{
                             log.info("当前刷新校园网的的操作执行成功，开始放到下一天的消息队列");
                             // 发送成功，将今天的发送记录添加到redis中（过期时间设置为24小时）
                             bucket.set("yes", Duration.ofDays(3));
-                            log.info("开始判断执行的时间是否是json里面的时间");
-                            if(hour.equals(currentHourMinuteArray[0]) && minute.equals(currentHourMinuteArray[1])){ // 是当前时间，直接24小时之后
-                                delayedMessageSender.send(serviceCampusNetLoginService.toJson(serviceCampusNetLoginEntity),86400000);
-                                log.info("是当前时间，直接24小时之后");
-                            }
-                            else{
-                                long intervalMillis=TimeUtil.getIntervalMillis(hour,minute);
-                                delayedMessageSender.send(serviceCampusNetLoginService.toJson(serviceCampusNetLoginEntity),intervalMillis);
-                                log.info("不是当前时间，计算出距离当前时间的毫秒数，放到消息队列中");
-                            }
+                            serviceCampusNetLoginService.scheduleNextRunAfter(
+                                    serviceCampusNetLoginEntity,
+                                    Instant.ofEpochMilli(scheduledAtEpochMillis)
+                            );
+                            log.info("已按本次计划时间之后的下一执行时间重新排队");
                         }
                     }
                     else{
@@ -121,6 +129,7 @@ public class DelayedMessageListener {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
+                break;
             case "login":
                 // 处理登录服务
                 break;
@@ -129,5 +138,12 @@ public class DelayedMessageListener {
                 break;
         }
     }
-}
 
+    private String toScheduledJson(ServiceCampusNetLoginEntity serviceCampusNetLoginEntity, long delayMillis) throws JsonProcessingException {
+        JsonNode node = objectMapper.readTree(serviceCampusNetLoginService.toJson(serviceCampusNetLoginEntity));
+        ObjectNode objectNode = (ObjectNode) node;
+        objectNode.put("scheduledAtEpochMillis", Instant.now().plusMillis(delayMillis).toEpochMilli());
+        objectNode.put("scheduledZone", TimeUtil.BUSINESS_ZONE.getId());
+        return objectMapper.writeValueAsString(objectNode);
+    }
+}

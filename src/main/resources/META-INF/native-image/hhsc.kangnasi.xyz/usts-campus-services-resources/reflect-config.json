@@ -1,0 +1,14 @@
+[
+  {
+    "name": "io.minio.GetObjectArgs",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "io.minio.StatObjectArgs",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "io.minio.GetPresignedObjectUrlArgs",
+    "allDeclaredConstructors": true
+  }
+]

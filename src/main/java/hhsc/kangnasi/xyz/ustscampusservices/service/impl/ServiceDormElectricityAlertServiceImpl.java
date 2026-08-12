@@ -2,20 +2,24 @@ package hhsc.kangnasi.xyz.ustscampusservices.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dianfei.DianFeiServiceGrpc;
 import dianfei.Dianfei;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertRoomEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
-import hhsc.kangnasi.xyz.ustscampusservices.dubbo.api.DianFeiService;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertRoomMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceLogMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.service.ServiceDormElectricityAlertService;
 import hhsc.kangnasi.xyz.ustscampusservices.util.TimeUtil;
-import org.apache.dubbo.config.annotation.DubboReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.annotation.RegisterReflection;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,32 +27,45 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static hhsc.kangnasi.xyz.ustscampusservices.config.AuthInterceptor.CURRENT_USER_EMAIL;
 
 @Service
+@RegisterReflection(
+        classes = {
+                Dianfei.QueryRequest.class,
+                Dianfei.QueryReply.class
+        },
+        memberCategories = MemberCategory.INVOKE_PUBLIC_METHODS
+)
 public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectricityAlertService {
+    private static final Logger log = LoggerFactory.getLogger(ServiceDormElectricityAlertServiceImpl.class);
+
     private final ServiceDormElectricityAlertRoomMapper serviceDormElectricityAlertRoomMapper;
     private final ResourceLoader resourceLoader;
     private final ObjectMapper objectMapper;
     private final ServiceDormElectricityAlertMapper serviceDormElectricityAlertMapper;
     private final ServiceLogMapper serviceLogMapper;
+    private final DianFeiServiceGrpc.DianFeiServiceBlockingStub dianFeiService;
+    private final long dianFeiTimeoutMs;
 
-    @DubboReference(
-            interfaceClass = DianFeiService.class,
-            protocol = "tri",
-            check = false,
-            url = "${dubbo.reference.dianfei-service.url}", // 与你原来的 URL 一致
-            timeout = 5000
-    )
-    private DianFeiService dianFeiService;
-
-    public ServiceDormElectricityAlertServiceImpl(ServiceDormElectricityAlertRoomMapper serviceDormElectricityAlertRoomMapper, ResourceLoader resourceLoader, ObjectMapper objectMapper, ServiceDormElectricityAlertMapper serviceDormElectricityAlertMapper, ServiceLogMapper serviceLogMapper) {
+    public ServiceDormElectricityAlertServiceImpl(
+            ServiceDormElectricityAlertRoomMapper serviceDormElectricityAlertRoomMapper,
+            ResourceLoader resourceLoader,
+            ObjectMapper objectMapper,
+            ServiceDormElectricityAlertMapper serviceDormElectricityAlertMapper,
+            ServiceLogMapper serviceLogMapper,
+            DianFeiServiceGrpc.DianFeiServiceBlockingStub dianFeiService,
+            @Value("${app.dianfei.timeout-ms:5000}") long dianFeiTimeoutMs
+    ) {
         this.serviceDormElectricityAlertRoomMapper = serviceDormElectricityAlertRoomMapper;
         this.resourceLoader = resourceLoader;
         this.objectMapper = objectMapper;
         this.serviceDormElectricityAlertMapper = serviceDormElectricityAlertMapper;
         this.serviceLogMapper = serviceLogMapper;
+        this.dianFeiService = dianFeiService;
+        this.dianFeiTimeoutMs = dianFeiTimeoutMs;
     }
 
     @Override
@@ -203,14 +220,17 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
                     .setType(serviceDormElectricityAlertEntity.getType())
                     .setLevel(serviceDormElectricityAlertEntity.getLevel())
                     .build();
-            Dianfei.QueryReply reply = dianFeiService.QueryCurrentElectricity(req);
+            Dianfei.QueryReply reply = dianFeiService
+                    .withDeadlineAfter(dianFeiTimeoutMs, TimeUnit.MILLISECONDS)
+                    .queryCurrentElectricity(req);
             serviceLog.setOperationStatus(1);
             serviceLog.setRemarks("操作成功，当前电量为"+reply.getValue()+"度");
             serviceLogMapper.insert(serviceLog);
             return reply.getValue();
         }catch (Exception e){
+            log.error("获取宿舍电量失败，email={}", email, e);
             serviceLog.setOperationStatus(0);
-            serviceLog.setRemarks("获取电量失败\n"+e.getMessage());
+            serviceLog.setRemarks("获取电量失败\n" + e);
             serviceLogMapper.insert(serviceLog);
             return -1d;
         }

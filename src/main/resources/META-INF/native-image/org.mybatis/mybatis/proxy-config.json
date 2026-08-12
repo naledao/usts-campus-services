@@ -1,0 +1,32 @@
+[
+  {
+    "interfaces": [
+      "hhsc.kangnasi.xyz.ustscampusservices.mapper.CommonServiceMapper"
+    ]
+  },
+  {
+    "interfaces": [
+      "hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper"
+    ]
+  },
+  {
+    "interfaces": [
+      "hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertMapper"
+    ]
+  },
+  {
+    "interfaces": [
+      "hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertRoomMapper"
+    ]
+  },
+  {
+    "interfaces": [
+      "hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceLogMapper"
+    ]
+  },
+  {
+    "interfaces": [
+      "hhsc.kangnasi.xyz.ustscampusservices.mapper.SysUserMapper"
+    ]
+  }
+]

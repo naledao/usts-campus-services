@@ -55,13 +55,17 @@ mq:
     enabled: true
 
 
-dubbo:
-  application:
-    name: usts-campus-services
-  reference:
-    dianfei-service:
-      url: tri://127.0.0.1:50051/dianfei.DianFeiService?mapping=grpc
-
-
-
-
+app:
+  dianfei:
+    host: 127.0.0.1
+    port: 50051
+    timeout-ms: 5000
+  update:
+    android:
+      enabled: true
+      endpoint: http://frp.kangnasi.xyz:8084
+      access-key: ${APP_UPDATE_ANDROID_ACCESS_KEY:}
+      secret-key: ${APP_UPDATE_ANDROID_SECRET_KEY:}
+      bucket: usts-campus-services
+      metadata-object: android/latest.json
+      presigned-url-expiry-seconds: 3600

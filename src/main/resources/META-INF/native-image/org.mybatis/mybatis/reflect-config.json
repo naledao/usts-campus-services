@@ -1,0 +1,131 @@
+[
+  {
+    "name": "org.apache.ibatis.logging.slf4j.Slf4jImpl",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "org.apache.ibatis.logging.slf4j.Slf4jLoggerImpl",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "org.apache.ibatis.logging.slf4j.Slf4jLocationAwareLoggerImpl",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "org.apache.ibatis.plugin.Interceptor"
+  },
+  {
+    "name": "org.apache.ibatis.type.TypeHandler"
+  },
+  {
+    "name": "org.apache.ibatis.scripting.LanguageDriver"
+  },
+  {
+    "name": "org.apache.ibatis.scripting.xmltags.XMLLanguageDriver",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "org.apache.ibatis.scripting.defaults.RawLanguageDriver",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "org.apache.ibatis.mapping.DatabaseIdProvider"
+  },
+  {
+    "name": "org.apache.ibatis.session.SqlSessionFactory"
+  },
+  {
+    "name": "java.util.ArrayList",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "java.util.HashMap",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "java.util.LinkedHashMap",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "java.util.HashSet",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "java.util.LinkedHashSet",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceCampusNetLoginEntity",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "queryAllDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertEntity",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "queryAllDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricityAlertRoomEntity",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "queryAllDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "queryAllDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "hhsc.kangnasi.xyz.ustscampusservices.domain.entity.SysUserEntity",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "queryAllDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "org.mybatis.spring.SqlSessionFactoryBean",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "queryAllDeclaredMethods": true
+  },
+  {
+    "name": "org.mybatis.spring.SqlSessionTemplate",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true
+  },
+  {
+    "name": "org.apache.ibatis.javassist.util.proxy.ProxyFactory",
+    "allDeclaredConstructors": true,
+    "queryAllDeclaredConstructors": true,
+    "queryAllDeclaredMethods": true
+  },
+  {
+    "name": "org.apache.ibatis.javassist.util.proxy.Proxy"
+  },
+  {
+    "name": "org.apache.ibatis.javassist.util.proxy.MethodHandler"
+  }
+]

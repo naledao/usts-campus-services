@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public interface ServiceDormElectricityAlertService {
+public interface ServiceDormElectricityAlertService extends CommonServiceProvider {
     void addRooms() throws IOException;
 
     List<Map<String,String>> getRoom(String campusId, Integer buildingId);
@@ -21,6 +21,7 @@ public interface ServiceDormElectricityAlertService {
 
     void updateById(ServiceDormElectricityAlertEntity serviceDormElectricityAlertEntity);
 
+    @Override
     List<CommonServiceVo> allService(String email);
 
     void updateRoom(String campus,String campusName, String building, String buildingName,String room, String roomName);

@@ -88,7 +88,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>annotationProcessor</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -103,12 +103,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo</artifactId>
-            <version>3.3.2</version>
-        </dependency>
-
         <!-- Protobuf runtime -->
         <dependency>
             <groupId>com.google.protobuf</groupId>
@@ -116,10 +110,10 @@
             <version>3.25.3</version>
         </dependency>
 
-        <!-- gRPC 核心 -->
+        <!-- gRPC 客户端；OkHttp 传输可避免 grpc-netty-shaded 的 Native Image 初始化冲突 -->
         <dependency>
             <groupId>io.grpc</groupId>
-            <artifactId>grpc-netty-shaded</artifactId>
+            <artifactId>grpc-okhttp</artifactId>
             <version>1.63.0</version>
         </dependency>
         <dependency>
@@ -149,6 +143,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.5.17</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -163,6 +162,38 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <profiles>
+                        <profile>prod</profile>
+                    </profiles>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <configuration>
+                    <buildArgs>
+                        <buildArg>--initialize-at-build-time=org.slf4j,ch.qos.logback</buildArg>
+                        <buildArg>--initialize-at-build-time=org.redisson.misc.BiHashMap</buildArg>
+                        <buildArg>--initialize-at-build-time=org.redisson.liveobject.core.RedissonObjectBuilder$CodecMethodRef</buildArg>
+                        <buildArg>--initialize-at-run-time=sun.security.util.Password$ConsoleHolder,jdk.internal.io.JdkConsoleImpl$1ConsoleHolder</buildArg>
+                        <!-- Work around a GraalVM 21.0.11 graph decoder crash in TrivialInlinePhase. -->
+                        <buildArg>-H:-AOTTrivialInline</buildArg>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.xolstice.maven.plugins</groupId>

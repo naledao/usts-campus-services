@@ -13,6 +13,8 @@ import hhsc.kangnasi.xyz.ustscampusservices.websocket.WsSessionHub;
 import org.apache.commons.text.StringSubstitutor;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.annotation.RegisterReflection;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,10 @@ import static hhsc.kangnasi.xyz.ustscampusservices.util.EmailUtil.SMSTEMPLATE;
 import static hhsc.kangnasi.xyz.ustscampusservices.websocket.SMSWebSocket.SMSKEY;
 
 @Service
+@RegisterReflection(
+        classes = SysUserService.class,
+        memberCategories = MemberCategory.INVOKE_PUBLIC_METHODS
+)
 public class SysUserServiceImpl implements SysUserService {
 
     private final RedissonClient redissonClient;

@@ -6,31 +6,28 @@ import hhsc.kangnasi.xyz.ustscampusservices.domain.vo.CommonServiceVo;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.CommonServiceMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.service.CommonService;
+import hhsc.kangnasi.xyz.ustscampusservices.service.CommonServiceProvider;
 import hhsc.kangnasi.xyz.ustscampusservices.service.ServiceCampusNetLoginService;
-import org.springframework.context.ApplicationContext;
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static hhsc.kangnasi.xyz.ustscampusservices.config.AuthInterceptor.CURRENT_USER_EMAIL;
 
 @Service
+@RegisterReflectionForBinding(CommonServiceVo.class)
 public class CommonServiceImpl implements CommonService {
-    // 仅扫描 service.impl 包下、类名以 Service 开头的 @Service Bean
-    private final String serviceRootPkg = "hhsc.kangnasi.xyz.ustscampusservices.service";
-    private final String implSuffix = ".impl";
-    private final ApplicationContext applicationContext;
+    private final List<CommonServiceProvider> serviceProviders;
     private final CommonServiceMapper commonServiceMapper;
     private final ServiceCampusNetLoginMapper serviceCampusNetLoginMapper;
     private final ServiceCampusNetLoginService serviceCampusNetLoginService;
 
-    public CommonServiceImpl(ApplicationContext applicationContext, CommonServiceMapper commonServiceMapper, ServiceCampusNetLoginMapper serviceCampusNetLoginMapper, ServiceCampusNetLoginService serviceCampusNetLoginService) {
-        this.applicationContext = applicationContext;
+    public CommonServiceImpl(List<CommonServiceProvider> serviceProviders, CommonServiceMapper commonServiceMapper, ServiceCampusNetLoginMapper serviceCampusNetLoginMapper, ServiceCampusNetLoginService serviceCampusNetLoginService) {
+        this.serviceProviders = serviceProviders;
         this.commonServiceMapper = commonServiceMapper;
         this.serviceCampusNetLoginMapper = serviceCampusNetLoginMapper;
         this.serviceCampusNetLoginService = serviceCampusNetLoginService;
@@ -39,37 +36,9 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public ResponseEntity<?> allService(String email) {
         List<CommonServiceVo> result = new ArrayList<>();
-
-        Map<String, Object> serviceBeans = applicationContext.getBeansWithAnnotation(Service.class);
-        for (Object bean : serviceBeans.values()) {
-            Class<?> targetClass = bean.getClass();
-
-            String pkgName = targetClass.getPackageName();
-            String simpleName = targetClass.getSimpleName();
-
-            boolean inImplPackage = pkgName.startsWith(serviceRootPkg) && pkgName.endsWith(implSuffix);
-            boolean nameStartsWithService = simpleName.startsWith("Service");
-            if (!inImplPackage || !nameStartsWithService) {
-                continue;
-            }
-
-            try {
-                Method m = bean.getClass().getMethod("allService", String.class);
-                Object ret = m.invoke(bean, email);
-                if (ret instanceof List<?> list) {
-                    for (Object o : list) {
-                        if (o instanceof CommonServiceVo csv) {
-                            result.add(csv);
-                        }
-                    }
-                }
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        for (CommonServiceProvider serviceProvider : serviceProviders) {
+            result.addAll(serviceProvider.allService(email));
         }
-
         return ResponseEntity.ok(result);
     }
 

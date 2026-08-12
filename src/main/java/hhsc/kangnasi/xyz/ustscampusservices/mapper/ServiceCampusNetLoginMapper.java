@@ -9,11 +9,39 @@ import java.util.List;
 public interface ServiceCampusNetLoginMapper {
 
     @Select("SELECT * FROM service_campus_net_login WHERE email = #{email} and is_del = 0 for update")
-    @ResultMap("hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper.BaseResultMap")
+    @Results({
+            @Result(property = "email", column = "email", id = true),
+            @Result(property = "netAccount", column = "net_account"),
+            @Result(property = "carrier", column = "carrier"),
+            @Result(property = "netPassword", column = "net_password"),
+            @Result(property = "wlanUserIp", column = "wlan_user_ip"),
+            @Result(property = "wlanUserMac", column = "wlan_user_mac"),
+            @Result(property = "wlanAcIp", column = "wlan_ac_ip"),
+            @Result(property = "wlanAcName", column = "wlan_ac_name"),
+            @Result(property = "createTime", column = "create_time"),
+            @Result(property = "updateTime", column = "update_time"),
+            @Result(property = "isDel", column = "is_del"),
+            @Result(property = "runStatus", column = "run_status"),
+            @Result(property = "refreshTime", column = "refresh_time")
+    })
     ServiceCampusNetLoginEntity selectById(String email);
 
     @Select("SELECT * FROM service_campus_net_login WHERE is_del = 0")
-    @ResultMap("hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper.BaseResultMap")
+    @Results({
+            @Result(property = "email", column = "email", id = true),
+            @Result(property = "netAccount", column = "net_account"),
+            @Result(property = "carrier", column = "carrier"),
+            @Result(property = "netPassword", column = "net_password"),
+            @Result(property = "wlanUserIp", column = "wlan_user_ip"),
+            @Result(property = "wlanUserMac", column = "wlan_user_mac"),
+            @Result(property = "wlanAcIp", column = "wlan_ac_ip"),
+            @Result(property = "wlanAcName", column = "wlan_ac_name"),
+            @Result(property = "createTime", column = "create_time"),
+            @Result(property = "updateTime", column = "update_time"),
+            @Result(property = "isDel", column = "is_del"),
+            @Result(property = "runStatus", column = "run_status"),
+            @Result(property = "refreshTime", column = "refresh_time")
+    })
     List<ServiceCampusNetLoginEntity> selectAll();
 
     @Insert("INSERT INTO service_campus_net_login " +
@@ -31,6 +59,20 @@ public interface ServiceCampusNetLoginMapper {
     int deleteById(String email);
 
     @Select("select * from service_campus_net_login where email = #{email} and is_del = #{isDel}")
-    @ResultMap("hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceCampusNetLoginMapper.BaseResultMap")
+    @Results({
+            @Result(property = "email", column = "email", id = true),
+            @Result(property = "netAccount", column = "net_account"),
+            @Result(property = "carrier", column = "carrier"),
+            @Result(property = "netPassword", column = "net_password"),
+            @Result(property = "wlanUserIp", column = "wlan_user_ip"),
+            @Result(property = "wlanUserMac", column = "wlan_user_mac"),
+            @Result(property = "wlanAcIp", column = "wlan_ac_ip"),
+            @Result(property = "wlanAcName", column = "wlan_ac_name"),
+            @Result(property = "createTime", column = "create_time"),
+            @Result(property = "updateTime", column = "update_time"),
+            @Result(property = "isDel", column = "is_del"),
+            @Result(property = "runStatus", column = "run_status"),
+            @Result(property = "refreshTime", column = "refresh_time")
+    })
     ServiceCampusNetLoginEntity selectByNetByEmail(@Param("email") String email,@Param("isDel") int isDel);
 }

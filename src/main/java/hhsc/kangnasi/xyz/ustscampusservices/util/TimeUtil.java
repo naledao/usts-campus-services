@@ -4,9 +4,14 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class TimeUtil {
+    public static final ZoneId BUSINESS_ZONE = ZoneId.of("Asia/Shanghai");
+
     public static String formatDiff(LocalDateTime start, LocalDateTime end) {
         Duration duration = Duration.between(start, end);
         long seconds = Math.abs(duration.getSeconds());
@@ -33,18 +38,40 @@ public class TimeUtil {
      * @return 间隔毫秒
      */
     public static long getIntervalMillis(String hourStr, String minuteStr) {
+        ZonedDateTime now = nowBusinessZonedDateTime();
+        ZonedDateTime target = getNextTriggerTime(hourStr, minuteStr, now);
+        return Duration.between(now, target).toMillis();
+    }
+
+    public static ZonedDateTime getNextTriggerTime(String hourStr, String minuteStr) {
+        return getNextTriggerTime(hourStr, minuteStr, nowBusinessZonedDateTime());
+    }
+
+    public static ZonedDateTime getNextTriggerTime(String hourStr, String minuteStr, ZonedDateTime now) {
         int hour = Integer.parseInt(hourStr);
         int minute = Integer.parseInt(minuteStr);
 
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime target = now.withHour(hour).withMinute(minute).withSecond(0).withNano(0);
-
-        // 如果目标时间已经过去，则加一天
-        if (target.isBefore(now)) {
+        ZonedDateTime target = now.withHour(hour).withMinute(minute).withSecond(0).withNano(0);
+        if (!target.isAfter(now)) {
             target = target.plusDays(1);
         }
+        return target;
+    }
 
-        return Duration.between(now, target).toMillis();
+    public static long getNextTriggerEpochMillis(String hourStr, String minuteStr) {
+        return getNextTriggerTime(hourStr, minuteStr).toInstant().toEpochMilli();
+    }
+
+    public static ZonedDateTime nowBusinessZonedDateTime() {
+        return ZonedDateTime.now(BUSINESS_ZONE);
+    }
+
+    public static LocalDateTime nowBusinessLocalDateTime() {
+        return LocalDateTime.now(BUSINESS_ZONE);
+    }
+
+    public static LocalDateTime toBusinessLocalDateTime(Date date) {
+        return date.toInstant().atZone(BUSINESS_ZONE).toLocalDateTime();
     }
 
     /**
@@ -52,8 +79,8 @@ public class TimeUtil {
      * @return 包含小时和分钟的字符串数组，格式为[小时, 分钟]，例如["21", "45"]
      */
     public static String[] getCurrentHourMinuteArray() {
-        // 获取当前的本地时间
-        LocalTime now = LocalTime.now();
+        // 获取当前上海业务时间
+        LocalTime now = LocalTime.now(BUSINESS_ZONE);
         // 创建时间格式化器，指定格式为24小时制的小时和分钟（HH:mm）
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         // 将当前时间按照指定格式转换为字符串，例如 "21:45"
@@ -64,7 +91,7 @@ public class TimeUtil {
 
 
     public static String getToday() {
-        LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now(BUSINESS_ZONE);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return today.format(formatter);
     }

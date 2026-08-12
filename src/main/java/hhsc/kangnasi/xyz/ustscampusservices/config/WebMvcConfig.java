@@ -22,6 +22,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/user/send-login-code",
                         "/user/login",
                         "/user/validate-token",
+                        "/app-update/**",
                         // health/error/static
                         "/error",
                         "/favicon.ico",
@@ -31,4 +32,3 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 );
     }
 }
-

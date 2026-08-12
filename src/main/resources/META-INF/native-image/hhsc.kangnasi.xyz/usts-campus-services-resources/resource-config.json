@@ -1,0 +1,12 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": "redisson-.*\\.yml"
+      },
+      {
+        "pattern": "hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/.*\\.xml"
+      }
+    ]
+  }
+}
