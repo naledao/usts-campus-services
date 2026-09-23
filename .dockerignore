@@ -1,0 +1,12 @@
+target/
+.git/
+.github/
+.coding-tools/
+.idea/
+.vscode/
+docs/
+temp_music_b/
+logs/
+run/
+*.log
+*.log.*
