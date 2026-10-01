@@ -63,7 +63,11 @@ jobs:
             campus-network-server=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
             -n campus-services
 
-          kubectl rollout status \
+          if ! kubectl rollout status \
             deployment/campus-network-server \
             -n campus-services \
-            --timeout=180s
+            --timeout=600s; then
+            kubectl get pods -n campus-services -l app=campus-network-server -o wide
+            kubectl describe deployment campus-network-server -n campus-services
+            exit 1
+          fi
