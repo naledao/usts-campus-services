@@ -1,0 +1,3235 @@
+[
+  {
+    "version": 1,
+    "task_id": "8e7665bec049444883dead6ff4a9a9ba",
+    "objective": "Add an amd64-only Docker/GHCR release setup for this Spring Boot backend, analogous to the existing autoLoginInternet GHCR workflow: build a Java 17 Spring Boot image and push latest plus commit-SHA tags to ghcr.io/naledao/usts-campus-services on master changes or manual dispatch. Preserve all existing user changes.",
+    "status": "completed",
+    "steps": [
+      {
+        "id": "apply",
+        "text": "Apply workspace changes",
+        "status": "completed",
+        "updated_at": "2026-09-21T09:58:51.294Z"
+      },
+      {
+        "id": "verify",
+        "text": "Run tests and build verification",
+        "status": "completed",
+        "updated_at": "2026-09-21T09:58:51.294Z"
+      },
+      {
+        "id": "finalize",
+        "text": "Finalize verified result",
+        "status": "completed",
+        "updated_at": "2026-09-21T09:58:51.294Z"
+      }
+    ],
+    "current_step": "Completed",
+    "current_command": {
+      "command": "mvn -B -DskipTests package",
+      "kind": "command",
+      "session_id": "0ut-yhNiXpJW_Mhvd_1_lHlU",
+      "workdir": ".",
+      "status": "running",
+      "started_at": "2026-09-21T09:58:41.176Z"
+    },
+    "test_results": [],
+    "build_results": [
+      {
+        "command": "mvn -B -DskipTests package",
+        "status": "passed",
+        "exit_code": 0,
+        "duration_ms": 9577,
+        "summary": "exit 0 | 9.6s | 67 lines | tail: 'WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release'"
+      }
+    ],
+    "last_build_report": {
+      "project": {
+        "type": "maven",
+        "name": "backend",
+        "version": "",
+        "package_manager": "maven",
+        "test_command": "mvn test",
+        "build_command": "mvn package",
+        "artifact_paths": [
+          "target"
+        ]
+      },
+      "commands": {
+        "test": "mvn test",
+        "build": "mvn -B -DskipTests package"
+      },
+      "test_result": null,
+      "build_result": {
+        "command": "mvn -B -DskipTests package",
+        "status": "passed",
+        "exit_code": 0,
+        "duration_ms": 9577,
+        "summary": "exit 0 | 9.6s | 67 lines | tail: 'WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release'"
+      },
+      "artifacts": [
+        {
+          "path": "target/classes/META-INF/native-image/ch.qos.logback/logback-classic/1.5.18/reflect-config.json",
+          "size": 20912,
+          "modified_at": "2026-08-21T05:35:51.003515Z",
+          "sha256": "3F1D77D22008EBD36D210ED650B1825119523339E4FA7A6F816B6DC51A9DCD3D"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/ch.qos.logback/logback-classic/1.5.18/resource-config.json",
+          "size": 423,
+          "modified_at": "2026-08-21T05:35:51.003515Z",
+          "sha256": "6EFEA9FD5DCCEFE12561216B40B71E7C5677582CE5BCC3AE5C8CEE9ABE4EE519"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/com.fasterxml.jackson.core/jackson-databind/2.18.4/reflect-config.json",
+          "size": 4257,
+          "modified_at": "2026-08-21T05:35:50.983515Z",
+          "sha256": "FDE8590E80E9D1BC2B39A3158F23D76992F065CF526A92FB3E93DB34D543D39C"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/com.mysql/mysql-connector-j/9.4.0/reflect-config.json",
+          "size": 4564,
+          "modified_at": "2026-08-21T05:35:50.999515Z",
+          "sha256": "CD979FCD3AA36273DDAE0999DE8DBAD9AE7A566B080044C237DADD27DDD64151"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/com.mysql/mysql-connector-j/9.4.0/resource-config.json",
+          "size": 314,
+          "modified_at": "2026-08-21T05:35:50.999515Z",
+          "sha256": "F06B372D86447AC0151407212D211854375F6CDCCF069AF66B4F0A6E8DF435C4"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/com.zaxxer/HikariCP/5.1.0/jni-config.json",
+          "size": 505,
+          "modified_at": "2026-08-21T05:35:50.999515Z",
+          "sha256": "8B50260F901DD3BF9C18D8F488EDF93EFB60EFCC4A95BE9FD3775A39964BCDC7"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/com.zaxxer/HikariCP/5.1.0/proxy-config.json",
+          "size": 173,
+          "modified_at": "2026-08-21T05:35:50.999515Z",
+          "sha256": "9324E08909F7BA04948A72D401AC31019F02C0031F405450D4DAD66054BE164B"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/com.zaxxer/HikariCP/5.1.0/reflect-config.json",
+          "size": 10996,
+          "modified_at": "2026-08-21T05:35:50.999515Z",
+          "sha256": "508A7DB51F64057C186566EBC3620F81AF899CB806EBC71889E28E6EE5152243"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/hhsc.kangnasi.xyz/usts-campus-services-resources/reflect-config.json",
+          "size": 265,
+          "modified_at": "2026-08-08T10:00:06.463938Z",
+          "sha256": "27FC251C6B8587C855884916AA3A05020197F64D431531DE4CEC06FE4130C675"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/hhsc.kangnasi.xyz/usts-campus-services-resources/resource-config.json",
+          "size": 199,
+          "modified_at": "2026-08-08T10:00:06.459938Z",
+          "sha256": "47B802AF376E4DE65D7BE8972501BFBBE1EA2621274E33B9BAEB48330CE30003"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/hhsc.kangnasi.xyz/usts-campus-services/native-image.properties",
+          "size": 167,
+          "modified_at": "2026-08-21T05:36:04.287515Z",
+          "sha256": "FB92A94E34E86A93BC3CE63A07970C9ED415937AD67186CB63D2A80997885205"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/hhsc.kangnasi.xyz/usts-campus-services/proxy-config.json",
+          "size": 7514,
+          "modified_at": "2026-08-21T05:36:04.287515Z",
+          "sha256": "AD9377E21751963460841C00C1025551DBF5E5C032794FBAAA69FB7F455A8930"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/hhsc.kangnasi.xyz/usts-campus-services/reflect-config.json",
+          "size": 532051,
+          "modified_at": "2026-08-21T05:36:04.287515Z",
+          "sha256": "66AF803B9A1766E316C8917FE56B576E5D693DAB75A9ADD8FBAB538F66919019"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/hhsc.kangnasi.xyz/usts-campus-services/resource-config.json",
+          "size": 3194,
+          "modified_at": "2026-08-21T05:36:04.287515Z",
+          "sha256": "EEDE5B78E0BB6596A9161BE17F59B2BE6F5CFB17CEEF50C0D3833B8B19BB9E12"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/hhsc.kangnasi.xyz/usts-campus-services/serialization-config.json",
+          "size": 176,
+          "modified_at": "2026-08-21T05:36:04.287515Z",
+          "sha256": "666E5DA8E2CEBB93336C8E2DDFE59469B823D51FEB9716B37B38636BD4263D9B"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.grpc/grpc-core/1.63.0/reachability-metadata.properties",
+          "size": 14,
+          "modified_at": "2026-08-21T05:35:50.999515Z",
+          "sha256": "63DB2B4A614A34D19D0DFD5139AED82EFF04AD12031FD359A8BA2E4A5805AD81"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.grpc/grpc-core/1.63.0/reflect-config.json",
+          "size": 153,
+          "modified_at": "2026-08-21T05:35:50.999515Z",
+          "sha256": "83549B4E268F5242950E8AB958D0159DC2B164BBA9834FAE8061C615D220F195"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-buffer/4.1.127.Final/reachability-metadata.properties",
+          "size": 14,
+          "modified_at": "2026-08-21T05:35:50.987515Z",
+          "sha256": "63DB2B4A614A34D19D0DFD5139AED82EFF04AD12031FD359A8BA2E4A5805AD81"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-common/4.1.127.Final/jni-config.json",
+          "size": 16345,
+          "modified_at": "2026-08-21T05:35:50.987515Z",
+          "sha256": "7B6AFFF638BFDAECDC5777EE183EDCD6A68C7000538F88E7E29D943D5F4C1761"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-common/4.1.127.Final/reachability-metadata.properties",
+          "size": 14,
+          "modified_at": "2026-08-21T05:35:50.991515Z",
+          "sha256": "63DB2B4A614A34D19D0DFD5139AED82EFF04AD12031FD359A8BA2E4A5805AD81"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-common/4.1.127.Final/reflect-config.json",
+          "size": 155608,
+          "modified_at": "2026-08-21T05:35:50.987515Z",
+          "sha256": "ED9FE6E04453FBD56CB0AE4EC5A0D255FD326618624B78DD347A5EAB63376136"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-common/4.1.127.Final/resource-config.json",
+          "size": 1684,
+          "modified_at": "2026-08-21T05:35:50.987515Z",
+          "sha256": "EE08F6E1414CA8D79C120FDB074FDB640C928B63058049C67C3153ED6E2560C5"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-common/4.1.127.Final/serialization-config.json",
+          "size": 930,
+          "modified_at": "2026-08-21T05:35:50.991515Z",
+          "sha256": "AEE7E4817DF5C80454131891FED1B9BA8DD23AE9B3DD89E07F6F5CBA9223BFB1"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-handler/4.1.127.Final/reachability-metadata.properties",
+          "size": 14,
+          "modified_at": "2026-08-21T05:35:50.991515Z",
+          "sha256": "63DB2B4A614A34D19D0DFD5139AED82EFF04AD12031FD359A8BA2E4A5805AD81"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-resolver-dns/4.1.127.Final/reachability-metadata.properties",
+          "size": 14,
+          "modified_at": "2026-08-21T05:35:50.995515Z",
+          "sha256": "63DB2B4A614A34D19D0DFD5139AED82EFF04AD12031FD359A8BA2E4A5805AD81"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-transport/4.1.127.Final/reachability-metadata.properties",
+          "size": 14,
+          "modified_at": "2026-08-21T05:35:50.995515Z",
+          "sha256": "63DB2B4A614A34D19D0DFD5139AED82EFF04AD12031FD359A8BA2E4A5805AD81"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/io.netty/netty-transport/4.1.127.Final/reflect-config.json",
+          "size": 779,
+          "modified_at": "2026-08-21T05:35:50.995515Z",
+          "sha256": "DCA999E44097FF3C28E5012886ED4B83209EE02F68CC50FC665BDD8CB85D62BD"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/javax.cache/cache-api/1.1.1/resource-config.json",
+          "size": 268,
+          "modified_at": "2026-08-21T05:35:50.995515Z",
+          "sha256": "426CA11281F4F04E4B9531E54E84CA57966811883BE33C6A30766EFC6BEC888C"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/javax.cache/cache-api/1.1.1/serialization-config.json",
+          "size": 1085,
+          "modified_at": "2026-08-21T05:35:50.995515Z",
+          "sha256": "EA8DB4BC281E58158459E70171E806C4BD8F4D7B0650F9A0AAD5F805D004D120"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.apache.commons/commons-compress/1.27.1/reflect-config.json",
+          "size": 4251,
+          "modified_at": "2026-08-21T05:35:51.003515Z",
+          "sha256": "21F73B8E3F764FDAD66DB0FF5AA0DD47C0F7280682EB1B6CE5A5263EC766CA70"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.apache.tomcat.embed/tomcat-embed-core/10.1.46/reflect-config.json",
+          "size": 6305,
+          "modified_at": "2026-08-21T05:35:50.991515Z",
+          "sha256": "847DDAAD433A7F274D2D56C4671FFA3DD96FB1A4972DAC324E2FF2C8BF493BB1"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.apache.tomcat.embed/tomcat-embed-core/10.1.46/resource-config.json",
+          "size": 4657,
+          "modified_at": "2026-08-21T05:35:50.991515Z",
+          "sha256": "C1ECB44BB94ADBA296AB77608BB4A915DA04D5C7F7B028759747211CE435AFCA"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.eclipse.angus/jakarta.mail/2.0.4/reflect-config.json",
+          "size": 1439,
+          "modified_at": "2026-08-21T05:35:50.983515Z",
+          "sha256": "C2353789E5AC59C724E5A066354143B0E8C412130A7BBC38A95A3E1A0054D51E"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.eclipse.angus/jakarta.mail/2.0.4/resource-config.json",
+          "size": 492,
+          "modified_at": "2026-08-21T05:35:50.979515Z",
+          "sha256": "AB115179F4CC97534C5BC7F85D39DA053521C423B36088F00EBC1436A0B49046"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.hdrhistogram/HdrHistogram/2.2.2/reflect-config.json",
+          "size": 4198,
+          "modified_at": "2026-08-21T05:35:50.987515Z",
+          "sha256": "8666A7623F045F1D9BB5A308ACEF4F65FFAB111FB49C976DE9A580C5F4FBC26E"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.hibernate.validator/hibernate-validator/8.0.3.Final/proxy-config.json",
+          "size": 1236,
+          "modified_at": "2026-08-21T05:35:50.983515Z",
+          "sha256": "CC3FCE36A953334C3926D06F8205496DC475D31CB5E8A5C14B186978B361AB9D"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.hibernate.validator/hibernate-validator/8.0.3.Final/reflect-config.json",
+          "size": 99788,
+          "modified_at": "2026-08-21T05:35:50.983515Z",
+          "sha256": "A28E6290188465F3900191558D1BBFC6F00B21E5472D0113ABB8622CE33E9039"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.hibernate.validator/hibernate-validator/8.0.3.Final/resource-config.json",
+          "size": 135,
+          "modified_at": "2026-08-21T05:35:50.983515Z",
+          "sha256": "4F1E85D28C0448440A8EE1E3F356931A9F407D912ED6797E44DEA03908593451"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.jboss.logging/jboss-logging/3.6.1.Final/reflect-config.json",
+          "size": 2158,
+          "modified_at": "2026-08-21T05:35:50.991515Z",
+          "sha256": "4C1744D7CD1D0B1E427925059B111B63A3A92776C868723E643435F3C83AF67F"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.jetbrains.kotlin/kotlin-stdlib/1.9.25/reflect-config.json",
+          "size": 270,
+          "modified_at": "2026-08-21T05:35:50.995515Z",
+          "sha256": "76045F43232A172C22F3B02825B4F330F9B6074A421DB172657030B67AAAC147"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.mybatis/mybatis/proxy-config.json",
+          "size": 676,
+          "modified_at": "2026-08-08T10:00:06.463938Z",
+          "sha256": "5A5E29D414AF38DF1D8921BF21E3EAB2A9AB7EE7778629D0F9462BAC76CA7FA6"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.mybatis/mybatis/reflect-config.json",
+          "size": 3789,
+          "modified_at": "2026-08-08T10:00:06.463938Z",
+          "sha256": "377AF465BAF2A70C71936FCDEED31DDEB2D71F73CFBA08B90B4DFD6D361ACD62"
+        },
+        {
+          "path": "target/classes/META-INF/native-image/org.mybatis/mybatis/resource-config.json",
+          "size": 135,
+          "modified_at": "2026-08-08T10:00:06.463938Z",
+          "sha256": "04E9CA4ED114E254A35A18FAA50F3760D4B75A021E22022FD29249FBCF0197AB"
+        },
+        {
+          "path": "target/classes/application-local.yml",
+          "size": 1546,
+          "modified_at": "2026-08-12T06:56:01.783810Z",
+          "sha256": "0719103A799CDE09246B588C9EB61E46B0D4FD7095CB184C613ABB1C06360E14"
+        },
+        {
+          "path": "target/classes/application-prod.yml",
+          "size": 1535,
+          "modified_at": "2026-08-12T06:56:01.787810Z",
+          "sha256": "2B4FA5665ADBBF44169128FDB678E449E152241690D73D8CBB90A1736D5F074A"
+        },
+        {
+          "path": "target/classes/application.yml",
+          "size": 91,
+          "modified_at": "2026-08-08T10:00:06.455938Z",
+          "sha256": "EE922795F13ADFDE7CEF3EB244AB189FFE31F87EB90A700C08561A5125D02311"
+        },
+        {
+          "path": "target/classes/dianfei.proto",
+          "size": 345,
+          "modified_at": "2026-08-08T10:00:06.463938Z",
+          "sha256": "CD18DA9420B5646ED0127B4030EB619C7D7B9AB8966D239E189C66F85B374BD5"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$1.class",
+          "size": 1290,
+          "modified_at": "2026-09-21T09:58:48.116762Z",
+          "sha256": "211B41949484C1F8A82856272DF0F9678BF314B562872BCCB1620A71057EA536"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$2.class",
+          "size": 1348,
+          "modified_at": "2026-09-21T09:58:48.120762Z",
+          "sha256": "26D24FF8482347D000840D3DD1D1221574F78D7680ACBA9FE4CAEA64EA77C8CE"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$3.class",
+          "size": 1336,
+          "modified_at": "2026-09-21T09:58:48.120762Z",
+          "sha256": "FC1DA7D8CF9C0884B86BE323D49B07D244475D25F3BBBF01C6D21CE3D0CB9695"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$AsyncService.class",
+          "size": 1197,
+          "modified_at": "2026-09-21T09:58:48.120762Z",
+          "sha256": "5B993C6A6B515915A8C2F8242F676CDD4E3A7DCC1D51AE79CFEF5B1742FE3522"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$DianFeiServiceBaseDescriptorSupplier.class",
+          "size": 1253,
+          "modified_at": "2026-09-21T09:58:48.124762Z",
+          "sha256": "49E346C685DF9798B686E5DBF94967F72928D5E291E13459AB2150571E2AA43E"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$DianFeiServiceBlockingStub.class",
+          "size": 1834,
+          "modified_at": "2026-09-21T09:58:48.124762Z",
+          "sha256": "029004368F13846BE22B07637BB5763C46EE595E5E6935C33B984F12A814D3E0"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$DianFeiServiceFileDescriptorSupplier.class",
+          "size": 584,
+          "modified_at": "2026-09-21T09:58:48.124762Z",
+          "sha256": "0A34B8C8DCF8C33B22952B70341BA79CC18DF9DA81936A2AC93F20E205C1AB0F"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$DianFeiServiceFutureStub.class",
+          "size": 2070,
+          "modified_at": "2026-09-21T09:58:48.124762Z",
+          "sha256": "14C2D00B0C9F8FE0095958DF2FC17331CBC92BB323DDD5CE26B7433293C92D61"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$DianFeiServiceImplBase.class",
+          "size": 751,
+          "modified_at": "2026-09-21T09:58:48.120762Z",
+          "sha256": "C4E1D9832E8E91E7A45BCD4CE7BC0830DA4BE630832987FE39AB7E246A9CE21C"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$DianFeiServiceMethodDescriptorSupplier.class",
+          "size": 1310,
+          "modified_at": "2026-09-21T09:58:48.124762Z",
+          "sha256": "7767C18E617F9ED15AA39395897252D3B74C46A286902A8B5977FF324B826572"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$DianFeiServiceStub.class",
+          "size": 2146,
+          "modified_at": "2026-09-21T09:58:48.120762Z",
+          "sha256": "1F577D11149AB0013B187C8E43EDE88A7119BA068BA064BEC05DD90E560306F1"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc$MethodHandlers.class",
+          "size": 2472,
+          "modified_at": "2026-09-21T09:58:48.124762Z",
+          "sha256": "F029DEEF8FB2AF575FDC74AA9DB653F12787905A7B1893CDD13A7582293FBDBC"
+        },
+        {
+          "path": "target/classes/dianfei/DianFeiServiceGrpc.class",
+          "size": 6579,
+          "modified_at": "2026-09-21T09:58:48.140762Z",
+          "sha256": "07CC1C8842BBED7FCA188D460146C8E6086D326E320893F92AC3A71E33E7E86A"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei$QueryReply$1.class",
+          "size": 2351,
+          "modified_at": "2026-09-21T09:58:48.356762Z",
+          "sha256": "D73C99407584FFC2042B650B520F78BACDF9C48F87955B1B1D624574DBA847DB"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei$QueryReply$Builder.class",
+          "size": 12482,
+          "modified_at": "2026-09-21T09:58:48.356762Z",
+          "sha256": "EB201F9241C24D22EB69C51EC4CA20B7FD6F1087C0FFCC787FE622D0F5D0196E"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei$QueryReply.class",
+          "size": 10025,
+          "modified_at": "2026-09-21T09:58:48.360762Z",
+          "sha256": "E9F2C941448AEC0E3F16EC0CC2E131CC0A6F1582C2D2A7F241AEB2E61261305E"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei$QueryReplyOrBuilder.class",
+          "size": 285,
+          "modified_at": "2026-09-21T09:58:48.352762Z",
+          "sha256": "386BFF592AA2A063464260C2F9FC0DDE69991991D132F818138698BD557B1DAF"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei$QueryRequest$1.class",
+          "size": 2373,
+          "modified_at": "2026-09-21T09:58:48.332762Z",
+          "sha256": "46FE0C73250CF86706BD5929BEB10CE3D184903AF07981BAAA6E866AC8A13161"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei$QueryRequest$Builder.class",
+          "size": 18327,
+          "modified_at": "2026-09-21T09:58:48.332762Z",
+          "sha256": "A3115FBE12139A935D107DB2562D9CD82190BE137D8201A4311DE878B18B3466"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei$QueryRequest.class",
+          "size": 13895,
+          "modified_at": "2026-09-21T09:58:48.352762Z",
+          "sha256": "03A388C184AC269834BFB01BEEEA9CF43D68E48FA81D51FD1196FB7B9AE1E751"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei$QueryRequestOrBuilder.class",
+          "size": 594,
+          "modified_at": "2026-09-21T09:58:48.324762Z",
+          "sha256": "4DFAF36C1F9728FEE27375B7C4569371639EA997C574C3CFA62E55798AB5CB32"
+        },
+        {
+          "path": "target/classes/dianfei/Dianfei.class",
+          "size": 3065,
+          "modified_at": "2026-09-21T09:58:48.360762Z",
+          "sha256": "AECC172797EC50CE0AD78CEC1177FE30999AAD53CB15C22C5EF7ABD7E23C9152"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/UstsCampusServicesApplication.class",
+          "size": 967,
+          "modified_at": "2026-09-21T09:58:47.716762Z",
+          "sha256": "5275B6E978375E0F2EC44A84092A9915D10468BDB901F8AA6D7B4EE2BFD3F6F2"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/UstsCampusServicesApplication__ApplicationContextInitializer.class",
+          "size": 3814,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "DFBCB0E4CD81C684459158944D6B7CCD88FB37FD3240264AE8D24365DA64846B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/UstsCampusServicesApplication__BeanDefinitions.class",
+          "size": 1322,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "23B7EE48779D37316A02CFFDF5F2D6F8EE5B2D71172732149663D75AF8A9AE95"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/UstsCampusServicesApplication__BeanFactoryRegistrations.class",
+          "size": 104148,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "823519FB14D4A8EADFE469B9927471E476A317F598992D39F2A6B557C36AFEEB"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/UstsCampusServicesApplication__EnvironmentPostProcessor.class",
+          "size": 770,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "78721DA4798B499866DA8CCC0B9FABEA3A9EBFBFBF4E557D91C1EE38679FB0D2"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/annotation/APIRateLimiting$Mode.class",
+          "size": 1547,
+          "modified_at": "2026-09-21T09:58:47.744762Z",
+          "sha256": "67B3C30EC8E8B5133440B9AF2666F31FDA9482CE990CD3D95974E1DABD0D2B2A"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/annotation/APIRateLimiting.class",
+          "size": 1175,
+          "modified_at": "2026-09-21T09:58:47.744762Z",
+          "sha256": "C5CAD6F07FB2273417D600F98A161E22614E7DD5D1CB8BEB9FC233D443D19AF2"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/annotation/ProfileApiGate.class",
+          "size": 658,
+          "modified_at": "2026-09-21T09:58:47.748762Z",
+          "sha256": "F5FAC3DA3B3C62731BCB38A20F5F32ABB90F9FE3CFF0D717D2AD7A36F06561DE"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/aop/ProfileApiGateAspect.class",
+          "size": 5259,
+          "modified_at": "2026-09-21T09:58:47.884762Z",
+          "sha256": "0B57AAF96F3FA0E478A67DBFD388044D4CBAEF5BA2C53AC16FA9DD982CD5776E"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/aop/ProfileApiGateAspect__BeanDefinitions.class",
+          "size": 2595,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "6BA9540534046332FE8197D1FD859BCA803DE8406BE2B022C36EC33DAD3CA88D"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/aop/RateLimitAspect$1.class",
+          "size": 1451,
+          "modified_at": "2026-09-21T09:58:47.984762Z",
+          "sha256": "02265578E04C4A911AD7C3350DEBAEBE24A59462D1997015D26BD666A69065DF"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/aop/RateLimitAspect.class",
+          "size": 10021,
+          "modified_at": "2026-09-21T09:58:47.992762Z",
+          "sha256": "7231E477C7DF209AC6EF5B7E3E7F9302E88D477A0E4BBFDF0C541C472B4440FE"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/aop/RateLimitAspect__BeanDefinitions.class",
+          "size": 2660,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "E47AB1BE0AFD4E884D619C57036F08C47C2F011E716D71CBE6FEC9A8399C55FF"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/AndroidAppUpdateProperties.class",
+          "size": 2523,
+          "modified_at": "2026-09-21T09:58:48.016762Z",
+          "sha256": "C464477D9D09C9EE48E077AF265775FE4FC89300331B352F2AF4A8F75CEE35A9"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/AndroidAppUpdateProperties__BeanDefinitions.class",
+          "size": 1324,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "772F0325F69FFE4154C05759D6CC44C78242DAE06454BF629235E0CD419A33D4"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/ApplicationContextProvider.class",
+          "size": 1229,
+          "modified_at": "2026-09-21T09:58:48.028762Z",
+          "sha256": "0D9E4D44E15396E3395B5019CEC31BBC1A7131D98A6F020B30579F67D0716226"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/ApplicationContextProvider__BeanDefinitions.class",
+          "size": 1324,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "D6E064A78312D103FEC385D66E0A22637C6DC642A9D348F8F3FD34B701B530F5"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/AuthInterceptor.class",
+          "size": 5111,
+          "modified_at": "2026-09-21T09:58:48.044762Z",
+          "sha256": "6A2A3A1DE88C9123FDB632CD0C4430142444E73C3E9276FC2D2C6DF5A3DDC80E"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/AuthInterceptor__BeanDefinitions.class",
+          "size": 2686,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "A7C2D2337310D81E505A5B470177C5165A2AA392C2B205D9F650DCF88614E56F"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/DianFeiGrpcConfig.class",
+          "size": 2563,
+          "modified_at": "2026-09-21T09:58:48.060762Z",
+          "sha256": "2D38946370DD8FCFBC3E5A37DB063C794F5853157A724214B46DCD35A1F09B54"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/DianFeiGrpcConfig__BeanDefinitions.class",
+          "size": 4382,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "4162006EEB92351EFBA62B801D668E0C25DC521BC5CAD967CAA3C51FB25BB141"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/MybatisNativeConfig.class",
+          "size": 2794,
+          "modified_at": "2026-09-21T09:58:48.368762Z",
+          "sha256": "E1184C0836CF76D7928FF60ADF93AEE1569F9339AA840C130BA54609381F68B7"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/MybatisNativeConfig__BeanDefinitions.class",
+          "size": 3503,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "D0F8220E5896F0BAE54D1D41DC24821A4EC8960E29B570E25C73BF6349F9F678"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/NativeAotCompatibilityConfig$NativeAotCompatibilityPostProcessor.class",
+          "size": 4104,
+          "modified_at": "2026-09-21T09:58:48.376762Z",
+          "sha256": "666C9F48553C4C50A24CBEB59FA5E4F1BBD16887473E6D1EB89D40BA0600E9BF"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/NativeAotCompatibilityConfig.class",
+          "size": 951,
+          "modified_at": "2026-09-21T09:58:48.376762Z",
+          "sha256": "86E22DE55C3F4938626B723586CDAE67234FFE41E3EFF0EBE842C85A7197E77C"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/NativeAotCompatibilityConfig__BeanDefinitions.class",
+          "size": 2516,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "7BC757A9C40319A051140E842AA7078BA09B4D1451531EFA8DADA062B2FE910F"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/RabbitDelayConfig$$SpringCGLIB$$0.class",
+          "size": 5746,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "0373FF28094E66ECCBA1A50EF1199B64ACAC60DFB9684009925A580AFDC2596A"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/RabbitDelayConfig$$SpringCGLIB$$FastClass$$0.class",
+          "size": 3700,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "ACD35E400BD235C937A333053EDB507CC7BE30F4B2B1292712C9EB3799351E67"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/RabbitDelayConfig$$SpringCGLIB$$FastClass$$1.class",
+          "size": 6789,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "99A229E5FEB20876653A25B0AE6A314D0E1F51C1EF617BE81C1EDD0E987DA363"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/RabbitDelayConfig.class",
+          "size": 3141,
+          "modified_at": "2026-09-21T09:58:48.384762Z",
+          "sha256": "8453618AC84B355BC88FD0F209E45B66EA7413E9363A9D9560A82BBF39749435"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/RabbitDelayConfig__BeanDefinitions.class",
+          "size": 5974,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "D9DF47DB3D22C79A383D298287FE0267347A7C23E05FF38E92E522C6B4FFF3DB"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/SchedulingConfig$$SpringCGLIB$$0.class",
+          "size": 4150,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "54FA7A5A26387FC00AAC75A39C40AD1C9252A9B107AEE6F45E7EF1451317FE13"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/SchedulingConfig$$SpringCGLIB$$FastClass$$0.class",
+          "size": 2573,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "8FD5A1BD10E69FC186CE5CAFF8F8987B53E76C41D869E646ACA69D22C0BC084C"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/SchedulingConfig$$SpringCGLIB$$FastClass$$1.class",
+          "size": 4905,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "8198B5D275403B3E03A1BD820409D8DBA6BDBC6B70E663DD1DE4F2FC3397CD3D"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/SchedulingConfig.class",
+          "size": 1130,
+          "modified_at": "2026-09-21T09:58:48.388762Z",
+          "sha256": "ABDE74545E1182790FDF793E5A9A969D6281428F58B751790E96A133149B06C1"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/SchedulingConfig__BeanDefinitions.class",
+          "size": 3341,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "EB615C1725176D884A132D4F2BF7E3212F891A25A768D19D187BC8A9065A8ADC"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/SpringWsBridgeConfig$$SpringCGLIB$$0.class",
+          "size": 3605,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "57904DC0EB9A70B5867C7E60031FE33649C7F6585C6F27917685B6E02F5BB5D9"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/SpringWsBridgeConfig.class",
+          "size": 1670,
+          "modified_at": "2026-09-21T09:58:48.392762Z",
+          "sha256": "57232495A7AC8DAAFE69BF15B297F07BDBE6F5157A547CA404B473073FDA359A"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/SpringWsBridgeConfig__BeanDefinitions.class",
+          "size": 2925,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "21E1CADDED807B2EBB8CE587C4DBCDEAB80947118C56A82FB85CE9506CE534D6"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WebMvcConfig$$SpringCGLIB$$0.class",
+          "size": 3584,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "C6677B560F72D884F7FE6F6164CAA03C92B1AE6AF3956B28C7E1D9E5DC98BCBD"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WebMvcConfig.class",
+          "size": 1795,
+          "modified_at": "2026-09-21T09:58:48.456762Z",
+          "sha256": "FD298125C4588BCDE4B8D95AC8051D86CC6A26320A06C002DCBEB322717A5CCC"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WebMvcConfig__BeanDefinitions.class",
+          "size": 2853,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "6858A3F1C50A6672C53DA8DA014FE9DC93450577747DF61F3E9A86C75B58436B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WebSocketConfig$$SpringCGLIB$$0.class",
+          "size": 4217,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "494E2AFB6F122F30AEF2804DBC2B365C6165579095A8E2B3E9D07A86A484CAC8"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WebSocketConfig$$SpringCGLIB$$FastClass$$0.class",
+          "size": 2619,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "174914B4E9F59704B342DF610A846146D0D5FB5498D00F0AB6D7925D4A3B7368"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WebSocketConfig$$SpringCGLIB$$FastClass$$1.class",
+          "size": 4978,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "D8387463D536B5CE829DFB613C48E739D3B0CBD58B8127AA6628F67CF1D2329F"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WebSocketConfig.class",
+          "size": 1130,
+          "modified_at": "2026-09-21T09:58:48.460762Z",
+          "sha256": "AE5AD3DCAD5AA9C42B9C3DAF44FC77525FC1F8BB31C9D6DDE08C0055A87403BE"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WebSocketConfig__BeanDefinitions.class",
+          "size": 3431,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "68712447937C10496C6E405E90352931327BFC978FCE36F3BBE0E555567B817C"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WsBufferConfig$$SpringCGLIB$$0.class",
+          "size": 4257,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "7CD199CB21F434CEF7C2BA6286F582743E3816EBC79B032A753A324DA9C7A42B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WsBufferConfig$$SpringCGLIB$$FastClass$$0.class",
+          "size": 2643,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "98D18D21B6A6805D1B29CF2E7315E6A5698D6FDEFDEF98EAB5065B6347266A53"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WsBufferConfig$$SpringCGLIB$$FastClass$$1.class",
+          "size": 5019,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "CF37413DA96D1C455E9B3902AC3EB6689C0A8D75D4A9CDE91E30BB5C78A1DBC9"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WsBufferConfig.class",
+          "size": 1105,
+          "modified_at": "2026-09-21T09:58:48.460762Z",
+          "sha256": "1EE5420EBCF6644181EE40C9C8BEABB7E2E9F4A50D6854851BA14C68858DFAF3"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/config/WsBufferConfig__BeanDefinitions.class",
+          "size": 3477,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "11FC1131273C281DC4D6C1CA38B2C6BC8659665020FDF57AFC9B56486FF94EF0"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/contant/MqConstant.class",
+          "size": 720,
+          "modified_at": "2026-09-21T09:58:48.460762Z",
+          "sha256": "7D379AF7241C55BC6FB70C2E3B8F4F389CE74BA3CA48C35885FC3B4AB3B30463"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/AppUpdateController.class",
+          "size": 1620,
+          "modified_at": "2026-09-21T09:58:48.464762Z",
+          "sha256": "BD544902A71DA0AF8CA62CF2F82BA4247762D0FA64A21D61A4198E5754EE9346"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/AppUpdateController__BeanDefinitions.class",
+          "size": 2657,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "EF169F40AA4393200B3258C1A421039C087CFA3F6DE766B4CB414553D795825B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/CommonServiceController.class",
+          "size": 3803,
+          "modified_at": "2026-09-21T09:58:48.520762Z",
+          "sha256": "449CFFECCBE2A2573E1C851BFB1217EA9891985B23F0ED9231A7BE264F5FBAF4"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/CommonServiceController__BeanDefinitions.class",
+          "size": 2683,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "FA75808391727E1BC8B0AA2D979F6FC5D3EA042A655820EDE2FAA01F4E8C0D78"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/MusicController.class",
+          "size": 4978,
+          "modified_at": "2026-09-21T09:58:48.540762Z",
+          "sha256": "1D2E90C1F42B6053DE27AD04DCB0C402E7EA5F69884726221F42826966B7911F"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/MusicController__BeanDefinitions.class",
+          "size": 2621,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "69E5AD0F2864644F60E67DF3805A8F7EADBB00D5D47EDD3B7B619AEF64392366"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/ServiceCampusNetLoginController.class",
+          "size": 6653,
+          "modified_at": "2026-09-21T09:58:48.556762Z",
+          "sha256": "4B1BD5607F00155BFB9EA582866951545B5E85EC57F138E51CC13C9215B74B3A"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/ServiceCampusNetLoginController__BeanDefinitions.class",
+          "size": 3027,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "8C10976D9F581E8C9BF7A6132581EF977252D91BB42405E76E331EAE396727B6"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/ServiceDormElectricityAlertController$$SpringCGLIB$$0.class",
+          "size": 16137,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "034340F494C461BC1C142E613545D1B4CA3D7EC805B8041F0034F26E748FA5AA"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/ServiceDormElectricityAlertController.class",
+          "size": 7828,
+          "modified_at": "2026-09-21T09:58:48.580762Z",
+          "sha256": "77742B5564D324606EBAE62A7EAFFAF180945DB59D817D414CBB27148C51283D"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/ServiceDormElectricityAlertController__BeanDefinitions.class",
+          "size": 3014,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "99FCA67750A642EB622B35E5C323CF7DA865373DA0A91DB1EE82C8B1EADCE6E6"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/SysUserController.class",
+          "size": 4585,
+          "modified_at": "2026-09-21T09:58:48.608762Z",
+          "sha256": "07855C5A0CEC757294488AC6C1806DF527151504AF92DECC2509120C6D32A289"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/controller/SysUserController__BeanDefinitions.class",
+          "size": 2637,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "2BC1C06A2E87FFF14D099C6313CA51789ED6A0339428C309E8A2E25FC85A8CC5"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/entity/ServiceCampusNetLoginEntity.class",
+          "size": 3326,
+          "modified_at": "2026-09-21T09:58:48.560762Z",
+          "sha256": "92B31B74D74CDDD9BDBC91913D944D4D684C9E25EF0899A0528E7C7CA3200D4A"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/entity/ServiceDormElectricityAlertEntity.class",
+          "size": 9810,
+          "modified_at": "2026-09-21T09:58:48.600762Z",
+          "sha256": "D4F0B38701225F105917D0504B4D3D90D40C95B43120E5A65F5F086535082BCC"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/entity/ServiceDormElectricityAlertRoomEntity.class",
+          "size": 5371,
+          "modified_at": "2026-09-21T09:58:48.632762Z",
+          "sha256": "AEF46352554C43624093634478F607DAB279418697611EDDA26ED4F382776002"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/entity/ServiceLogEntity.class",
+          "size": 2057,
+          "modified_at": "2026-09-21T09:58:48.564762Z",
+          "sha256": "B383D24CA9368F780434485411F76C1BD1176DB37B4C8D54A95E7191CFD40458"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/entity/SysUserEntity.class",
+          "size": 1799,
+          "modified_at": "2026-09-21T09:58:48.048762Z",
+          "sha256": "E50E9498C4536B01FF4BCF50C29C6068CD93793145EE38C323E08BA99074D184"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/request/SmsRequest.class",
+          "size": 941,
+          "modified_at": "2026-09-21T09:58:48.632762Z",
+          "sha256": "0A3114013EE26439B02B788ED5C64F94192A69F1565A9D12DC13D0D82C646561"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/vo/AndroidAppUpdateMetadata.class",
+          "size": 1982,
+          "modified_at": "2026-09-21T09:58:48.504762Z",
+          "sha256": "1F2F8489C81D43546EA76E78DEF51A24768D111BD1FFDDDCDE84ECD7E4338206"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/vo/AppUpdateInfo.class",
+          "size": 2465,
+          "modified_at": "2026-09-21T09:58:48.504762Z",
+          "sha256": "EE9F5E6FC4BF02B51C48D00465ACC7BE613AC368BBB3F7874D699BB3805D419B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/domain/vo/CommonServiceVo.class",
+          "size": 1256,
+          "modified_at": "2026-09-21T09:58:48.564762Z",
+          "sha256": "DF292A025C89F99A25A6B63C8640429AB5C7CD6069F626C6182E695B27C81447"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/exception/ErrorResponse.class",
+          "size": 1004,
+          "modified_at": "2026-09-21T09:58:48.632762Z",
+          "sha256": "9ED7B8AD41FD9A0B8B784862CE937EDFBC4DC282D4566092122045A7A339C7DE"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/exception/GlobalExceptionHandler.class",
+          "size": 10855,
+          "modified_at": "2026-09-21T09:58:48.652762Z",
+          "sha256": "2925B4C5307920F6F5371201EA382A79F216FC75AF10BBA4C64A151E0FF3EA0E"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/exception/GlobalExceptionHandler__BeanDefinitions.class",
+          "size": 1314,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "AC29686D2F91881E1C0BC816B01070D25C7C6E2D42D14EF40FED836CE374F565"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/exception/TooManyRequestsException.class",
+          "size": 765,
+          "modified_at": "2026-09-21T09:58:48.652762Z",
+          "sha256": "693B3435C222FAF9599E0C60D30EEF726E2705648E65F4FBCD8A653119358DA8"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/handler/MusicWsHandler$DownloadContext.class",
+          "size": 1439,
+          "modified_at": "2026-09-21T09:58:48.448762Z",
+          "sha256": "9F9283BED3800D6E4C554E9AD0BA0CA5894EA5A014F43821659DA419A95369AC"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/handler/MusicWsHandler$DownloadResult.class",
+          "size": 1919,
+          "modified_at": "2026-09-21T09:58:48.448762Z",
+          "sha256": "9904A040B3C49EF230592ACC60C36395EAB16978CDD8C42C2775F85748F13D19"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/handler/MusicWsHandler.class",
+          "size": 9524,
+          "modified_at": "2026-09-21T09:58:48.456762Z",
+          "sha256": "CA0BB3AD5344669B5E8E7CCBBB85782805437BE59B9DA94F9386C7224D951FA3"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/handler/MusicWsHandler__BeanDefinitions.class",
+          "size": 1278,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "7C08DF761C933ADFFA587A66811F12FC1545C8BC2D5B171A3EEE65D8D92A1331"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/CommonServiceMapper.class",
+          "size": 1037,
+          "modified_at": "2026-09-21T09:58:48.652762Z",
+          "sha256": "51479F76ECAFF96C8A0BFD65E122FF5F4689CAF6B2CBB2571ACFA1CB02377164"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/ServiceCampusNetLoginMapper.class",
+          "size": 3406,
+          "modified_at": "2026-09-21T09:58:48.560762Z",
+          "sha256": "425CCB931DF03043A6F6CF19792065309892BA4AC63CF673B12BFA9B8D44533A"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/ServiceDormElectricityAlertMapper.class",
+          "size": 1468,
+          "modified_at": "2026-09-21T09:58:48.580762Z",
+          "sha256": "FFD446A300A3BF25202C3D37DCD5287EB4E2FD8D01DB7F857175135EC21219A4"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/ServiceDormElectricityAlertRoomMapper.class",
+          "size": 2195,
+          "modified_at": "2026-09-21T09:58:48.652762Z",
+          "sha256": "71F06C0168ABF3861ABFA9BEF3B6FDACE29032450A2AA98B4FBE041A2767A13B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/ServiceLogMapper.class",
+          "size": 1311,
+          "modified_at": "2026-09-21T09:58:48.656762Z",
+          "sha256": "BDB52F69C609258E16FC81E0DDB44BB19BB2403E6953D95AE9B4BDF093D21ED8"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/SysUserMapper.class",
+          "size": 727,
+          "modified_at": "2026-09-21T09:58:48.044762Z",
+          "sha256": "CC46D58C06D8860F67817DC61C50AF380B9582778B9787C3479FBFB06B21DB1B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/ServiceCampusNetLoginMapper.xml",
+          "size": 1173,
+          "modified_at": "2026-08-08T10:00:06.443938Z",
+          "sha256": "C63C00F768819EB76260987F9928E0413F816745F8991C3C96907AB5BB7857B2"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/ServiceDormElectricityAlertMapper.xml",
+          "size": 5311,
+          "modified_at": "2026-08-08T10:00:06.447937Z",
+          "sha256": "B6CBA19DF3BCDB05E8ECB4CAD3D0ACA6993CBF65E36E6DF25E224BAC1753FEF0"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/ServiceDormElectricityAlertRoomMapper.xml",
+          "size": 4549,
+          "modified_at": "2026-08-08T10:00:06.447937Z",
+          "sha256": "722F03839D37D766126C0854DAD04067E98C8A5DE35263EE415EA70EA2741D10"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/ServiceLogMapper.xml",
+          "size": 2691,
+          "modified_at": "2026-08-08T10:00:06.447937Z",
+          "sha256": "2DBE4A6DCF7D39409226B28A878A79142969D0A2F9C7AF9DB2EC0E7AC8B70DA8"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mapper/xml/SysUserMapper.xml",
+          "size": 1828,
+          "modified_at": "2026-08-08T10:00:06.447937Z",
+          "sha256": "7B54796EB5221EB14D99C77C6E6C1E99EBE13806AD56C360A19C71F1E2FD782D"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mq/CampusNetLoginScheduleInitializer.class",
+          "size": 4688,
+          "modified_at": "2026-09-21T09:58:48.660762Z",
+          "sha256": "A802FFA9242911831127E0C1B4E45E03A21B1416A5A512660507BA9D48ADB2EA"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mq/CampusNetLoginScheduleInitializer__BeanDefinitions.class",
+          "size": 2926,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "43E8838080E682286E0452C0273278FC976F4044C2E66947F58E5023A668405E"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mq/DelayedMessageListener.class",
+          "size": 9909,
+          "modified_at": "2026-09-21T09:58:48.676762Z",
+          "sha256": "3F97255EAB680E6EF00869824F40B994755C54CDD3F88536A5CE1B0D0C9FAC10"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mq/DelayedMessageListener__BeanDefinitions.class",
+          "size": 3444,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "DAEA5059FE8166D5C996DEBC19BBA134BEA2C26A4EB0574F4AE7971E346B9A18"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mq/DelayedMessageSender.class",
+          "size": 2686,
+          "modified_at": "2026-09-21T09:58:48.704762Z",
+          "sha256": "BBE1B436A7910E44F46A9D6AB3FB83C9918B3638F080EBFDD2844AB3AC87650E"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/mq/DelayedMessageSender__BeanDefinitions.class",
+          "size": 2613,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "AAFCAE3B71F36540439940CA54331A209FF7DA67C50CF7D43AA4FB9D99430F71"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/schedule_task/QueryPowerTask.class",
+          "size": 7175,
+          "modified_at": "2026-09-21T09:58:48.756762Z",
+          "sha256": "F8D108EA716B623A0444F31B680757C1782C601DA46C71908C63121013AA68BE"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/schedule_task/QueryPowerTask__BeanDefinitions.class",
+          "size": 3221,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "4B8C3F1E5B5AEDE321B2C6A17928DD0D703064B54D5B9BE5BB91BABB190C7DFD"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/AppUpdateService.class",
+          "size": 7954,
+          "modified_at": "2026-09-21T09:58:48.500762Z",
+          "sha256": "E4226F4880C99ACD35CF2BE8E30AE73F45D7008AA5296C6947E5ECE3582FC0CD"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/AppUpdateService__BeanDefinitions.class",
+          "size": 2748,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "6B7E45813D2BEA7CE0B34DD8602154373A89E2932B5EB1AB30D5D1BDDBC9700F"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/CommonService.class",
+          "size": 777,
+          "modified_at": "2026-09-21T09:58:48.520762Z",
+          "sha256": "587A939D891B273E296942A1B8B0F37C1A7DABE6FF3BD85A4A20D8E1046E3FDC"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/CommonServiceProvider.class",
+          "size": 391,
+          "modified_at": "2026-09-21T09:58:48.556762Z",
+          "sha256": "2D4B8CC73476266D147ABCF6D7164492FB1018EE401B0FDDB32EC864F486F532"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/ServiceCampusNetLoginService.class",
+          "size": 1879,
+          "modified_at": "2026-09-21T09:58:48.556762Z",
+          "sha256": "CA3668A4C9F608D2B975DBF8FE5CE176C1CB20E161ADE318668B93E58D10BFAF"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/ServiceDormElectricityAlertService.class",
+          "size": 1795,
+          "modified_at": "2026-09-21T09:58:48.580762Z",
+          "sha256": "8EA06E2F2D61E98F8A1E05F869CC6A412069DF94226AC98773DA9D6DC46B5C85"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/SysUserService.class",
+          "size": 1264,
+          "modified_at": "2026-09-21T09:58:48.608762Z",
+          "sha256": "F37DA6BFDDEFE72357D4C62EAB08DE44BED073DDF1553CA62C9AA72D48023E03"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/CommonServiceImpl$$SpringCGLIB$$0.class",
+          "size": 14150,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "6A66121136BD86F38418452BE4278DE6CB9DD31736864C992671907857AE6032"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/CommonServiceImpl.class",
+          "size": 5753,
+          "modified_at": "2026-09-21T09:58:48.764762Z",
+          "sha256": "8243D7C9877FFD6F3AE8E7AA7C9046AD490018A2DA2F5879E8B9110D73910D1C"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/CommonServiceImpl__BeanDefinitions.class",
+          "size": 3038,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "CF5CDFF7F0F0D7BFDA2682D715433B8C10DD8CF60A4D9F4708992118C277B86D"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/ServiceCampusNetLoginServiceImpl$$SpringCGLIB$$0.class",
+          "size": 18073,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "4C5314B458C3832C77983968730A54BF1A4E67682F301624A861DDE0E50F775B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/ServiceCampusNetLoginServiceImpl.class",
+          "size": 13388,
+          "modified_at": "2026-09-21T09:58:48.796762Z",
+          "sha256": "7DBF80C16208E47EC7E4C49CBECEA640A76C213352599E99BC011639780DB05D"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/ServiceCampusNetLoginServiceImpl__BeanDefinitions.class",
+          "size": 3325,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "09CF6AA8C6A56C48BB0383BF597C5426D214A62900432059F938C0AA361183D1"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/ServiceDormElectricityAlertServiceImpl.class",
+          "size": 14249,
+          "modified_at": "2026-09-21T09:58:48.832762Z",
+          "sha256": "574C056E8DF458538432FEDE5522330D490DFC1D0E8292073AB74E00A6F2DCA3"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/ServiceDormElectricityAlertServiceImpl__BeanDefinitions.class",
+          "size": 3699,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "B94A39F527FCD14459C8D34F8C9552645501C29DE33A912CA62909F014139756"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/SysUserServiceImpl.class",
+          "size": 11478,
+          "modified_at": "2026-09-21T09:58:48.864762Z",
+          "sha256": "88A3918DAC1FAE2FF6F2F04D252DB496AE41D3ECE1E6C360A99ACDFC050AD1CB"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/service/impl/SysUserServiceImpl__BeanDefinitions.class",
+          "size": 3000,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "CD3646490DC394E405D79B35C09A911BBE10C6EB1C8C8E7F6ECBAC0A3ED05B39"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/util/EmailUtil$MailSendRuntimeException.class",
+          "size": 692,
+          "modified_at": "2026-09-21T09:58:48.736762Z",
+          "sha256": "4A27C91BBB48803087388C8FE1DB40918CB622F6C71EDEA115ACC99E7B45E2EB"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/util/EmailUtil.class",
+          "size": 8008,
+          "modified_at": "2026-09-21T09:58:48.740762Z",
+          "sha256": "D683375CDBF0C85D55103FDE874D32475DBA21A3EB749ADB84D208DFC6241D91"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/util/EmailUtil__Autowiring.class",
+          "size": 891,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "EE9B3428CEFCD293BD550E5933139E10E5CAC9CC54787778DB082172200FFC62"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/util/EmailUtil__BeanDefinitions.class",
+          "size": 3308,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "03D7AD55E0ADF04A8DBB50806A7EEC4400F53D2A9FEB9352168DCD28A9AEE63C"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/util/SpelUtil.class",
+          "size": 5115,
+          "modified_at": "2026-09-21T09:58:48.012762Z",
+          "sha256": "BA6294422F3F861584CA377E1D9B948B20BC7D3AC3229838A0B1DD6305FBBDFD"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/util/SpelUtil__BeanDefinitions.class",
+          "size": 2513,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "ACD26368F4880362433952BA72BD4DABE195ADD48D5192D957EF7C32CABE88AB"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/util/TimeUtil.class",
+          "size": 4689,
+          "modified_at": "2026-09-21T09:58:48.872762Z",
+          "sha256": "58EA3A2AD2FD18993338D25C6827DA21F61849F0CFFF2A35B453A74E6D600FC3"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/CampusNetworkAutoLoginWebSocket.class",
+          "size": 4698,
+          "modified_at": "2026-09-21T09:58:48.664762Z",
+          "sha256": "60EAB84B03A9947DC61FB518086EAC565922DF6D76CFE568288F8EE371D06E28"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/CampusNetworkAutoLoginWebSocket__BeanDefinitions.class",
+          "size": 1350,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "E1081FB8BD399B87F6288206EB24E756954B131059B92DE0B4CCB611913D8965"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/SMSWebSocket.class",
+          "size": 5624,
+          "modified_at": "2026-09-21T09:58:48.716762Z",
+          "sha256": "95BCC22DE0F0AA8C3FC3F8B9E3699004B84ED5DC933961580448129EE3A6BAAB"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/SMSWebSocket__BeanDefinitions.class",
+          "size": 1274,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "4B444C146FA2B87442ADE5B73253680BB607BDB336F5B6AB74B822A14F2FF919"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/WsBootstrap$$SpringCGLIB$$0.class",
+          "size": 3589,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "4B3693549DD35AA5E969F212820963ADA7A375D27455C13C3E951C8570FDC56B"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/WsBootstrap.class",
+          "size": 825,
+          "modified_at": "2026-09-21T09:58:48.876762Z",
+          "sha256": "ED119248AD9A8AB5D2F217205403F613EFAE644A409EE8299BD1B6CD99FA6ACA"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/WsBootstrap__BeanDefinitions.class",
+          "size": 2964,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "ED1B5DCA72D47DAB3D26F527B6DFB9B29E92A75897582BDC37DB10BE52D36E9F"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/WsSessionHub.class",
+          "size": 3474,
+          "modified_at": "2026-09-21T09:58:48.680762Z",
+          "sha256": "0EF562CD70AB8BC887C2AF5CCD7C7C2716EF02C0577F3894CD6B8E84F32DBF1D"
+        },
+        {
+          "path": "target/classes/hhsc/kangnasi/xyz/ustscampusservices/websocket/WsSessionHub__BeanDefinitions.class",
+          "size": 1274,
+          "modified_at": "2026-08-21T05:36:04.295515Z",
+          "sha256": "0793139FA64766CC6789EE33D946FDB3520F6146FC22BA67381F1636BF0DEBA5"
+        },
+        {
+          "path": "target/classes/org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration__BeanDefinitions$MapperScannerRegistrarNotFoundConfiguration.class",
+          "size": 1645,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "A67C911BC2D39A2A726B83C3B9384279130D6033244C30D63F6E00452B1B195E"
+        },
+        {
+          "path": "target/classes/org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration__BeanDefinitions.class",
+          "size": 5821,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "5A22E731F3AD3328307A0B45433CD07779F8FFE663CCBDB0ED737CC9B3204610"
+        },
+        {
+          "path": "target/classes/org/mybatis/spring/boot/autoconfigure/MybatisLanguageDriverAutoConfiguration__BeanDefinitions.class",
+          "size": 1360,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "21F5B5F3FED8499691612ABEDD21008440B40E37E1EAB7501543E0D7C43DEC20"
+        },
+        {
+          "path": "target/classes/org/mybatis/spring/boot/autoconfigure/MybatisProperties__BeanDefinitions.class",
+          "size": 1276,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "93E831D3515423324C5CEFF4B250F861CF04570FA31629426CBC378A50809563"
+        },
+        {
+          "path": "target/classes/org/mybatis/spring/mapper/MapperScannerConfigurer__BeanDefinitions.class",
+          "size": 2074,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "82D288D346C76B22EC0E60762DF6EAF67156359CC0DCE0ECBD5865509CBC504F"
+        },
+        {
+          "path": "target/classes/org/redisson/spring/starter/RedissonAutoConfigurationV2__Autowiring.class",
+          "size": 1063,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "D6CB3B678ED8AE9A0705DA050D427B58DD19FDF684542A00824B1C108DCE771F"
+        },
+        {
+          "path": "target/classes/org/redisson/spring/starter/RedissonAutoConfigurationV2__BeanDefinitions.class",
+          "size": 9005,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "195F1D36FE8CE4BFDF88250BDCA19E9849C90528924EC7FFACD36BFECCDFDDA6"
+        },
+        {
+          "path": "target/classes/org/redisson/spring/starter/RedissonProperties__BeanDefinitions.class",
+          "size": 1260,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "D9EA7FFD7D5508AA505B1027013FB40E3490ADB9D26D6332E7AF14F92F588E43"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocConfiguration__BeanDefinitions$OpenApiResourceAdvice.class",
+          "size": 3135,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "7278C21E0BA7417A8C8B721BCF52B320949CFBB112FACF13065BB81A87C29414"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocConfiguration__BeanDefinitions$QuerydslProvider.class",
+          "size": 3928,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "B537FE1A5938D46610A17325578D083AFB78F044D2E6548D586AD4D34BDA5B82"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocConfiguration__BeanDefinitions$SpringDocSpringDataWebPropertiesProvider.class",
+          "size": 3835,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "8E6247C9C1155230CDEBF610943D6E821FAB37F1330F5F056436602FEDBEF5EE"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocConfiguration__BeanDefinitions$SpringDocWebFluxSupportConfiguration.class",
+          "size": 3817,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "68D187ABA2E4A36951E19C076F4C6852B31C6A4887AC1D974443AF1FE1080616"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocConfiguration__BeanDefinitions$WebConversionServiceConfiguration.class",
+          "size": 3541,
+          "modified_at": "2026-08-21T05:36:04.299515Z",
+          "sha256": "20C76AF85AA69B17283B4FA3570C7690C123A873F18FE3815B3ABB449D077D29"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocConfiguration__BeanDefinitions.class",
+          "size": 23581,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "01D3691A72B489BA53BA3426E626A1DA1C8FBE2C4E0600E9C7AEB4CF60A0F071"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocKotlinConfiguration__BeanDefinitions.class",
+          "size": 1350,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "FCE39A821D2A7D37E9021189F3E5BA2DD2279521323434C4941C807D7DA5FDF0"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocPageableConfiguration__BeanDefinitions.class",
+          "size": 5603,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "127F3E693B47B1772A1F2335EFD51C288F60FA4C0D16A5765EEB5C2614FA11BA"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/configuration/SpringDocSortConfiguration__BeanDefinitions.class",
+          "size": 3484,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "C9B6A0F02C3A45C9392BBCB23BBB4840BADA7F2C7B8CF2F2C6FDDDFD12AC85E1"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/properties/SpringDocConfigProperties__BeanDefinitions.class",
+          "size": 1332,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "1E928927CB9904E4AD38979035F739A8BA819201BD44E601EFC8D4ED714C37C3"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/properties/SwaggerUiConfigProperties__BeanDefinitions.class",
+          "size": 1332,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "19B83A983B8FBD59FB62F554CBBC4DC15D3AC2B38BB280D182AA191DFEF41BEB"
+        },
+        {
+          "path": "target/classes/org/springdoc/core/properties/SwaggerUiOAuthProperties__BeanDefinitions.class",
+          "size": 1328,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "8E35439374036F6CD8B7263F273CA72E6348B359754523E58519A4449DCB23E7"
+        },
+        {
+          "path": "target/classes/org/springdoc/webmvc/core/configuration/SpringDocWebMvcConfiguration__BeanDefinitions$SpringDocWebMvcActuatorConfiguration.class",
+          "size": 1645,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "B2A24B03B008BD8A34D673A38F01E339F3264B00BA8BC181D492E5319DF5ACFE"
+        },
+        {
+          "path": "target/classes/org/springdoc/webmvc/core/configuration/SpringDocWebMvcConfiguration__BeanDefinitions$SpringDocWebMvcRouterConfiguration.class",
+          "size": 3621,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "2C3966C47C5E41976CBF9E60CAAE48F356F9B602EE881C7C6710960618AD3AF3"
+        },
+        {
+          "path": "target/classes/org/springdoc/webmvc/core/configuration/SpringDocWebMvcConfiguration__BeanDefinitions.class",
+          "size": 7973,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "AB06A11132897098FF2828E3C530C53851094D7FFC1060462F4200FA20E6E1A0"
+        },
+        {
+          "path": "target/classes/org/springdoc/webmvc/ui/SwaggerConfig__BeanDefinitions.class",
+          "size": 8253,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "6AD6A44DC66D7A94C64178BE566351E4C4A2EB11F4553FC8326701B4EE9E5D11"
+        },
+        {
+          "path": "target/classes/org/springdoc/webmvc/ui/SwaggerWelcomeWebMvc__Autowiring.class",
+          "size": 884,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "7FD72BA5C5B86EC0864B4C73413F82796BC3F147C7AA7A97D242437F2BA4AFC9"
+        },
+        {
+          "path": "target/classes/org/springframework/amqp/rabbit/annotation/RabbitListenerAnnotationBeanPostProcessor__BeanDefinitions.class",
+          "size": 1382,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "4ECDFA602F341CE737D36185985821D0D93CEEB78BFB710F09C8F896B1605BAB"
+        },
+        {
+          "path": "target/classes/org/springframework/amqp/rabbit/listener/RabbitListenerEndpointRegistry__BeanDefinitions.class",
+          "size": 1342,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "E2811072A8B9CE47EE5669B9374964E3378A1ABF27C54764FC2EF61EB03CFBC6"
+        },
+        {
+          "path": "target/classes/org/springframework/aop/aspectj/annotation/AnnotationAwareAspectJAutoProxyCreator__BeanDefinitions.class",
+          "size": 1860,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "5101760D6BB5BF745D61307CEC7C3709538D60A9CAA6682EDAB7768893254676"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/amqp/RabbitHealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 3570,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "90B598C4A9D3A4380DD82EFAF83C5452D61F548E05208546F18E50974CBF76A5"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/availability/AvailabilityHealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 1436,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "77E9979ECF79FC827669490E6331261AA16BC6E92A904DD243E4206A53D665F3"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/data/redis/RedisHealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 1404,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "A10919081D80338F1D8BCC632B076A2731105F45531BB93C11C1384C750885AE"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/data/redis/RedisReactiveHealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 3651,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "5A888448B891CD5240592287755A06202132F9A53E0C0AD6356BD187F28AAA50"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/EndpointAutoConfiguration__BeanDefinitions.class",
+          "size": 5928,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "A1EC9C12DB7BC0C39F7AC14338A45C02BC74919DD0D47CA1EDAA0C1BF2583776"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration__BeanDefinitions.class",
+          "size": 3341,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "79411364D923D3B0D7850F78DFBAD24B494CF10DF44AD53B798E147E2DE85837"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/web/CorsEndpointProperties__BeanDefinitions.class",
+          "size": 1340,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "DC62CF133391CFBFD1FDBAFC31202F33D5788FD2E393082351B46FD5EC0E39FF"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/web/ServletEndpointManagementContextConfiguration__BeanDefinitions$WebMvcServletEndpointManagementContextConfiguration.class",
+          "size": 4764,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "B557CC5E00C160E31102C04A1AF49DD985D211AD0638E5076A83AC6D244B95AE"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/web/ServletEndpointManagementContextConfiguration__BeanDefinitions.class",
+          "size": 4523,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "28DC9C43A4AA2A9DAD265835133443CC088D89AA34AED14D3268E6E5B163DC87"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/web/WebEndpointAutoConfiguration__BeanDefinitions$WebEndpointServletConfiguration.class",
+          "size": 4225,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "341AE643841253BD387B24BECB8707A93949384E22244671A0872A277BA9F523"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/web/WebEndpointAutoConfiguration__BeanDefinitions.class",
+          "size": 12408,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "07D9CDED517F12DC0B62C13E5FB2EC97572B8C0483BA8C5715BABE8A448BDB31"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/web/WebEndpointProperties__BeanDefinitions.class",
+          "size": 1336,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "5607242946FD68E038086C304EF387CEFAFC390A181E970D78B4C3CF205BFA21"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/endpoint/web/servlet/WebMvcEndpointManagementContextConfiguration__BeanDefinitions.class",
+          "size": 7929,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "07B0B0F9CAC46EA7876143EAAB5CD3836284C0767E848AD41778A9AA0AAD5988"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/health/HealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 3281,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "6D58FA5EE52F8F8A37BBB2B41210056159A579BB3D7BFA4E90B2A4F8F6754DE9"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/health/HealthEndpointAutoConfiguration__BeanDefinitions.class",
+          "size": 1364,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "CA03B4FB63E36B8199A83F789A402A5BFA2FEDB48DFC1E954087FE40FBB80DB5"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/health/HealthEndpointConfiguration__BeanDefinitions.class",
+          "size": 10822,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "C53B638C35ADBD1F01E94D7AEB2F817C1D98278D6752BCCDDD89BE0F0B261841"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/health/HealthEndpointProperties__BeanDefinitions.class",
+          "size": 1336,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "872C56EA24D519BB0762CE80D45A1041899EBB4EE82C533B821115310DB6EDCD"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/health/HealthEndpointWebExtensionConfiguration__BeanDefinitions$MvcAdditionalHealthEndpointPathsConfiguration.class",
+          "size": 4450,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "CE071BFBD527BC5CF662D6E47D6F5EEAB09B143B8751B633C625212E911F9479"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/health/HealthEndpointWebExtensionConfiguration__BeanDefinitions.class",
+          "size": 4247,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "B332BCC7AEAEF786ED683E019D045985675C73CD1685502B321822AB8CE18FCC"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/health/ReactiveHealthEndpointConfiguration__BeanDefinitions.class",
+          "size": 3788,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "2385A2D7AD40C8EB15783ACB0C8FE157483FFF20444D984E3BC077A4C79B2CE9"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/info/InfoContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 1364,
+          "modified_at": "2026-08-21T05:36:04.303515Z",
+          "sha256": "A37B65328E0BA91360834383FC6773B07EBB21812F028344AA5B922C957DBE7D"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/info/InfoContributorProperties__BeanDefinitions.class",
+          "size": 1336,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "E6FD6045A5D2371285DD2B1CCB24E6722780A3B4D3066FDDC3DD4C63A911BF24"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/jdbc/DataSourceHealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 4618,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "EE27749DC3B19C43F0CA02B0FE405B6F95F14E27A9248070332549A40A56D698"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/jdbc/DataSourceHealthIndicatorProperties__BeanDefinitions.class",
+          "size": 1376,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "49BE52215A524645C74FA74657CE57A7D637C3E5D3527E93C6736B4FDD24FB28"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/mail/MailHealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 3552,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "266292A761BCAF2ADCB8AB96CC53CB745B6DC08F1461AAE0B2D61B8C6229D886"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/CompositeMeterRegistryAutoConfiguration__BeanDefinitions.class",
+          "size": 1398,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "026D39AD4B261AABA2E86BB63E7ACC4C281BD324C35BAF27B7C1A11781D00700"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/JvmMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 8125,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "4A88D42B5AC8CA4338B64D974AA64AF296032A3416032631FFC7C0AFCB72F6EA"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/LogbackMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 3350,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "CD69234662C78F28B0D0F21E367E59520D72355DE23262D7DE901CA3A4800580"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/MetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 7113,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "FE39995121F9CC4D152FE08F83C43B90ADBC756DF22FFB608F56E51C93953CBD"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/MetricsProperties__BeanDefinitions.class",
+          "size": 1310,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "02E4A4A68C0B4F181637A4644EEF2905778EEA9D1C07B01BA3A572AE0154560F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/SystemMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 6277,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "120ABA5AC4C5EFEC2B90EE047B219952AEE95A098E0933C7B7E7F3A597F6CC49"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/amqp/RabbitMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 3369,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "EBB95819A1497BBDDF4956790FFF5CDD74E28018A20BC20F5504C0FD3C4C9618"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/data/RepositoryMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 7264,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "CF08B151A82F2E1220546887D8BEE257DF76C133CDA0752B7C3BCBA072321EF2"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/export/simple/SimpleMetricsExportAutoConfiguration__BeanDefinitions.class",
+          "size": 4750,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "20F3F248B897C4D23953624CE4B01F971B2020DD63E60F1D8660ED829E6693DE"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/export/simple/SimpleProperties__BeanDefinitions.class",
+          "size": 1334,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "91D2B4913AAB392E0C2523D0F1E148C58D1EC4F6E89573EC9CA519FD7FC4E0D9"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/integration/IntegrationMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 1406,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "D01D4533D18629A5B03ABD3BAC71FDC65CCEFE1AE472244FFC00AD3F924EBAF6"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/jdbc/DataSourcePoolMetricsAutoConfiguration__BeanDefinitions$DataSourcePoolMetadataMetricsConfiguration.class",
+          "size": 4697,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "CDAE9CE097597BBBC607EC69A4139527EDC2409AB98A3DFB6F9398A9172BE7A0"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/jdbc/DataSourcePoolMetricsAutoConfiguration__BeanDefinitions$HikariDataSourceMetricsConfiguration.class",
+          "size": 4500,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "52AF8467836C8165F80C114333C5491A650C38AB3FCAD5F38D0CE817A606819E"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/jdbc/DataSourcePoolMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 1852,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "391A00C20D300FBAE04CFAD5C15E10D395446C0D4786C94D76498FCE5CC0D052"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/startup/StartupTimeMetricsListenerAutoConfiguration__BeanDefinitions.class",
+          "size": 3690,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "5B6B3990A5766F08D648B565221EC2A1DE93C6A8BE9B45286FB685585F61F418"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/task/TaskExecutorMetricsAutoConfiguration__Autowiring.class",
+          "size": 2648,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "AA6F8D2E82DB560B3018D458DBD7A460335448428B9B0FB635A1DCBDD6AFF3B4"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/task/TaskExecutorMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 3564,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "AFAA42590523A18A7E0F337B94707FE8F7B667E8687CD1837E7C270572CEAAB6"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/metrics/web/tomcat/TomcatMetricsAutoConfiguration__BeanDefinitions.class",
+          "size": 3622,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "6FE24D5B5FA43DDB0A5B7A9AB888741FE0C30F3A381F50B50C2E3F8C1B3CD87F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/ObservationAutoConfiguration__BeanDefinitions$MeterObservationHandlerConfiguration$OnlyMetricsMeterObservationHandlerConfiguration.class",
+          "size": 4716,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "B10B12C296BB258811CD296DB9DC3B95180BE3E94C41A3218D7A713BC1A24694"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/ObservationAutoConfiguration__BeanDefinitions$MeterObservationHandlerConfiguration.class",
+          "size": 1974,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "BE768185F052EE3C395987C98FCA13E6A8894FFA8BB20F26683C746C31FEEB4D"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/ObservationAutoConfiguration__BeanDefinitions$OnlyMetricsConfiguration.class",
+          "size": 3754,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "32B8123A749E501CF3C739EA7F971E211C4768241F8519099C4FB222FF50294A"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/ObservationAutoConfiguration__BeanDefinitions.class",
+          "size": 6922,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "4D2417B6111514A094D894CFC09AB20F8213C25E47AB813ABE086B50BBE5EB61"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/ObservationProperties__BeanDefinitions.class",
+          "size": 1334,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "9A4DB9BBB7D6405F66AAAA10D820FB2B60E4050727CEFD5AD37C19308635F50E"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/web/client/HttpClientObservationsAutoConfiguration__BeanDefinitions$MeterFilterConfiguration.class",
+          "size": 4237,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "7C1231931F0957F00862EEFA3F7357E59294C6BC290253A6B6B7F31F6A650E15"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/web/client/HttpClientObservationsAutoConfiguration__BeanDefinitions.class",
+          "size": 1644,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "AABE1DDBBB9D7BA3A50B2019EE715DD938B670FC65253857E62B50772C7CDDF8"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/web/client/RestClientObservationConfiguration__BeanDefinitions.class",
+          "size": 3948,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "32AD80F1737D9F55648F38F71D65537E28ED30B22D8C44B501F3BF956D3D5E8A"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/web/client/RestTemplateObservationConfiguration__BeanDefinitions.class",
+          "size": 4082,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "DF48FE116D2C91EB341B43D0F290B875F9A0086BA57D23406CE9AF9F7240491F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/web/servlet/WebMvcObservationAutoConfiguration__BeanDefinitions$MeterFilterConfiguration.class",
+          "size": 4212,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "403202BF3196E732572A4045EC50B56F71CB75976F3EA6DAE7BB26A44FA1C33A"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/observation/web/servlet/WebMvcObservationAutoConfiguration__BeanDefinitions.class",
+          "size": 4461,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "A9E3C0B97D18C926699022E6ED643E2CB157322148610B94BF0772A7D3A87F56"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/scheduling/ScheduledTasksObservabilityAutoConfiguration__BeanDefinitions.class",
+          "size": 4032,
+          "modified_at": "2026-08-21T05:36:04.307515Z",
+          "sha256": "AC1AAA090221588C3FC41A283ACBAB2405BAAD128912ABDB14655188743E392A"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/ssl/SslHealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 4500,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "9F1B852961DA8BFA6E866F8D0F36671C5AFDF5A2B2719CADBE9B4B2279B707D2"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/ssl/SslHealthIndicatorProperties__BeanDefinitions.class",
+          "size": 1346,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "F2E151DD9650EAB3A2291D6A99DBD0F1C294DFFB7627ADAF4D13297C99FD8247"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/system/DiskSpaceHealthContributorAutoConfiguration__BeanDefinitions.class",
+          "size": 3733,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "D0D2136CD18BEB51656BF8DCC62BC71690BB4883B8F613084A7CCB30818B8CE6"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/system/DiskSpaceHealthIndicatorProperties__BeanDefinitions.class",
+          "size": 1376,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "5FB87BA634C3A4FBD9F7E5968B6806422EACDD030E126FC957F8ECDCB30206AF"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/web/server/ManagementContextAutoConfiguration__BeanDefinitions$SameManagementContextConfiguration$EnableSameManagementContextConfiguration.class",
+          "size": 2169,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "C2DF3BE2629A090A8294898E567A846364D30F003E25CEC357E299C13FD3C353"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/web/server/ManagementContextAutoConfiguration__BeanDefinitions$SameManagementContextConfiguration.class",
+          "size": 3442,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "BB2FF2B5EE503A11D9EBD03F4D6456DE50BFC5E16F35AE504971B7ECCFE6403C"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/web/server/ManagementContextAutoConfiguration__BeanDefinitions.class",
+          "size": 1847,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "6AD8959FD07799DD7B34D4858675BC3F69C1738A8B10C9BF8DA0BCB00CC80B4A"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/web/server/ManagementServerProperties__BeanDefinitions.class",
+          "size": 1352,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "FD944EA67824DA0517F8111DDBB922B181F6E258B2A9B3D377EC10C6A1A11084"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration__BeanDefinitions.class",
+          "size": 4689,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "3E148CEFF8B145AB1EA5A3EB16C4BC76199C99F6E977FFB3490CB7FEC45A51A2"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/AutoConfigurationPackages__BeanDefinitions$BasePackages.class",
+          "size": 3271,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "C1D7B8FB0665FA260AB08F0D3A0761E15EEE1587290545470F7C9DD12B9E8A8D"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/AutoConfigurationPackages__BeanDefinitions.class",
+          "size": 554,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "BE803ECAC6D3E302D41CA1DAF8925150BC4428D78773D9FAF12FA1FF1E7C4091"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/amqp/RabbitAnnotationDrivenConfiguration__BeanDefinitions.class",
+          "size": 7232,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "182BC30B6CF01C4056324FF0E2D3D1818026D5E97C86FCD7138CB07465A36636"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/amqp/RabbitAutoConfiguration__BeanDefinitions$MessagingTemplateConfiguration.class",
+          "size": 3840,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "89D8874325D449AED16DA0E5E4F82052BAB7DF67926572719846A156D946BAAB"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/amqp/RabbitAutoConfiguration__BeanDefinitions$RabbitConnectionFactoryCreator.class",
+          "size": 8547,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "233B8DE63061B55E01EB984BEAAEDF77E56EDCA2D67478A982FB51A2E1CD304B"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/amqp/RabbitAutoConfiguration__BeanDefinitions$RabbitTemplateConfiguration.class",
+          "size": 5991,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "F299E084F4E6F1E8D62C599AD09198ABCEF24F4A0766EFD0BEB68C3EA35E2126"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/amqp/RabbitAutoConfiguration__BeanDefinitions.class",
+          "size": 1820,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "4FC35767C9F79E5CF6B77A789ECFA4084C4F686B9513F6BFBD3BE2F1C3A3CA4E"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/amqp/RabbitProperties__BeanDefinitions.class",
+          "size": 1284,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "A2430EAD2616F668C14D1EFF2F405878268055F437326FE8DEBFAAC6E679A7A7"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/aop/AopAutoConfiguration__BeanDefinitions$AspectJAutoProxyingConfiguration$CglibAutoProxyConfiguration.class",
+          "size": 1919,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "F97619DD485B0F8ED72C42000DD9E27A7027B649058FB3E7AF77B443120AF9F3"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/aop/AopAutoConfiguration__BeanDefinitions$AspectJAutoProxyingConfiguration.class",
+          "size": 1786,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "10FDADB7C2D542300B58242BCCE788C311B564E104D6CA27E9781EBA44C58781"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/aop/AopAutoConfiguration__BeanDefinitions.class",
+          "size": 1671,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "0C1C7E438B3E1DEB2D0385A34C425CEE77194A1313064001D5C93B40D28343D5"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/availability/ApplicationAvailabilityAutoConfiguration__BeanDefinitions.class",
+          "size": 3337,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "307D4A4F4DE6EA64D9B3FFC33DDAB46D5BE1BF180B3FC1B46A308AEA046AA331"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/context/ConfigurationPropertiesAutoConfiguration__BeanDefinitions.class",
+          "size": 1386,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "037F401D4CFEB8C95684AC2BA3E926B199E30EC5CCEE401A837A22CA541A155F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/context/LifecycleAutoConfiguration__BeanDefinitions.class",
+          "size": 3554,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "8FF79C4CD4C284FEA9D4ED1CAE61F5C704D5F1697E52F9897239F88AE3319067"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/context/LifecycleProperties__BeanDefinitions.class",
+          "size": 1302,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "309B2305EB4DE7BC5B1C86489FC4B01C4A7620FBFBD479ADCE95FC6C53634B86"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/context/PropertyPlaceholderAutoConfiguration__BeanDefinitions.class",
+          "size": 2578,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "EE603881D740A434AD6337423DBA25EF8181F8E1738AEDAF2202273B9DC00A22"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/dao/PersistenceExceptionTranslationAutoConfiguration__BeanDefinitions.class",
+          "size": 3303,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "90A5404AF691A4BDDEE60A11DA5649D732820B61345D44F095CCF4385A6352BC"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/data/redis/RedisAutoConfiguration__BeanDefinitions.class",
+          "size": 3634,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "46AC0252C192DD8759F905E984E84FBA42F5A613F1A26560F60E8FCF7555D09A"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/data/redis/RedisProperties__BeanDefinitions.class",
+          "size": 1292,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "724000834D586866F675FB8A83F591E6F301696F031EDCE38DE107F32B8E0AC7"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/data/redis/RedisReactiveAutoConfiguration__BeanDefinitions.class",
+          "size": 4952,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "CD32C9F56F22CA0E63C4E3B8E8ECAFC87CA876C0EAFAA8FF40E9AFCA280D4ADA"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/data/redis/RedisRepositoriesAutoConfiguration__BeanDefinitions.class",
+          "size": 1368,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "E1E985535319AFE69646ACE302292738507D78EEA9C22339BB4900CB1AC78898"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/data/web/SpringDataWebAutoConfiguration__BeanDefinitions.class",
+          "size": 6181,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "A2C0710E42E33A14B13939EB1A3B10850A7BC286E7E8813718AF80A10A4CD5C6"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/data/web/SpringDataWebProperties__BeanDefinitions.class",
+          "size": 1320,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "D7E7ADE9F728AF4503FD9833C151FC65CFD7EB0CE3E2722B7A27E4A654AE2F7F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/gson/GsonAutoConfiguration__BeanDefinitions.class",
+          "size": 5166,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "F55E1C94A4A8A08CC97217B9CC33AED5B1B61AE3CFF3B9987ACFDAE833EDF860"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/gson/GsonProperties__BeanDefinitions.class",
+          "size": 1276,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "71961541DF41B426BAD021BB5B8E4F4144B1B1B2943F1308FF86036E6F97414B"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/http/GsonHttpMessageConvertersConfiguration__BeanDefinitions.class",
+          "size": 1372,
+          "modified_at": "2026-08-21T05:36:04.311515Z",
+          "sha256": "23477BCBD4595DAE93237FF875652C925299986082CE0A38B55640747DF90AFA"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/http/HttpMessageConvertersAutoConfiguration__BeanDefinitions$StringHttpMessageConverterConfiguration.class",
+          "size": 3969,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "67AE2EC2084150BC13EC91228A4CF4EF88930D1C7487F27BEC7A21B511E7CF9D"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/http/HttpMessageConvertersAutoConfiguration__BeanDefinitions.class",
+          "size": 3793,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "38FA7EE0162163EC932E886BDDD9B94A45332FEF4D294A2CA6BDB1E72FB8E7D6"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/http/JacksonHttpMessageConvertersConfiguration__BeanDefinitions$MappingJackson2HttpMessageConverterConfiguration.class",
+          "size": 4126,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "76A0CEB0689F2FDD90CCC72D54FE0471ABA4BDC31A680B4015DAB8D36BBB9FD7"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/http/JacksonHttpMessageConvertersConfiguration__BeanDefinitions.class",
+          "size": 1624,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "CF15F72632C5B68B5FDEA821F174BB11851A0E203E731B965FBC138593F44ACC"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/http/client/HttpClientAutoConfiguration__BeanDefinitions.class",
+          "size": 5033,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "7558777A58C3BFB6D83AFBE41FE0356CAE81179DA7C9190E08B1674047270339"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/http/client/HttpClientProperties__BeanDefinitions.class",
+          "size": 1314,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "7B5B7823AFD54C278A987FB1FFF1AD33E6C367DB98C4BDAEA705379BC4A5B2ED"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/info/ProjectInfoAutoConfiguration__BeanDefinitions.class",
+          "size": 2721,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "2BBCDA70A71EC810BA3926CB3E12EA7387587057022E4578A1B9834A582BD640"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/info/ProjectInfoProperties__BeanDefinitions.class",
+          "size": 1304,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "FEEE81D74714BB6372371BFDD3C3A9715B55BE66BC23F7F54976358F951436CC"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jackson/JacksonAutoConfiguration__BeanDefinitions$Jackson2ObjectMapperBuilderCustomizerConfiguration.class",
+          "size": 4677,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "3482C14961A85A5612434A44CB71ED490CBAE7142C37DBA45DFB10976033BB2E"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jackson/JacksonAutoConfiguration__BeanDefinitions$JacksonMixinConfiguration.class",
+          "size": 3879,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "D4E0D02D2ADFE6914613535FC1820425E7C74313C741531D1868C13A4DAC4044"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jackson/JacksonAutoConfiguration__BeanDefinitions$JacksonObjectMapperBuilderConfiguration.class",
+          "size": 4033,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "BFCB0CF922D7F04C6D9EBBF2F6ED9F5D5163123A09B59B43D24A278940CF092A"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jackson/JacksonAutoConfiguration__BeanDefinitions$JacksonObjectMapperConfiguration.class",
+          "size": 3858,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "373BE90CEEF4FCFFF9F62D96C0E5C27F6AB555BE49E6393A030115259D764C3D"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jackson/JacksonAutoConfiguration__BeanDefinitions$ParameterNamesModuleConfiguration.class",
+          "size": 3563,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "D413827149C0C7022C5DA5E00C8709A2084D2B008C03922E5C06E9DAEF525978"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jackson/JacksonAutoConfiguration__BeanDefinitions.class",
+          "size": 4094,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "E9040108B6744FBDBA453A6323EE5B58BA6D849539119E4AA0335D9F45AB8BFB"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jackson/JacksonProperties__BeanDefinitions.class",
+          "size": 1294,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "8A013AC5D9A76CECDA4696D940665852D3D81E90FA8A2568EE751B39663D3F1D"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceAutoConfiguration__BeanDefinitions$PooledDataSourceConfiguration.class",
+          "size": 3937,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "43DBEB79997377A27FAC52F8A797E0AF4FDAC8BA3A98DCFF6841B2DDD949A033"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceAutoConfiguration__BeanDefinitions.class",
+          "size": 1516,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "25B6E4FD5D3C1A3983FDA2D14362576083B823A1C91513F4DB3DF7CAA020123F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration__BeanDefinitions$Hikari.class",
+          "size": 5165,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "E76CB2CC754A2AA83A6BC341DA3CD81674A752FE870C66871D7EAFEBBE44AD43"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration__BeanDefinitions.class",
+          "size": 546,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "3E11AA7ECE0D94C140B11913C8F7D745F40F227164C82BB80FF80F949A74CE84"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceJmxConfiguration__BeanDefinitions$Hikari.class",
+          "size": 2915,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "4E87945F16351D41C73AD4115605D52C3E7A5CD986FCE8042DF759F418A6D8F1"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceJmxConfiguration__BeanDefinitions.class",
+          "size": 1465,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "D72632B59502485DD88D86CB5C0FB30FCD6E32C2FA12C68599C92C8C85CEB091"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceProperties__BeanDefinitions.class",
+          "size": 1300,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "428A1E037AA0DD6322AD025598FEFEEBF1B1DBB4DB1C9E01FF8C9D55E5F13A58"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceTransactionManagerAutoConfiguration__BeanDefinitions$JdbcTransactionManagerConfiguration.class",
+          "size": 4153,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "C483CC22E9635668018A3AA372B27D7DEDFBAF5E273E96EE08E4D8AA44BF4E04"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/DataSourceTransactionManagerAutoConfiguration__BeanDefinitions.class",
+          "size": 1618,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "E3349D80581C95A48884B43F8FB445D72538F4DFA4A801CDA9AA41B8D326F77E"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/JdbcClientAutoConfiguration__BeanDefinitions.class",
+          "size": 3587,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "0EB485315225767234CD49F63DB6E380E73C04947598EFA66BC2CB708ED6ED31"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/JdbcProperties__BeanDefinitions.class",
+          "size": 1276,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "BD4E9A5C31408C6F617B446DAE55576925F5776473C4FB58F71C6BF7FD6CF908"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/JdbcTemplateAutoConfiguration__BeanDefinitions.class",
+          "size": 1336,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "D4870DDA79EE52A6B44CD38304ECD3B737E2DFECDD9AD80849253CB9C6C455A4"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/JdbcTemplateConfiguration__BeanDefinitions.class",
+          "size": 3649,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "624AF4EF832A03DDB5D3BFD02674FFBD77796E229827F49D44636B186CE0D3AC"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/NamedParameterJdbcTemplateConfiguration__BeanDefinitions.class",
+          "size": 3780,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "AF0D6CF444B446369E63DE7B6FFE8C8ACBB8B80E89BF8551EC141DA5C7197891"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration__BeanDefinitions$HikariPoolDataSourceMetadataProviderConfiguration.class",
+          "size": 3893,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "C5ACC660CBB25F1BA3089E472822E056AE4A78ABC56809F24D9051681DCD1FD2"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration__BeanDefinitions.class",
+          "size": 1668,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "12E46C2EC4DC0DCA404A0A83EE08419AE1210757DA764FC42F8F5DCE8B5E9C71"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/mail/MailProperties__BeanDefinitions.class",
+          "size": 1276,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "0E2758878174D837534CB40439424D412757851804E7657B72F3367CB160C5E3"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/mail/MailSenderAutoConfiguration__BeanDefinitions.class",
+          "size": 1328,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "44B82E39DD170981FB4797EDF0D7426F22418701B9A4D4646E65F08D951310EE"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/mail/MailSenderPropertiesConfiguration__BeanDefinitions.class",
+          "size": 3608,
+          "modified_at": "2026-08-21T05:36:04.315515Z",
+          "sha256": "5EA5734EB1A4FCD70F965705ACBD521F8943764408195DD6D9A9B751EBF3D935"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/netty/NettyAutoConfiguration__BeanDefinitions.class",
+          "size": 3718,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "084DE7A65D9855AC9D17E9DE40C5234B0F841B60D0CBAAE6225C45B7FEF849BB"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/netty/NettyProperties__BeanDefinitions.class",
+          "size": 1282,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "6BE59CB499D09835522780DF8CF5FFC6B53E21D406B8DD8A55CE8902438E676B"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/reactor/ReactorAutoConfiguration__BeanDefinitions.class",
+          "size": 3756,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "44DD32F2954F474A7C7BB15B79FE3169E8B8818ACB0B13A7744A857617A8B32D"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/reactor/ReactorProperties__BeanDefinitions.class",
+          "size": 1294,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "E0EF3B385AD82A42E3F356DE743A06C9428886A9F5FE7335A3A5DC2ADB6C25AC"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration__BeanDefinitions.class",
+          "size": 3854,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "631C38D39FCDA27848EB4E2398A4CECC081D588A02E21D6696841941D70F9437"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/sql/init/SqlInitializationAutoConfiguration__BeanDefinitions.class",
+          "size": 1364,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "6D651670D245726533D468FFEC7C86DCBCFB2D2C3DF753FC14A3E1F33CD1B0E3"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/sql/init/SqlInitializationProperties__BeanDefinitions.class",
+          "size": 1336,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "187DD98EF9F946ECDE9231B55EA6B033600C70C316441A8A4648A0D0DCF5269B"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/ssl/SslAutoConfiguration__BeanDefinitions.class",
+          "size": 6418,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "B22AA88C4E25BEE196CB0F3196A0C31A6455E553EABFADBEBBA66D96AC4D4E2C"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/ssl/SslProperties__BeanDefinitions.class",
+          "size": 1270,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "68751B017C9E97A8E426A8B7301C64AEB59D0240B48C67A7B7930E4B563C29D6"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskExecutionAutoConfiguration__BeanDefinitions.class",
+          "size": 1340,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "328926E011DEF8E8C6DD8F10B479BDE0507869B48B82BA96ED4930E8D7C584D5"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskExecutionProperties__BeanDefinitions.class",
+          "size": 1312,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "2A0F0C082A239322893CDF5BBE484DB3AD4ECE201EF7EF33AA8D950B3C62EA4F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskExecutorConfigurations__BeanDefinitions$SimpleAsyncTaskExecutorBuilderConfiguration.class",
+          "size": 5104,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "DBCC95304CC99463284AC5A558A405517CACAC491E21026929AD9A46189F3EDD"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskExecutorConfigurations__BeanDefinitions$TaskExecutorConfiguration.class",
+          "size": 3905,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "298D3E004FC47E9B392CF9C975B9833CC1BDAC22E575CD4E8137BEBC1C90A8AB"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskExecutorConfigurations__BeanDefinitions$ThreadPoolTaskExecutorBuilderConfiguration.class",
+          "size": 4154,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "46D204D726723D1C97B6AF48E3432F01229510907E7BEC726C2C639FE99BF981"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskExecutorConfigurations__BeanDefinitions.class",
+          "size": 977,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "C54D05F5379005E6B4F8D362919C65ED354EAE33598D65DD69F149099C067BE2"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskSchedulingAutoConfiguration__BeanDefinitions.class",
+          "size": 2528,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "EC266CCAB871FC841DFFFB330E4627C5379717BDA452A3042318D0E606D6799F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskSchedulingConfigurations__BeanDefinitions$SimpleAsyncTaskSchedulerBuilderConfiguration.class",
+          "size": 5074,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "F432526450D2419B0100A02F3A2D3529A08531C26D644DD075F90F90C09A851A"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskSchedulingConfigurations__BeanDefinitions$ThreadPoolTaskSchedulerBuilderConfiguration.class",
+          "size": 4116,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "C8F5F11D7B2E53079E4DCF32D694ABB4C63D720D919E78CE1C31A88815FA76EE"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskSchedulingConfigurations__BeanDefinitions.class",
+          "size": 832,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "3E61280B7EA1FD0C8C70B75F54B62B968B22EEF543FC9C74C52B0FE856E711DB"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/task/TaskSchedulingProperties__BeanDefinitions.class",
+          "size": 1316,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "DC042AA24B8B8287865E2F2C818671C0EA59540CEB7FB8B7E44A2DC3AB7BD9A7"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/transaction/TransactionAutoConfiguration__BeanDefinitions$TransactionTemplateConfiguration.class",
+          "size": 3909,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "FB9306D1DB2EC6C438DBC9C4330D948C1C3D27C55696082A5839D48135192AB5"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/transaction/TransactionAutoConfiguration__BeanDefinitions.class",
+          "size": 1548,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "85F4B3A10EDCCF6A6D3DB9E82331A0B7FF812523A8C1AD032B39D98FD39F7BB8"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/transaction/TransactionManagerCustomizationAutoConfiguration__BeanDefinitions.class",
+          "size": 4907,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "85B64E242F12E8F8F4102B8A0454C68A4DA2473339523B11B3658AC909E69438"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/transaction/TransactionProperties__BeanDefinitions.class",
+          "size": 1318,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "1F0EE427D9D70C56BC6C059DF3D39A9AA775FCD9620A5A56ABC8D24F327BF366"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/validation/ValidationAutoConfiguration__BeanDefinitions.class",
+          "size": 4542,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "A96FA07764594637508B582493512DC7AC0B4356EBC4D43405EFEE4FCE4D72F7"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/ServerProperties__BeanDefinitions.class",
+          "size": 1282,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "A2FA384F3247DA86B2B4D17A58B8D514F1F475B97CF4175E52AA55E31E789B05"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/WebProperties__BeanDefinitions.class",
+          "size": 1270,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "476980ECC3FD5DA73C53A7C9DB44BD9CCA7C6481D04B81FB43919607B9A9E31B"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/client/RestClientAutoConfiguration__BeanDefinitions.class",
+          "size": 7002,
+          "modified_at": "2026-08-21T05:36:04.319515Z",
+          "sha256": "3318745D2AFAA40BF1776731D5DBC364258CA7FAD94C858BC9A42B7DC00340CD"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/client/RestTemplateAutoConfiguration__BeanDefinitions.class",
+          "size": 4905,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "E8AACC0F1E162E5F19A3B62A52C5F654DB27A6F65D03E1FA3625E481D6BC0574"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/embedded/EmbeddedWebServerFactoryCustomizerAutoConfiguration__BeanDefinitions$TomcatWebServerFactoryCustomizerConfiguration.class",
+          "size": 4374,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "E5C57D565084448F30D64AAE8C7240650EB8173C2980556FF264C340128B1BC9"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/embedded/EmbeddedWebServerFactoryCustomizerAutoConfiguration__BeanDefinitions.class",
+          "size": 1692,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "59C710DF97BDB75A53B665AB1C85E178842CC785721DA6C64C2F604FCB3845D7"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/DispatcherServletAutoConfiguration__BeanDefinitions$DispatcherServletConfiguration.class",
+          "size": 3905,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "A793D6B27C9651D750678485436BB05B3BAC2E8F3B0EDC9FD6E48F8844D69D37"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/DispatcherServletAutoConfiguration__BeanDefinitions$DispatcherServletRegistrationConfiguration.class",
+          "size": 4393,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "3210F8A83B1286EFAE1955740077CFA10422346597BBEE2DEB721B85B33823CF"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/DispatcherServletAutoConfiguration__BeanDefinitions.class",
+          "size": 1780,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "DE099EAE4D23C9CE4F021734D3B1E8423850E9A7E64BF7786F30B21DBEC26E80"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/HttpEncodingAutoConfiguration__BeanDefinitions.class",
+          "size": 5502,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "37DF8DBE3A4D6525C31533521570BD4F2A95714FC3E2E8E244AA84A42C2ED6B2"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/MultipartAutoConfiguration__BeanDefinitions.class",
+          "size": 5179,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "6B35B58B804DC5E4393BF8F4298E2DB3BE3BFDD88F64EC88B599716D889AB5B0"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/MultipartProperties__BeanDefinitions.class",
+          "size": 1310,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "8A53E39AE7E0E76D298B434205437F1914CE90EE136F62FC3ABEB034A2200C68"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/ServletWebServerFactoryAutoConfiguration__BeanDefinitions.class",
+          "size": 5161,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "A947E4B9CE464F7EFDE672CF3073C7DC51288FF063E3F1855FB6821ACD4C0602"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/ServletWebServerFactoryConfiguration__BeanDefinitions$EmbeddedTomcat.class",
+          "size": 4077,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "AFCD787A816A41AF1A4623241147D3E7AAA6912F9B04EC0A0CD518F7976341FB"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/ServletWebServerFactoryConfiguration__BeanDefinitions.class",
+          "size": 615,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "2911E4A39F89682B645E13A83F1B9BCC9747C86A7C1A520446DAFAD066FDF3ED"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration_EnableWebMvcConfiguration__Autowiring.class",
+          "size": 2555,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "C94EE2A998A24E4A356A1EDA97F6A5513F06654F048AC377031896BAA49023DA"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration__BeanDefinitions$EnableWebMvcConfiguration.class",
+          "size": 29258,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "A9D47E4C8747E2E6383FE4F69328D42A3D05424D6C94A614B06D7F42FACC8FC6"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration__BeanDefinitions$ResourceChainCustomizerConfiguration.class",
+          "size": 4292,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "610E30B7E00BFEFCA40716E7160B1C3509B8A5C321173B32920AD258DACC3622"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration__BeanDefinitions$WebMvcAutoConfigurationAdapter.class",
+          "size": 6924,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "9FADD9DDC701109DC2E266F347D06FF0E4CBB947E14D7EA53BD041F13D444F55"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration__BeanDefinitions.class",
+          "size": 3774,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "1979F81137CD5D8764DF57E80FBC8A2723FF835EDD4B8A6073C3C19AA7833E98"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/WebMvcProperties__BeanDefinitions.class",
+          "size": 1298,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "AC7EC0C93E8767650BF1295BDAC9EC1195CFC1100160BC58B0D3A46FBF5004C0"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/error/ErrorMvcAutoConfiguration__BeanDefinitions$DefaultErrorViewResolverConfiguration.class",
+          "size": 5114,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "682B5F73AB7DBC873B5D65A543261B0627654C2C930EF97704F23D00F440795C"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/error/ErrorMvcAutoConfiguration__BeanDefinitions$WhitelabelErrorViewConfiguration.class",
+          "size": 4272,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "AF4B638592EA702E617930383C8FBBE0A7B776CF0BB75C0B2761DADEB07A20D1"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/web/servlet/error/ErrorMvcAutoConfiguration__BeanDefinitions.class",
+          "size": 8163,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "199DAC78C81B40DF80C3F20DDF18E64CDF724396AEE2D62932E906AF9290A735"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/websocket/servlet/WebSocketMessagingAutoConfiguration__BeanDefinitions.class",
+          "size": 1386,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "9810AB934AECA30D3AE4BF87E0F758759064D9ECD923EED92BD0E8A077F24A9E"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/websocket/servlet/WebSocketServletAutoConfiguration__BeanDefinitions$TomcatWebSocketConfiguration.class",
+          "size": 3854,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "79AAA6B226DE8F0C31AAB1225DBC880F27CA39F1C98A480EA8A32FAEA1CD50CB"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/autoconfigure/websocket/servlet/WebSocketServletAutoConfiguration__BeanDefinitions.class",
+          "size": 1583,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "636E37A5AEE6D65434DB0F2C931683286406D6759A611998B204597B0C84D3C5"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/context/properties/BoundConfigurationProperties__BeanDefinitions.class",
+          "size": 1429,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "9B8D86B3C759C1BE20B1D30FE050108A15A23B39410096C56C8D7BAC157ACAC8"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/context/properties/ConfigurationPropertiesBinder__BeanDefinitions$ConfigurationPropertiesBinderFactory.class",
+          "size": 1764,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "DC382BCAD0FD4E738C17784F212736621002AC457960EF1BE4175E4AF031F89F"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/context/properties/ConfigurationPropertiesBinder__BeanDefinitions.class",
+          "size": 624,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "14BCED162C38F8BB2CC4794BB5952B6D97253BA158F5686FC68C8532DC09522D"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/context/properties/ConfigurationPropertiesBindingPostProcessor__BeanDefinitions.class",
+          "size": 1489,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "22590E9B296CCF020097C7AFEF53D78BDE4AFA7A178DA6BE488A0649C460969B"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/jackson/JsonMixinModuleEntries__BeanDefinitions.class",
+          "size": 2058,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "1F74FA18A9F0A222EF67C67E95B3CACA83D6879E689FABC4AF40C4EF04500903"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/sql/init/dependency/DatabaseInitializationDependencyConfigurer__BeanDefinitions$DependsOnDatabaseInitializationPostProcessor.class",
+          "size": 1767,
+          "modified_at": "2026-08-21T05:36:04.323515Z",
+          "sha256": "DA14D89C9838AE2EF70B20C2B417993166F2E2B266EFDBF9A163BD93CB801747"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/sql/init/dependency/DatabaseInitializationDependencyConfigurer__BeanDefinitions.class",
+          "size": 681,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "B88C3BC116E183C660649946570B9BCDEC673DE97C4299710B44F6B2A44BA0BE"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter__BeanDefinitions.class",
+          "size": 3239,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "6013AEDB3BA0AF28DA5176AF1E270449052D855B62B9EC9844A73A312E5B63C2"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/web/server/ErrorPageRegistrarBeanPostProcessor__BeanDefinitions.class",
+          "size": 1385,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "1385A3CDF6056F0B680BE3C39FD78BE3920CEA6DE207428720793060A7A99DB0"
+        },
+        {
+          "path": "target/classes/org/springframework/boot/web/server/WebServerFactoryCustomizerBeanPostProcessor__BeanDefinitions.class",
+          "size": 1417,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "2F72CB6AEE58B6C51F4A3CD7591F21ACF44A4A0CD29CBA6D22DC613A31899AD5"
+        },
+        {
+          "path": "target/classes/org/springframework/context/event/DefaultEventListenerFactory__BeanDefinitions.class",
+          "size": 1406,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "680AC71287E33A94FB0F5D76BFC4BD69E18117E80EB7D07AF934CB9D990E3261"
+        },
+        {
+          "path": "target/classes/org/springframework/context/event/EventListenerMethodProcessor__BeanDefinitions.class",
+          "size": 1411,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "DF6B34F21BB6AB832788A44B67A36BC19CED40B77C66477C8530C0482A3B8ED7"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/RedisKeyValueAdapter__BeanDefinitions.class",
+          "size": 3931,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "0AAEE14D866972D77F8FEFAF658B9EE2E364CA081DC860FEB43620146531BC42"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/RedisKeyValueTemplate__BeanDefinitions.class",
+          "size": 3208,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "6F120000C589C11CA5332ECC6B5B6BA42389563BA2181329F884BDB81C35A76E"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/convert/KeyspaceConfiguration__BeanDefinitions.class",
+          "size": 1406,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "E56B79CD094F59C7252A2828385BD9C0FC7EBDBC5E5679694E3BACCD79E0C821"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/convert/MappingConfiguration__BeanDefinitions.class",
+          "size": 3304,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "82586AEC3ED740D4C0671D8C18997ADDB3A8C023D3E505A17524CED341E9C739"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/convert/MappingRedisConverter__BeanDefinitions.class",
+          "size": 3391,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "3AEC4B2C32CD827A74A02FF726CEE832E9386F7A808308008E2B54F946F2EB60"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/convert/RedisCustomConversions__BeanDefinitions.class",
+          "size": 1308,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "0B9A07AC92E4CB99EDDB2FB89393E3F0184C7C49748007EDE1EB779327E39404"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/convert/ReferenceResolverImpl__BeanDefinitions.class",
+          "size": 3028,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "0DB4A84E9B8E0E3F43D9FEE50E8C0633DD3B98BECC80FEDEAB82121D3DBFCA83"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/index/IndexConfiguration__BeanDefinitions.class",
+          "size": 1390,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "3A0FD1FFD70DC6A2F367EF77C6995CBE3A102743C41031123FAB50264566F9CB"
+        },
+        {
+          "path": "target/classes/org/springframework/data/redis/core/mapping/RedisMappingContext__BeanDefinitions.class",
+          "size": 3058,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "24084978DC8380245B6114603E8F5EDBB7D5D78670EDC8D28236887B9E6C1572"
+        },
+        {
+          "path": "target/classes/org/springframework/data/web/config/ProjectingArgumentResolverRegistrar__BeanDefinitions.class",
+          "size": 3445,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "792713E2937365ADE6AB47E4B8A9D875457741228A4465E11647E50C4A3BF639"
+        },
+        {
+          "path": "target/classes/org/springframework/data/web/config/SpringDataJacksonConfiguration__Autowiring.class",
+          "size": 1152,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "FB64FB6DC2B387E09885821F706AEA0240B5C35FEA15145E971ED87DCEF6C2EF"
+        },
+        {
+          "path": "target/classes/org/springframework/data/web/config/SpringDataJacksonConfiguration__BeanDefinitions.class",
+          "size": 4891,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "C130DE205C996BC08594AB27EF031388F2F62CF6D0142B26AF6989DCC3E3097A"
+        },
+        {
+          "path": "target/classes/org/springframework/data/web/config/SpringDataWebConfiguration__BeanDefinitions.class",
+          "size": 6056,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "8AFC66B46B2E2C5BA7D381B63373EC9A8E6567474EB270DCD6B6D9415A752907"
+        },
+        {
+          "path": "target/classes/org/springframework/scheduling/annotation/SchedulingConfiguration__BeanDefinitions.class",
+          "size": 3424,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "B39B1CFF18D99DD5357FCD00EF2C1BF1E229A7F053112483B74A3132F2C00348"
+        },
+        {
+          "path": "target/classes/org/springframework/transaction/annotation/AbstractTransactionManagementConfiguration__BeanDefinitions.class",
+          "size": 2559,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "80B26A9550200CE2BD0BE761B8714F5D469FAEEB71A1473469280CA661082EAA"
+        },
+        {
+          "path": "target/classes/org/springframework/transaction/annotation/ProxyTransactionManagementConfiguration__Autowiring.class",
+          "size": 2333,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "349066BD5A60575C913B680E88CAD444A59D81B54279B181F37B30CDD2804DB8"
+        },
+        {
+          "path": "target/classes/org/springframework/transaction/annotation/ProxyTransactionManagementConfiguration__BeanDefinitions.class",
+          "size": 6843,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "2BD4C46BCCF0DE1EE9BDC350B8C016F1E6C2A09D212F48204530294601365EC6"
+        },
+        {
+          "path": "target/classes/org/springframework/web/socket/config/annotation/DelegatingWebSocketConfiguration__Autowiring.class",
+          "size": 2308,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "994B5F53C1300D4A18FD0578836D0924F7B5FF89F870CBADF51F8CBBEEBB1BEC"
+        },
+        {
+          "path": "target/classes/org/springframework/web/socket/config/annotation/DelegatingWebSocketConfiguration__BeanDefinitions.class",
+          "size": 5797,
+          "modified_at": "2026-08-21T05:36:04.327515Z",
+          "sha256": "A0DC658D2961E2CB14EBE6307706D7D7B6C2AEAB647927A13D4F6FF2B6F2F5C7"
+        },
+        {
+          "path": "target/classes/prolems/1.txt",
+          "size": 50511,
+          "modified_at": "2026-08-08T10:00:06.455938Z",
+          "sha256": "3E6E93E87083683CA01BB11F8F342CF239A237172B483ED3A4ACE36ACAD1A101"
+        },
+        {
+          "path": "target/classes/prolems/2.txt",
+          "size": 67150,
+          "modified_at": "2026-08-08T10:00:06.455938Z",
+          "sha256": "C48E397EE6AFD74E7BD75F4EF2D2C62DC377FA074EB9AB87412A99FDEBAD5048"
+        },
+        {
+          "path": "target/classes/redisson-local.yml",
+          "size": 310,
+          "modified_at": "2026-08-08T10:00:06.455938Z",
+          "sha256": "1B7136A6E0C10EF675F06539A2C6652C691B50864AE7A56D902655FF0A4EBC49"
+        },
+        {
+          "path": "target/classes/redisson-prod.yml",
+          "size": 306,
+          "modified_at": "2026-08-08T10:00:06.455938Z",
+          "sha256": "5790F696FEBFE3F39EEEEB4052D00DC1833FDB22695DBA7DF8DF98C928AFE506"
+        },
+        {
+          "path": "target/classes/rooms_all.json",
+          "size": 1086494,
+          "modified_at": "2026-08-08T10:00:06.459938Z",
+          "sha256": "C6A59C89C8D089F0F8DD182AECACC44954F1300A26BDE8DBBAC551FB7A9F272D"
+        },
+        {
+          "path": "target/generated-sources/protobuf/grpc-java/dianfei/DianFeiServiceGrpc.java",
+          "size": 11417,
+          "modified_at": "2026-09-21T09:58:44.868762Z",
+          "sha256": "79B9A73679334FAA504C041386FC3E3977FF730ED67D6B7E70A03271D9125AC0"
+        },
+        {
+          "path": "target/generated-sources/protobuf/java/dianfei/Dianfei.java",
+          "size": 60747,
+          "modified_at": "2026-09-21T09:58:44.796762Z",
+          "sha256": "3201557CEF15CF4C341A3A9CD87625DD6E8FB37F19AD82754ECFC647C1D6E288"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback.contrib/logback-jackson/0.1.5/index.json",
+          "size": 28,
+          "modified_at": "2026-08-08T10:00:06.247937Z",
+          "sha256": "29D6ACC90B1D6305D5604F9010859876941902EFFDA17D352175CB50C5DC7F3D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback.contrib/logback-jackson/0.1.5/reflect-config.json",
+          "size": 297,
+          "modified_at": "2026-08-08T10:00:06.247937Z",
+          "sha256": "2BD64E2826BD823FA6D3728C16019EDD6FBE3A5F4135467BC3ADB63AFB62C91B"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback.contrib/logback-jackson/index.json",
+          "size": 166,
+          "modified_at": "2026-08-08T10:00:06.247937Z",
+          "sha256": "AEEB88CBBB5DE41AFBA3978CDACE80E750D6023C9AC270C22B94842E5AFDAE82"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback.contrib/logback-json-classic/0.1.5/index.json",
+          "size": 28,
+          "modified_at": "2026-08-08T10:00:06.247937Z",
+          "sha256": "29D6ACC90B1D6305D5604F9010859876941902EFFDA17D352175CB50C5DC7F3D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback.contrib/logback-json-classic/0.1.5/reflect-config.json",
+          "size": 2309,
+          "modified_at": "2026-08-08T10:00:06.247937Z",
+          "sha256": "1492A0756C105698919836EC81D225B29BFA048FF4990E8A3461D3B7877F32E9"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback.contrib/logback-json-classic/index.json",
+          "size": 171,
+          "modified_at": "2026-08-08T10:00:06.247937Z",
+          "sha256": "CD46FA1E4A12AF56309FF5E0F6E3AE757957D0DCDB8C128F9B9EAC45AFFDF408"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/1.2.11/index.json",
+          "size": 28,
+          "modified_at": "2026-08-08T10:00:06.191937Z",
+          "sha256": "29D6ACC90B1D6305D5604F9010859876941902EFFDA17D352175CB50C5DC7F3D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/1.2.11/reflect-config.json",
+          "size": 8431,
+          "modified_at": "2026-08-08T10:00:06.191937Z",
+          "sha256": "1C8D5A227DBD5EE408A9692C4CD0AE4691B8BC086159DD963B0D07930C997C1F"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/1.4.1/index.json",
+          "size": 54,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "555B89094B2CBC9248655CC48A35AA43995B9FCA44BE090FD4EBEBB5ABB22012"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/1.4.1/reflect-config.json",
+          "size": 20113,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "0603F8375F97745ED95491FC353F25326F82C186BDB9AF10A15BA99AA3A74DFD"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/1.4.1/resource-config.json",
+          "size": 631,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "DADD773841327D21BB669CB3604F8FB3FD94DF1DCC4C023E45F66BE0C1EEBAA3"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/1.4.9/index.json",
+          "size": 54,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "555B89094B2CBC9248655CC48A35AA43995B9FCA44BE090FD4EBEBB5ABB22012"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/1.4.9/reflect-config.json",
+          "size": 20912,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "3F1D77D22008EBD36D210ED650B1825119523339E4FA7A6F816B6DC51A9DCD3D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/1.4.9/resource-config.json",
+          "size": 423,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "6EFEA9FD5DCCEFE12561216B40B71E7C5677582CE5BCC3AE5C8CEE9ABE4EE519"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/ch.qos.logback/logback-classic/index.json",
+          "size": 503,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "5826D3AAFD13CA66405941067D1E1E10EC39F30057D742D78A99217741E47659"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.ecwid.consul/consul-api/1.4.5/index.json",
+          "size": 54,
+          "modified_at": "2026-08-08T10:00:06.223938Z",
+          "sha256": "555B89094B2CBC9248655CC48A35AA43995B9FCA44BE090FD4EBEBB5ABB22012"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.ecwid.consul/consul-api/1.4.5/reflect-config.json",
+          "size": 25146,
+          "modified_at": "2026-08-08T10:00:06.223938Z",
+          "sha256": "7684B3925CEA6881B1A401CE1FE2CA3497F201F0CF381202DFFE4CFF66BB7212"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.ecwid.consul/consul-api/1.4.5/resource-config.json",
+          "size": 448,
+          "modified_at": "2026-08-08T10:00:06.223938Z",
+          "sha256": "60E2790424DC6144F0CE6479B8F22E624E906C7E82076FB77BE4DE41A2CEA6EE"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.ecwid.consul/consul-api/index.json",
+          "size": 155,
+          "modified_at": "2026-08-08T10:00:06.223938Z",
+          "sha256": "D6B0935C21FDF11DC11890C5CCDE8BD88E497FBA3F1771ED3644EDDEF2389580"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.fasterxml.jackson.core/jackson-databind/2.15.2/index.json",
+          "size": 28,
+          "modified_at": "2026-08-08T10:00:06.199938Z",
+          "sha256": "29D6ACC90B1D6305D5604F9010859876941902EFFDA17D352175CB50C5DC7F3D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.fasterxml.jackson.core/jackson-databind/2.15.2/reflect-config.json",
+          "size": 4257,
+          "modified_at": "2026-08-08T10:00:06.199938Z",
+          "sha256": "FDE8590E80E9D1BC2B39A3158F23D76992F065CF526A92FB3E93DB34D543D39C"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.fasterxml.jackson.core/jackson-databind/index.json",
+          "size": 189,
+          "modified_at": "2026-08-08T10:00:06.199938Z",
+          "sha256": "0C0A5B56C089E041CEF54FA66D8F077CF39B45304C377CD50E4A1998938B8FF9"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.ben-manes.caffeine/caffeine/2.9.3/index.json",
+          "size": 28,
+          "modified_at": "2026-08-08T10:00:06.243937Z",
+          "sha256": "29D6ACC90B1D6305D5604F9010859876941902EFFDA17D352175CB50C5DC7F3D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.ben-manes.caffeine/caffeine/2.9.3/reflect-config.json",
+          "size": 8861,
+          "modified_at": "2026-08-08T10:00:06.243937Z",
+          "sha256": "986773F9669B40CC7D4A05DF2D6D232419F9B94218B5CEBFB64F7F8E3E8599A7"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.ben-manes.caffeine/caffeine/3.1.2/index.json",
+          "size": 28,
+          "modified_at": "2026-08-08T10:00:06.243937Z",
+          "sha256": "29D6ACC90B1D6305D5604F9010859876941902EFFDA17D352175CB50C5DC7F3D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.ben-manes.caffeine/caffeine/3.1.2/reflect-config.json",
+          "size": 14606,
+          "modified_at": "2026-08-08T10:00:06.227937Z",
+          "sha256": "24AABBA4F29E0611CDC7C045F448A5B7F99088D43390E12B73DB3029F813655E"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.ben-manes.caffeine/caffeine/index.json",
+          "size": 309,
+          "modified_at": "2026-08-08T10:00:06.243937Z",
+          "sha256": "C61B80F5D5C3F4583776DEF58BA516517229D4C33FF0D86034C22CECDABF1A1F"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.luben/zstd-jni/1.5.2-5/index.json",
+          "size": 75,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "F37C70729C3D9DC9FE882F35F3D5D25110BAA2B073C3D1F21270F94191B5D39B"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.luben/zstd-jni/1.5.2-5/jni-config.json",
+          "size": 2482,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "5C84C85D1A0AB2CC73808F3EA77624F4600BC5BE4DAC02F5DF39F8FB149BB69B"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.luben/zstd-jni/1.5.2-5/reflect-config.json",
+          "size": 751,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "AF31CAC7700195E73C5FB11D87FAFF3E4DAA49CE1BBAE109668B8F1A8F5DCBD3"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.luben/zstd-jni/1.5.2-5/resource-config.json",
+          "size": 252,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "413BD21ECBC0ECA7C504DAEDEECC4694625E118041674DE96E899D3631AA1683"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.github.luben/zstd-jni/index.json",
+          "size": 157,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "4BFF565C3825F4B06C22B63B7702D5E2B7A7CC8B857E80A044DA7C6D5ADFBBAC"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.google.protobuf/protobuf-java-util/3.21.12/index.json",
+          "size": 28,
+          "modified_at": "2026-08-08T10:00:06.215938Z",
+          "sha256": "29D6ACC90B1D6305D5604F9010859876941902EFFDA17D352175CB50C5DC7F3D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.google.protobuf/protobuf-java-util/3.21.12/reflect-config.json",
+          "size": 24717,
+          "modified_at": "2026-08-08T10:00:06.215938Z",
+          "sha256": "01086904788AFA5C10F200F07FCA593D0E4296E3D0D6599B62E28324A096574D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.google.protobuf/protobuf-java-util/index.json",
+          "size": 170,
+          "modified_at": "2026-08-08T10:00:06.215938Z",
+          "sha256": "8EB28FF7DC558BC8967182372F7C5ACD7E94BCC699AD37D99DBF269AD43CEFE7"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java-extended-validation/19.1/index.json",
+          "size": 77,
+          "modified_at": "2026-08-08T10:00:06.179938Z",
+          "sha256": "E0AAC8C0DED29CEC4A85550194A9CA9E6E7DB23798B36C68D38536918BCF3305"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java-extended-validation/19.1/proxy-config.json",
+          "size": 265,
+          "modified_at": "2026-08-08T10:00:06.175937Z",
+          "sha256": "186596C72F4423E335D6EDC01B4709FDE1996857CE0599C99956E2FFC7F2AD72"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java-extended-validation/19.1/reflect-config.json",
+          "size": 233,
+          "modified_at": "2026-08-08T10:00:06.179938Z",
+          "sha256": "F1D53BAE51AEF2E78C66FBFE02A1C0C2BC3E02CD1594041E332F4913851913D0"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java-extended-validation/19.1/resource-config.json",
+          "size": 88,
+          "modified_at": "2026-08-08T10:00:06.179938Z",
+          "sha256": "BB3F0889AEF470854B72F67AB18E4B70A7B7AE4C60CBD5B3AC5BBB5623ECC615"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java-extended-validation/index.json",
+          "size": 175,
+          "modified_at": "2026-08-08T10:00:06.175937Z",
+          "sha256": "DA7285A88729E15D0015D483684AF125024BD18354C3CDBD53F1A7967DE30B01"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java/19.2/index.json",
+          "size": 54,
+          "modified_at": "2026-08-08T10:00:06.175937Z",
+          "sha256": "555B89094B2CBC9248655CC48A35AA43995B9FCA44BE090FD4EBEBB5ABB22012"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java/19.2/reflect-config.json",
+          "size": 1588,
+          "modified_at": "2026-08-08T10:00:06.175937Z",
+          "sha256": "118D7D6BC5C6E3745CE6C92C06CEF70E478C353FF16821BB76AD5C6869FA7002"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java/19.2/resource-config.json",
+          "size": 234,
+          "modified_at": "2026-08-08T10:00:06.175937Z",
+          "sha256": "6A4FF28F7EAC51D937B845F983804C4BC139300DB0A9733E4A6661FA9BD9F66E"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.graphql-java/graphql-java/index.json",
+          "size": 155,
+          "modified_at": "2026-08-08T10:00:06.175937Z",
+          "sha256": "664BFA422DB755783FE46191BA5DA48C8DF589D99F6D002DE5A593EEA55F0F2B"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.h2database/h2/2.1.210/index.json",
+          "size": 54,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "555B89094B2CBC9248655CC48A35AA43995B9FCA44BE090FD4EBEBB5ABB22012"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.h2database/h2/2.1.210/reflect-config.json",
+          "size": 4305,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "3635F1328149AFEE41C42029B429486EEB47C8C368306739E13BE888E54F021B"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.h2database/h2/2.1.210/resource-config.json",
+          "size": 211,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "B5081EC490A1A8E5229CF72849E941C1041B90F361C1A6F3F600DEF701C0BEBC"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.h2database/h2/index.json",
+          "size": 149,
+          "modified_at": "2026-08-08T10:00:06.171937Z",
+          "sha256": "29952F3FE3FB57FF713B4BD50B3A63B323BF8EA12D9C1F2A4B23C945B1839958"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.hazelcast/hazelcast/5.2.1/index.json",
+          "size": 75,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "F37C70729C3D9DC9FE882F35F3D5D25110BAA2B073C3D1F21270F94191B5D39B"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.hazelcast/hazelcast/5.2.1/jni-config.json",
+          "size": 510,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "27491850023452DF7B935A5AF1F390C05B9D5E622AC86CA827E83C7434ABE6C5"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.hazelcast/hazelcast/5.2.1/reflect-config.json",
+          "size": 217666,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "DAB219FFDB9E48AF80E226BFC89C553C56135BAC3C0387E9D2EDA58D1426262D"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.hazelcast/hazelcast/5.2.1/resource-config.json",
+          "size": 3322,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "3E0A4DA4F49654DD95E7F9B816B5302B8868775A02993C69604325855EC7AFBF"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.hazelcast/hazelcast/index.json",
+          "size": 214,
+          "modified_at": "2026-08-08T10:00:06.195938Z",
+          "sha256": "DCB66D9763F3C5943523566FEE55E56817B27C76A519CE7B79F40E0AD4CB5546"
+        },
+        {
+          "path": "target/graalvm-reachability-metadata/2697b29f2a8daf44dddde1364f0b0ba2028ffccd/com.itextpdf/forms/8.0.3/index.json",
+          "size": 28,
+          "modified_at": "2026-08-08T10:00:06.211937Z",
+          "sha256": "29D6ACC90B1D6305D5604F9010859876941902EFFDA17D352175CB50C5DC7F3D"
+        }
+      ],
+      "hash_algorithm": "sha256",
+      "overall_status": "passed",
+      "failure": null,
+      "report_generated_at": "2026-09-21T09:58:51.241Z"
+    },
+    "modified_files": [],
+    "failure": null,
+    "next_step": "Review the verified changes or continue with the next task.",
+    "created_at": "2026-09-21T09:55:10.586Z",
+    "updated_at": "2026-09-21T09:58:51.315Z",
+    "events": [
+      {
+        "time": "2026-09-21T09:55:10.587Z",
+        "event": "task_auto_started",
+        "details": {
+          "objective": "Run a workspace command"
+        }
+      },
+      {
+        "time": "2026-09-21T09:55:10.603Z",
+        "event": "command_started",
+        "details": {
+          "command": "sed -n '1,260p' /root/codes/usts-campus-services/SUZHOUKEJIDAXUE/.github/workflows/autologininternet-ghcr.yml",
+          "session_id": "_4n3TuW20pXUK7bkgBBKhdJn"
+        }
+      },
+      {
+        "time": "2026-09-21T09:55:10.612Z",
+        "event": "command_finished",
+        "details": {
+          "command": "sed -n '1,260p' /root/codes/usts-campus-services/SUZHOUKEJIDAXUE/.github/workflows/autologininternet-ghcr.yml",
+          "status": "passed"
+        }
+      },
+      {
+        "time": "2026-09-21T09:55:20.622Z",
+        "event": "command_started",
+        "details": {
+          "command": "sed -n '1,260p' /root/codes/usts-campus-services/SUZHOUKEJIDAXUE/autoLoginInternet/Dockerfile && printf '\\n--- repo ---\\n' && git -C /root/codes/usts-campus-services/SUZHOUKEJIDAXUE status --short --branch",
+          "session_id": "1rDDVbkdduYj7iCBD6rTIIes"
+        }
+      },
+      {
+        "time": "2026-09-21T09:55:20.652Z",
+        "event": "command_finished",
+        "details": {
+          "command": "sed -n '1,260p' /root/codes/usts-campus-services/SUZHOUKEJIDAXUE/autoLoginInternet/Dockerfile && printf '\\n--- repo ---\\n' && git -C /root/codes/usts-campus-services/SUZHOUKEJIDAXUE status --short --branch",
+          "status": "passed"
+        }
+      },
+      {
+        "time": "2026-09-21T09:57:33.993Z",
+        "event": "command_started",
+        "details": {
+          "command": "pwd; git status --short --branch; find . -maxdepth 4 -type f \\( -name Dockerfile -o -path './.github/workflows/*' \\) -print | sort",
+          "session_id": "yg8kWDXD3dMb2AeIf9Gzl1GD"
+        }
+      },
+      {
+        "time": "2026-09-21T09:57:34.041Z",
+        "event": "command_finished",
+        "details": {
+          "command": "pwd; git status --short --branch; find . -maxdepth 4 -type f \\( -name Dockerfile -o -path './.github/workflows/*' \\) -print | sort",
+          "status": "passed"
+        }
+      },
+      {
+        "time": "2026-09-21T09:57:56.189Z",
+        "event": "command_started",
+        "details": {
+          "command": "printf '%s\\n' '--- repo root/remote ---'; git rev-parse --show-toplevel; git remote -v; printf '%s\\n' '--- build/runtime files ---'; git ls-files | rg '(^|/)(Dockerfile|docker-compose|compose|\\.github/workflows/|pom\\.xml$|application.*\\.(yml|yaml|properties)$|README)' | head -200; printf '%s\\n' '--- pom key lines ---'; rg -n '<artifactId>|<groupId>|<version>|spring-boot-maven-plugin|<java.version>|<mainClass>' pom.xml | head -100",
+          "session_id": "aa7PpT4MWsSO16Z6gIptBz1q"
+        }
+      },
+      {
+        "time": "2026-09-21T09:57:56.237Z",
+        "event": "command_finished",
+        "details": {
+          "command": "printf '%s\\n' '--- repo root/remote ---'; git rev-parse --show-toplevel; git remote -v; printf '%s\\n' '--- build/runtime files ---'; git ls-files | rg '(^|/)(Dockerfile|docker-compose|compose|\\.github/workflows/|pom\\.xml$|application.*\\.(yml|yaml|properties)$|README)' | head -200; printf '%s\\n' '--- pom key lines ---'; rg -n '<artifactId>|<groupId>|<version>|spring-boot-maven-plugin|<java.version>|<mainClass>' pom.xml | head -100",
+          "status": "passed"
+        }
+      },
+      {
+        "time": "2026-09-21T09:58:07.429Z",
+        "event": "command_started",
+        "details": {
+          "command": "sed -n '145,230p' pom.xml; printf '\\n--- app config ---\\n'; sed -n '1,180p' src/main/resources/application.yml; printf '\\n--- service hints ---\\n'; rg -n 'java|jar|spring.profiles|server.port|JAVA_' native-service.sh | head -100; printf '\\n--- ignore ---\\n'; { test -f .gitignore && sed -n '1,220p' .gitignore; }",
+          "session_id": "L9ZS3DaQjilkh09mTyeJrCeg"
+        }
+      },
+      {
+        "time": "2026-09-21T09:58:07.476Z",
+        "event": "command_finished",
+        "details": {
+          "command": "sed -n '145,230p' pom.xml; printf '\\n--- app config ---\\n'; sed -n '1,180p' src/main/resources/application.yml; printf '\\n--- service hints ---\\n'; rg -n 'java|jar|spring.profiles|server.port|JAVA_' native-service.sh | head -100; printf '\\n--- ignore ---\\n'; { test -f .gitignore && sed -n '1,220p' .gitignore; }",
+          "status": "passed"
+        }
+      },
+      {
+        "time": "2026-09-21T09:58:41.115Z",
+        "event": "continuous_workflow_started",
+        "details": {
+          "fields": [
+            "current_step",
+            "next_step",
+            "objective",
+            "status",
+            "steps"
+          ]
+        }
+      },
+      {
+        "time": "2026-09-21T09:58:41.158Z",
+        "event": "task_updated",
+        "details": {
+          "fields": [
+            "current_step",
+            "steps"
+          ]
+        }
+      },
+      {
+        "time": "2026-09-21T09:58:41.176Z",
+        "event": "command_started",
+        "details": {
+          "command": "mvn -B -DskipTests package",
+          "session_id": "0ut-yhNiXpJW_Mhvd_1_lHlU"
+        }
+      },
+      {
+        "time": "2026-09-21T09:58:51.242Z",
+        "event": "build_verification_finished",
+        "details": {
+          "status": "passed"
+        }
+      },
+      {
+        "time": "2026-09-21T09:58:51.281Z",
+        "event": "task_updated",
+        "details": {
+          "fields": [
+            "current_step",
+            "steps"
+          ]
+        }
+      },
+      {
+        "time": "2026-09-21T09:58:51.294Z",
+        "event": "continuous_workflow_completed",
+        "details": {
+          "fields": [
+            "current_step",
+            "failure",
+            "next_step",
+            "status",
+            "steps"
+          ]
+        }
+      }
+    ],
+    "archived_at": "2026-09-21T09:59:00.902Z",
+    "archive_reason": "finished"
+  }
+]

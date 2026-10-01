@@ -65,7 +65,7 @@ public class SMSWebSocket {
 
     @OnClose
     public void onClose(Session session, CloseReason reason) {
-        hub.remove(SMSKEY);
+        hub.remove(SMSKEY, session);
     }
 
     @OnError

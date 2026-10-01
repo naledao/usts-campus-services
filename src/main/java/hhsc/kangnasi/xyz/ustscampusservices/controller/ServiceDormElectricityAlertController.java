@@ -8,6 +8,8 @@ import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceDormElectricity
 import hhsc.kangnasi.xyz.ustscampusservices.domain.entity.ServiceLogEntity;
 import hhsc.kangnasi.xyz.ustscampusservices.mapper.ServiceDormElectricityAlertMapper;
 import hhsc.kangnasi.xyz.ustscampusservices.service.ServiceDormElectricityAlertService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,7 @@ import static hhsc.kangnasi.xyz.ustscampusservices.config.AuthInterceptor.CURREN
 @RestController
 @RequestMapping("/service-dorm-electricity-alert")
 public class ServiceDormElectricityAlertController {
+    private static final Logger log = LoggerFactory.getLogger(ServiceDormElectricityAlertController.class);
 
     private final ServiceDormElectricityAlertService serviceDormElectricityAlertService;
     private final ServiceDormElectricityAlertMapper serviceDormElectricityAlertMapper;
@@ -101,8 +104,11 @@ public class ServiceDormElectricityAlertController {
     )
     @GetMapping("/current-electricity")
     public ResponseEntity<Double> queryCurrentElectricity() throws JsonProcessingException {
-        String email=CURRENT_USER_EMAIL.get();
-        return ResponseEntity.ok(serviceDormElectricityAlertService.queryCurrentElectricity(email));
+        String email = CURRENT_USER_EMAIL.get();
+        log.info("收到当前电量查询请求，email={}", email);
+        Double electricity = serviceDormElectricityAlertService.queryCurrentElectricity(email);
+        log.info("当前电量查询完成，email={}, electricity={}", email, electricity);
+        return ResponseEntity.ok(electricity);
     }
 
     @GetMapping("/view")

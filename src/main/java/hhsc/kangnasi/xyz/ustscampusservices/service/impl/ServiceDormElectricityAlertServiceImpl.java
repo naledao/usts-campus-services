@@ -202,6 +202,8 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
 
     @Override
     public Double queryCurrentElectricity(String email)  {
+        long startedAt = System.nanoTime();
+        log.info("开始查询宿舍当前电量，email={}, grpcTimeoutMs={}", email, dianFeiTimeoutMs);
         ServiceLogEntity serviceLog=new ServiceLogEntity();
         serviceLog.setRelationTable("service_dorm_electricity_alert");
         serviceLog.setEmail(email);
@@ -210,6 +212,7 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
         try {
             ServiceDormElectricityAlertEntity serviceDormElectricityAlertEntity = serviceDormElectricityAlertMapper.selectByEmail(email,0);
             if(serviceDormElectricityAlertEntity==null){
+                log.warn("查询宿舍当前电量失败：用户未绑定宿舍，email={}", email);
                 return -1d;
             }
             Dianfei.QueryRequest req = Dianfei.QueryRequest.newBuilder()
@@ -220,9 +223,13 @@ public class ServiceDormElectricityAlertServiceImpl implements ServiceDormElectr
                     .setType(serviceDormElectricityAlertEntity.getType())
                     .setLevel(serviceDormElectricityAlertEntity.getLevel())
                     .build();
+            log.info("准备调用 getcharge gRPC，email={}, campus={}, building={}, room={}, feeitemid={}, type={}, level={}",
+                    email, req.getCampus(), req.getBuilding(), req.getRoom(), req.getFeeitemid(), req.getType(), req.getLevel());
             Dianfei.QueryReply reply = dianFeiService
                     .withDeadlineAfter(dianFeiTimeoutMs, TimeUnit.MILLISECONDS)
                     .queryCurrentElectricity(req);
+            long elapsedMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startedAt);
+            log.info("getcharge gRPC 调用成功，email={}, electricity={}, elapsedMs={}", email, reply.getValue(), elapsedMs);
             serviceLog.setOperationStatus(1);
             serviceLog.setRemarks("操作成功，当前电量为"+reply.getValue()+"度");
             serviceLogMapper.insert(serviceLog);

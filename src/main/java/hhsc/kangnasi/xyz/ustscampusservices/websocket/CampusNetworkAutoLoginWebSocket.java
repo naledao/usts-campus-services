@@ -68,7 +68,7 @@ public class CampusNetworkAutoLoginWebSocket {
 
     @OnClose
     public void onClose(Session session, CloseReason reason) {
-        hub.remove(campusNetworkAutoLoginKey);
+        hub.remove(campusNetworkAutoLoginKey, session);
     }
 
     @OnError
