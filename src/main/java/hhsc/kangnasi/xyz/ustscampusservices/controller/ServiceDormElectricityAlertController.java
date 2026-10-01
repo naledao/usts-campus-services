@@ -123,8 +123,11 @@ public class ServiceDormElectricityAlertController {
 
     @GetMapping("/logs")
     public ResponseEntity<List<ServiceLogEntity>> logs()  {
-        String email= CURRENT_USER_EMAIL.get();
-        return ResponseEntity.ok(serviceDormElectricityAlertService.logs(email));
+        String email = CURRENT_USER_EMAIL.get();
+        log.info("收到电量服务日志查询请求，email={}", email);
+        List<ServiceLogEntity> logs = serviceDormElectricityAlertService.logs(email);
+        log.info("电量服务日志查询完成，email={}, count={}", email, logs.size());
+        return ResponseEntity.ok(logs);
     }
 
     @PostMapping("/set-threshold/{threshold}")
